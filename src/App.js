@@ -1,26 +1,54 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import DeviceDetector from './utils/DeviceDetector';
+import {SETTINGS} from './settings/ApplicationSettings';
+
+class App extends React.Component{
+
+  state = {
+    runningView: SETTINGS.loadingView,
+
+  };
+
+  /**
+   * Setting up a correct view each time when resizing(and after the component had mounted)
+   */
+  setRunningView = () => {
+    let actualView;
+    if(DeviceDetector.isMobileDevice()){
+      actualView = SETTINGS.mobileView;
+    }else{
+      actualView = SETTINGS.desktopView;
+    }
+    this.setState({
+        runningView: actualView
+    })
+  };
+
+
+  render(){
+      if(this.state.runningView === SETTINGS.desktopView){
+          return (
+              <div className="App">
+                  Regular App
+              </div>
+          );
+      }else if(this.state.runningView === SETTINGS.mobileView){
+          return(
+              <div>MOBILE</div>
+          )
+      }else{
+          return(
+              <div>LOADING</div>
+          )
+      }
+  }
+  componentDidMount(){
+    window.addEventListener('resize', this.setRunningView);
+    this.setRunningView();
+  }
+
 }
 
 export default App;
