@@ -3,7 +3,15 @@
  * @type {{}}
  */
 export const SETTINGS = {
-    loadingView: 'LOADING',
-    mobileView: 'MOBILE',
-    desktopView: 'DESKTOP'
+    views:{
+        loadingView: 'LOADING',
+        mobileView: 'MOBILE',
+        desktopView: 'DESKTOP'
+    },
+
+    routes:{
+        root: '/',
+        creator: '/creator'
+    }
+
 };
