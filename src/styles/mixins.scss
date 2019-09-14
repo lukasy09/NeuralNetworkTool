@@ -1,0 +1,8 @@
+/*
+  Skewing an element with given degree
+ */
+@mixin skew($degree1, $degree2){
+  -ms-transform: skew($degree1, $degree2);
+  -webkit-transform: skew($degree1, $degree2);
+  transform: skew($degree1, $degree2);
+}

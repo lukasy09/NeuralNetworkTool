@@ -1,0 +1,18 @@
+@import "../../settings/StylesSettings";
+@import "../../styles/mixins";
+
+.DesktopBackground{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: #3f0d12 linear-gradient(75deg, #3f0d12 0%, #a71d31 74%);
+
+  .LeftSkew{
+    @include skew(20deg, 0);
+    width: map_get($backgroundSize, leftSkewWidth);
+    height: 100vh;
+    background: #000000 linear-gradient(315deg, #000000 0%, #414141 74%);
+    position: relative;
+    left: -10%;
+  }
+}

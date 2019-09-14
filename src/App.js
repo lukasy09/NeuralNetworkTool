@@ -6,6 +6,7 @@ import {Switch, Route} from 'react-router-dom'
 import {TransitionGroup, CSSTransition} from 'react-transition-group';
 import DesktopMainView from './components/DesktopMainView/DesktopMainView';
 import CreatorView from "./components/CreatorView/CreatorView";
+import {DesktopBackground} from "./components/DesktopBackground/DesktopBackground";
 
 class App extends React.Component {
 
@@ -34,6 +35,7 @@ class App extends React.Component {
         if (this.state.runningView === SETTINGS.views.desktopView) {
             return (
                 <div className="DesktopApp">
+                    <DesktopBackground/>
                     <Route render={(location)=>(
                         <TransitionGroup>
                             <CSSTransition
