@@ -1,3 +1,5 @@
+@import "StartInfoInput/StartInfoInput";
+
 .MainViewContainer{
   position: absolute;
   left: 0;
@@ -5,11 +7,4 @@
   width: 100vw;
   height: 100vh;
 
-  div{
-    &.StartWrapper{
-      position: absolute;
-      right: 15%;
-      bottom: 65%;
-    }
-  }
 }

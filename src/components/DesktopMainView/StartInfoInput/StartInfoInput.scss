@@ -1,0 +1,22 @@
+@import "../../../styles/mixins";
+
+.StartWrapper{
+  @include col-flex-box();
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  min-width: 500px;
+
+
+  .TextButton{
+    width: 150px;
+    position: absolute;
+    top:20px;
+    left: 320px;
+
+  }
+  .UserInput{
+    transition: 0.7s ease-in;
+  }
+}

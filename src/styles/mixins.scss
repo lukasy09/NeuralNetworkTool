@@ -6,3 +6,34 @@
   -webkit-transform: skew($degree1, $degree2);
   transform: skew($degree1, $degree2);
 }
+
+/*
+ Flex element
+ */
+@mixin flex(){
+  display: flex;
+}
+
+@mixin col-flex-box(){
+  @include flex();
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*
+  Translate
+ */
+@mixin translate($x, $y){
+  transform: translate($x, $y);
+}
+
+
+@mixin scale($scale){
+  transform: scale($scale);
+}
+
+
+@mixin transformWithScale($x, $y, $scale){
+  transform: translate($x, $y) scale($scale);
+}
