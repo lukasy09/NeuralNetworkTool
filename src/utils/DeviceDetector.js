@@ -4,10 +4,7 @@
 export default class DeviceDetector{
 
    static isMobileDevice = () => {
-      const sizeLogicalPartial = (window.innerWidth <= 800);
-
-      console.log(sizeLogicalPartial);
-      return sizeLogicalPartial;
+       return (window.innerWidth <= 800);
 
     }
 }

@@ -1,8 +1,18 @@
 
+/*
+  Background var's
+ */
 $backgroundSize:(
   leftSkewWidth: 70%,
 );
 $backgroundSkews:(
   leftSkewBgColor: red,
   rightSkewBgColor: blue
-)
+);
+
+/*
+  General colors
+*/
+
+$lightColor: #f1f1f1;
+$darkColor: #111111;

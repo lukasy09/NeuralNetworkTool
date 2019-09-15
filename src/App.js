@@ -7,6 +7,7 @@ import {TransitionGroup, CSSTransition} from 'react-transition-group';
 import DesktopMainView from './components/DesktopMainView/DesktopMainView';
 import CreatorView from "./components/CreatorView/CreatorView";
 import {DesktopBackground} from "./components/DesktopBackground/DesktopBackground";
+import {StartInfoInput} from "./components/DesktopMainView/StartInfoInput/StartInfoInput";
 
 class App extends React.Component {
 
