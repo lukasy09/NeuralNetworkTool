@@ -1,8 +1,10 @@
 import React from 'react';
 import {TextButton} from "../../common/TextButton";
 import {UserInput} from "../../common/UserInput";
+import {connect} from 'react-redux';
+import {setProjectName} from "../../../actions/generalActions";
 
-export default class StartInfoInput extends React.Component{
+class StartInfoInput extends React.Component{
 
     state = {
       styles: {
@@ -12,23 +14,34 @@ export default class StartInfoInput extends React.Component{
           inputStyle: {
               opacity: 0
           }
-      }
+      },
+
+       userInputData:{
+          projectName: null
+       }
     };
+
+    /**
+     * Enabling input for
+     */
     startProject = () =>{
         this.setState({
             styles:{
-                // textButtonStyle:{
-                //     opacity: 0
-                // },
+                textButtonStyle:{
+                  opacity: 0
+                },
                 inputStyle: {
                     opacity: 1
                 }
             }
-
-
         });
-        console.log("Im starting the project!")
     };
+
+
+    changeProjectName = (e) => {
+        this.props.setProjectName(e.target.value);
+    };
+
 
     render(){
         return(
@@ -36,14 +49,36 @@ export default class StartInfoInput extends React.Component{
                 <TextButton
                     text={"Let's start!"}
                     style = {this.state.styles.textButtonStyle}
+                    className = {"TextButton"}
                     action={this.startProject}/>
 
                 <UserInput
                     type={"text"}
                     placeholder={"Enter a project name"}
+                    action = {this.changeProjectName}
                     style = {this.state.styles.inputStyle}
+                />
+
+                <TextButton
+                    text={"Submit"}
+                    className={"TextButton Submit"}
+                    style = {this.state.styles.inputStyle}
+                    //action = {this.submitProjectName}
                 />
             </div>
         )
     }
 }
+
+const mapStateToProps = state => {
+
+    return {
+        general: state.general
+    }
+};
+
+const mapActionsToProps = {
+    setProjectName : setProjectName
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(StartInfoInput);

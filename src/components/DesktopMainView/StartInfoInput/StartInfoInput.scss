@@ -15,8 +15,15 @@
     top:20px;
     left: 320px;
 
+    &.Submit{
+      left: 280px;
+      top: 50%;
+    }
+
   }
   .UserInput{
+    position: relative;
+    bottom: 40px;
     transition: 0.7s ease-in;
   }
 }

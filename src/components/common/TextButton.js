@@ -5,7 +5,7 @@ export const TextButton = (props)=>{
         <div
             onClick={props.action}
             style={props.style}
-            className="TextButton">
+            className={props.className}>
             <span>{props.text}</span>
         </div>
     )
