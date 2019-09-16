@@ -12,6 +12,10 @@ export const SETTINGS = {
     routes:{
         root: '/',
         creator: '/creator'
+    },
+
+    regex:{
+        projectName: /^[a-zA-Z0-9].*$/
     }
 
 };

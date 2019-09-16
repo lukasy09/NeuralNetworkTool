@@ -1,11 +1,10 @@
 import React from 'react';
 
-export const TextButton = (props)=>{
+export const LabelInfo = (props)=>{
     return(
         <div
-            onClick={props.action}
             style={props.style}
-            className={"TextButton"}>
+            className={"LabelInfoWrapper" + " " + props.className}>
             <span>{props.text}</span>
         </div>
     )
