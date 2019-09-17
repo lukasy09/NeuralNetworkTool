@@ -3,7 +3,7 @@
 
 .DesktopBackground{
   position: absolute;
-  width: 100vw;
+  width: calc(2 * 100vw);
   height: 100vh;
   background: rgb(13,219,40);
   background: linear-gradient(128deg, rgba(13,219,40,0.8690826672465861) 8%, rgba(20,249,238,0.8130602582830007) 100%);
@@ -15,6 +15,11 @@
     height: 100vh;
     background-image: linear-gradient(to right, #434343 0%, black 100%);
     position: relative;
-    left: -10%;
+    left: -75vw;
+    transition: all 1.5s ease-in-out;
+
+    &.shifted{
+      @include translateWithSkew(50vw, 0, 20deg, 0);
+    }
   }
 }

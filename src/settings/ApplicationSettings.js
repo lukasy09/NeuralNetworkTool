@@ -9,6 +9,9 @@ export const SETTINGS = {
         desktopView: 'DESKTOP'
     },
 
+    /*
+       @TODO In the future probably section "routes" will be removed from the global settings
+     */
     routes:{
         root: '/',
         creator: '/creator'

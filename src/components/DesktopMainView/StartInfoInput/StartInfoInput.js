@@ -29,7 +29,7 @@ class StartInfoInput extends React.Component {
 
         info: {
             projectName: ""
-        }
+        },
 
     };
 
@@ -75,7 +75,7 @@ class StartInfoInput extends React.Component {
         if (obj.isMatching) {
             opacity = 1;
         }
-        return this.setState({
+        this.setState({
             styles: {
                 textButtonStyle:{
                     opacity: 0
@@ -88,7 +88,14 @@ class StartInfoInput extends React.Component {
                 }
             }
         });
+    };
 
+
+    /**
+     * Submit button onClick. The application transitions to creator.
+     */
+    submitProjectName = () => {
+        this.props.activateBackground();
     };
 
     render() {
@@ -117,6 +124,7 @@ class StartInfoInput extends React.Component {
                     className={"TextButton Submit"}
                     style={this.state.styles.linkButtonStyle}
                     path={SETTINGS.routes.creator}
+                    action = {this.submitProjectName}
                 />
             </div>
         )

@@ -13,6 +13,10 @@ class App extends React.Component {
 
     state = {
         runningView: SETTINGS.views.loadingView,
+        styles:{
+            activeBackground: false
+        }
+
 
     };
 
@@ -31,22 +35,30 @@ class App extends React.Component {
         })
     };
 
+    activateBackground = () => {
+        this.setState({
+            styles:{
+                activeBackground: true
+            }
+        })
+    };
+
 
     render() {
         if (this.state.runningView === SETTINGS.views.desktopView) {
             return (
                 <div className="DesktopApp">
-                    <DesktopBackground/>
-                    <Route render={(location)=>(
+                    <DesktopBackground activeBackground = {this.state.styles.activeBackground}/>
+                    <Route render={({location})=>(
                         <TransitionGroup>
                             <CSSTransition
                                 key={location.key}
-                                timeout = {3000}
+                                timeout = {30000}
                                 classNames = "fade">
-                                <Switch key={location.key}
-                                        >
+                                <Switch location={location}>
                                     <Route exact path={SETTINGS.routes.root}
-                                           component={DesktopMainView}/>
+                                           component={() => <DesktopMainView activateBackground={this.activateBackground} />}
+                                            />
                                     <Route path={SETTINGS.routes.creator}
                                            component={CreatorView}/>
                                 </Switch>

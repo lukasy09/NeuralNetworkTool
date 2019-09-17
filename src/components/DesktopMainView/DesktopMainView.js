@@ -5,11 +5,14 @@ import StartInfoInput from "./StartInfoInput/StartInfoInput";
 
 export default class DesktopMainView extends React.Component {
 
+    constructor(props){
+        super(props);
+    }
 
     render(){
         return(
             <div className = "MainViewContainer">
-                <StartInfoInput/>
+                <StartInfoInput activateBackground={this.props.activateBackground}/>
             </div>
         )
     }

@@ -1,13 +1,4 @@
 /*
-  Skewing an element with given degree
- */
-@mixin skew($degree1, $degree2){
-  -ms-transform: skew($degree1, $degree2);
-  -webkit-transform: skew($degree1, $degree2);
-  transform: skew($degree1, $degree2);
-}
-
-/*
  Flex element
  */
 @mixin flex(){
@@ -22,7 +13,7 @@
 }
 
 /*
-  Translate
+  Translate only
  */
 @mixin translate($x, $y){
   transform: translate($x, $y);
@@ -36,4 +27,19 @@
 
 @mixin translateWithScale($x, $y, $scale){
   transform: translate($x, $y) scale($scale);
+}
+
+/*
+  Skewing an element with given degree
+ */
+@mixin skew($degree1, $degree2){
+  -ms-transform: skew($degree1, $degree2);
+  -webkit-transform: skew($degree1, $degree2);
+  transform: skew($degree1, $degree2);
+}
+
+
+@mixin translateWithSkew($x, $y, $degree1, $degree2){
+  transform:translate($x, $y) skew($degree1, $degree2);
+
 }
