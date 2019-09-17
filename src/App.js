@@ -53,7 +53,7 @@ class App extends React.Component {
                         <TransitionGroup>
                             <CSSTransition
                                 key={location.key}
-                                timeout = {30000}
+                                timeout = {1000}
                                 classNames = "fade">
                                 <Switch location={location}>
                                     <Route exact path={SETTINGS.routes.root}
