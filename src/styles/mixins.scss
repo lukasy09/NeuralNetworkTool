@@ -8,15 +8,11 @@
 @mixin col-flex-box(){
   @include flex();
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 @mixin row-flex-box(){
   @include flex();
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }
 
 
