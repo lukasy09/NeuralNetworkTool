@@ -1,8 +1,15 @@
-@import "App";
 @import "settings/StylesSettings";
 @import "styles/animations";
 @import "styles/mixins";
 @import "styles/common";
+
+
+/*
+  Components
+*/
+@import "App";
+@import "components/CreatorView/CreatorView";
+
 
 body {
   margin: 0;

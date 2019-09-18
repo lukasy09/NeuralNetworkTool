@@ -14,7 +14,7 @@ class App extends React.Component {
     state = {
         runningView: SETTINGS.views.loadingView,
         styles:{
-            activeBackground: false
+            activeBackground: true
         }
 
 

@@ -12,6 +12,14 @@
   align-items: center;
 }
 
+@mixin row-flex-box(){
+  @include flex();
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+
 /*
   Translate only
  */
@@ -37,7 +45,6 @@
   -webkit-transform: skew($degree1, $degree2);
   transform: skew($degree1, $degree2);
 }
-
 
 @mixin translateWithSkew($x, $y, $degree1, $degree2){
   transform:translate($x, $y) skew($degree1, $degree2);
