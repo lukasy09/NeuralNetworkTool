@@ -24,7 +24,7 @@ export const SETTINGS = {
 
     // Canvas size factors
     expandingCanvasSizeFactors:{
-        x: 0.5, // e.g 70% of the container's width
+        x: 0.55, // e.g 70% of the container's width
         y: 0.8
     }
 

@@ -5,11 +5,13 @@
 
 
 /*
-  Components
+  Components' stylesheets
 */
 @import "App";
 @import "components/CreatorView/CreatorView";
 
+@import "components/CreatorView/ExpandingCanvas/ExpandingCanvas";
+@import "components/CreatorView/CanvasNavigator/CanvasNavigator";
 
 body {
   margin: 0;

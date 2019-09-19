@@ -10,12 +10,13 @@
   height: 100%;
 
   .ExpandingCanvasContainer{
-    @include col-flex-box;
+    @include row-flex-box;
     justify-content: center;
+    align-items: center;
     box-sizing: border-box;
-    padding: 20px 30px 20px 30px;
-    width: auto;
+    min-width: 60%;
     height: 100%;
+    position: absolute;
     canvas.ExpandingCanvas{
       background: white;
     }

@@ -1,6 +1,5 @@
 import React from 'react';
 import {SETTINGS} from "../../settings/ApplicationSettings";
-import {Link} from "react-router-dom";
 import ExpandingCanvas from "./ExpandingCanvas/ExpandingCanvas";
 
 

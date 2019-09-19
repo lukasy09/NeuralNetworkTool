@@ -28,6 +28,9 @@
   transform: scale($scale);
 }
 
+/*
+  Translating an element with scaling
+ */
 
 @mixin translateWithScale($x, $y, $scale){
   transform: translate($x, $y) scale($scale);
@@ -42,7 +45,14 @@
   transform: skew($degree1, $degree2);
 }
 
+/*
+  Translating an element with skewing
+ */
 @mixin translateWithSkew($x, $y, $degree1, $degree2){
   transform:translate($x, $y) skew($degree1, $degree2);
+}
 
+@mixin rotate($deg){
+  transform: rotate($deg);
+  -webkit-transform: rotate($deg);
 }
