@@ -13,8 +13,9 @@
 @import "App";
 @import "components/DesktopMainView/DesktopMainView";
 @import "components/DesktopBackground/DesktopBackground";
+@import "components/DesktopMainView/StartInfoInput/StartInfoInput";
 @import "components/CreatorView/CreatorView";
-@import "components/CreatorView/ExpandingCanvas/ExpandingCanvas";
+@import "components/CreatorView/NetworkGraph/NetworkGraph";
 
 body {
   margin: 0;

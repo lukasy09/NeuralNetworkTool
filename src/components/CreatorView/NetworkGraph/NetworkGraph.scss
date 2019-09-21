@@ -1,0 +1,27 @@
+@import "../../../styles/mixins";
+@import "../../../settings/StylesSettings";
+
+.NetworkGraphContainer{
+  @include col-flex-box;
+  justify-content: center;
+  min-width: 60%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20px 10px 20px 10px;
+  transition: all 1.7s ease-in-out;
+ .NetworkGraph{
+   @include box-shadow($lightColor);
+   width: 90%;
+   height: 90%;
+ }
+  .LabelInfoWrapper{
+    &.ProjectName{
+      position: absolute;
+      left: 15px;
+      top: 17px;
+      color: $lightColor;
+      font-weight: 900;
+      text-shadow: 0 0 15px rgba(255,255,255,.5), 0 0 10px rgba(255,255,255,.5);
+    }
+  }
+}

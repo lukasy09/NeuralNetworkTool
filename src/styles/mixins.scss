@@ -5,11 +5,13 @@
   display: flex;
 }
 
+// Flex Direction in column
 @mixin col-flex-box(){
   @include flex();
   flex-direction: column;
 }
 
+// Flex Direction in row
 @mixin row-flex-box(){
   @include flex();
   flex-direction: row;
@@ -17,10 +19,11 @@
 
 
 /*
-  Translate only
+  Translating an element vertically and horizontally(only)
  */
 @mixin translate($x, $y){
   transform: translate($x, $y);
+  -webkit-transform: translate($x, $y);
 }
 
 
@@ -52,7 +55,17 @@
   transform:translate($x, $y) skew($degree1, $degree2);
 }
 
+/*
+  Rotating an element for a given angle(in deg, 0-360)
+ */
+
 @mixin rotate($deg){
   transform: rotate($deg);
   -webkit-transform: rotate($deg);
+}
+
+@mixin box-shadow($color){
+  -webkit-box-shadow: 0 0 5px 2px $color;
+  -moz-box-shadow: 0 0 5px 2px $color;
+  box-shadow: 0 0 5px 2px $color;
 }

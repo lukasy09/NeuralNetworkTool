@@ -20,6 +20,6 @@ export const SETTINGS = {
     // A project's name must match the following regex
     regex:{
         projectName: /^[a-zA-Z0-9].*$/
-    },
+    }
 
 };
