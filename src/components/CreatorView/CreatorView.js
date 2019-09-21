@@ -12,7 +12,6 @@ export default class CreatorView extends React.Component {
                 <ExpandingCanvas
                     sizeFactors={SETTINGS.expandingCanvasSizeFactors}
                 />
-
                 <div className={"ToolBoxContainer"}>
 
                 </div>

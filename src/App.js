@@ -8,6 +8,7 @@ import DesktopMainView from './components/DesktopMainView/DesktopMainView';
 import CreatorView from "./components/CreatorView/CreatorView";
 import {DesktopBackground} from "./components/DesktopBackground/DesktopBackground";
 import {StartInfoInput} from "./components/DesktopMainView/StartInfoInput/StartInfoInput";
+import TestCytoscapeCanvas from './components/CreatorView/TestCytoscapeCanvas';
 
 class App extends React.Component {
 
@@ -61,6 +62,8 @@ class App extends React.Component {
                                             />
                                     <Route path={SETTINGS.routes.creator}
                                            component={CreatorView}/>
+                                    <Route path={"/test"}
+                                           component={TestCytoscapeCanvas}/>
                                 </Switch>
                             </CSSTransition>
                         </TransitionGroup>

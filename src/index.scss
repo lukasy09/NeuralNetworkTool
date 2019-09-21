@@ -1,3 +1,6 @@
+/*
+  Common stylesheets
+ */
 @import "settings/StylesSettings";
 @import "styles/animations";
 @import "styles/mixins";
@@ -8,10 +11,10 @@
   Components' stylesheets
 */
 @import "App";
+@import "components/DesktopMainView/DesktopMainView";
+@import "components/DesktopBackground/DesktopBackground";
 @import "components/CreatorView/CreatorView";
-
 @import "components/CreatorView/ExpandingCanvas/ExpandingCanvas";
-@import "components/CreatorView/CanvasNavigator/CanvasNavigator";
 
 body {
   margin: 0;

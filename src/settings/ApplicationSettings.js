@@ -22,10 +22,4 @@ export const SETTINGS = {
         projectName: /^[a-zA-Z0-9].*$/
     },
 
-    // Canvas size factors
-    expandingCanvasSizeFactors:{
-        x: 0.55, // e.g 70% of the container's width
-        y: 0.8
-    }
-
 };
