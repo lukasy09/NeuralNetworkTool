@@ -2,7 +2,7 @@ import React from 'react';
 import cytoscape from 'cytoscape';
 import {connect} from 'react-redux';
 import {LabelInfo} from "../../common/LabelInfo";
-
+import NetworkGraphBuilder from '../../../NetworkGraphBuilder/NetworkGraphBuilder'
 class NetworkGraph extends React.Component {
 
     networkGraphId = 'cy';
@@ -20,8 +20,26 @@ class NetworkGraph extends React.Component {
     }
 
     componentDidMount() {
-        this.initGraph();
         this.setupInitStyles();
+        this.networkGraphBuilder = new NetworkGraphBuilder(this.initGraph());
+
+        const TEST_NETWORK = {
+          layers:[
+              {
+                  type: "hidden",
+                  nodesNumber: 5,
+                  layerIndex: 3
+              },
+
+              {
+                  type: "hidden",
+                  nodesNumber: 3,
+                  layerIndex: 4
+              }
+          ]
+        };
+        this.networkGraphBuilder.buildNeuralNetworkVisualisation(TEST_NETWORK)
+
     }
 
 
@@ -37,20 +55,20 @@ class NetworkGraph extends React.Component {
      * Method initializing network graph
      */
     initGraph = () => {
-        let cy = cytoscape({
+        return cytoscape({
             container: document.getElementById('cy'), // Graph container. All the stuff is rendereing inside.
 
-            elements: [ // list of graph elements to start with
-                { // node a
-                    data: {id: 'a'},
-                },
-                { // node b
-                    data: {id: 'b'}
-                },
-                { // edge ab
-                    data: {id: 'ab', source: 'a', target: 'b'}
-                }
-            ],
+            // elements: [ // list of graph elements to start with
+            //     { // node a
+            //         data: {id: 'a'},
+            //     },
+            //     { // node b
+            //         data: {id: 'b'}
+            //     },
+            //     { // edge ab
+            //         data: {id: 'ab', source: 'a', target: 'b'}
+            //     }
+            // ],
 
             style: [ // default styles
                 {
