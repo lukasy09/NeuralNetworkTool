@@ -27,14 +27,14 @@ class NetworkGraph extends React.Component {
           layers:[
               {
                   type: "hidden",
-                  nodesNumber: 5,
-                  layerIndex: 3
+                  nodesNumber: 6,
+                  index: 6
               },
 
               {
                   type: "hidden",
-                  nodesNumber: 3,
-                  layerIndex: 4
+                  nodesNumber: 4,
+                  index: 4
               }
           ]
         };

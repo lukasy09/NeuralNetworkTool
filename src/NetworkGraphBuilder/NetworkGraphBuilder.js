@@ -1,3 +1,5 @@
+import {NetworkGraphBuildUtils} from "./utils/NetworkGraphBuildUtils";
+
 export default class NetworkGraphBuilder {
 
     origin = {
@@ -29,20 +31,20 @@ export default class NetworkGraphBuilder {
 
     /**
      * Adding a nodes' layer(without connections between nodes)
-     * @param layerInfo
+     * @param layer
      * E.G input: {
      *      type: "hidden",
      *      nodesNumber: 8,
      *      layerIndex: 3
      * }
      */
-    addLayerNodes = (layerInfo) =>{
-        const {nodesNumber, layerIndex} = layerInfo;
+    addLayerNodes = (layer) =>{
+        const {nodesNumber, index} = layer;
         for(let i=0; i< nodesNumber; i++){
             this.nodes.push({
                group: this.groupTypes.NODE,
                data: {
-                   id:"l" + layerIndex + " " + "n" + (i+1).toString()
+                   id:"l" + index + " " + "n" + (i+1).toString()
                },
                position: {
                    x: this.currentPosition.x,
@@ -50,6 +52,7 @@ export default class NetworkGraphBuilder {
                }
             });
             this.currentPosition.y += this.nodesGap.vertical;
+            console.log(NetworkGraphBuildUtils.getNodePosition(layer, i, this.maxNodesNumber, this.nodesGap));
         }
         this.currentPosition.x += this.nodesGap.horizontal;
         this.currentPosition.y = this.origin.y;
@@ -58,13 +61,13 @@ export default class NetworkGraphBuilder {
 
 
     buildNeuralNetworkVisualisation = (network) => {
-        const LAYERS = network.layers;
-        const LAYERS_NUMBER = LAYERS.length;
+        let layers = network.layers;
+        const LAYERS_NUMBER = layers.length;
+        this.maxNodesNumber = NetworkGraphBuildUtils.getMaximalNodesInLayers(layers);
 
         for(let l = 0; l < LAYERS_NUMBER; l++){
-            this.addLayerNodes(LAYERS[l]);
+            this.addLayerNodes(layers[l]);
         }
-        console.log(this.nodes);
         return this.CY.add(this.nodes);
     }
 }
