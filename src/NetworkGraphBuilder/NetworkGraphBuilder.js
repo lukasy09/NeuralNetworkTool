@@ -13,8 +13,8 @@ export default class NetworkGraphBuilder {
     };
 
     nodesGap = {
-      horizontal: 100,
-      vertical: 100
+        horizontal: 150,
+        vertical: 100
     };
 
     groupTypes = {
@@ -24,8 +24,9 @@ export default class NetworkGraphBuilder {
 
 
     nodes = [];
+    edges = [];
 
-    constructor(cy){
+    constructor(cy) {
         this.CY = cy;
     }
 
@@ -38,15 +39,14 @@ export default class NetworkGraphBuilder {
      *      layerIndex: 3
      * }
      */
-    addLayerNodes = (layer) =>{
-        const {nodesNumber, index} = layer;
-        for(let i=0; i< nodesNumber; i++){
+    addLayerNodes = (layer) => {
+        const {nodesNumber, index: layerIndex} = layer;
+        for (let i = 0; i < nodesNumber; i++) {
             this.nodes.push({
-               group: this.groupTypes.NODE,
-               data: {
-                   id:"l" + index + " " + "n" + (i+1).toString()
-               },
-
+                group: this.groupTypes.NODE,
+                data: {
+                    id: "l" + layerIndex + " " + "n" + (i).toString()
+                },
                 position: NetworkGraphBuildUtils.getNodePosition(layer, i, this.maxNodesNumber, this.nodesGap)
             });
             this.currentPosition.y += this.nodesGap.vertical;
@@ -57,14 +57,52 @@ export default class NetworkGraphBuilder {
     };
 
 
+    addLayerEdges = () => {
+        for (let i = 0; i < this.nodes.length; i++) {
+            let fromNode = this.nodes[i];
+            const fromLayerIndex = parseInt(NetworkGraphBuildUtils.getNodeLayerIndexByNodeId(fromNode.data.id));
+            const fromNodeIndex = NetworkGraphBuildUtils.getNodeIndexInLayerById(fromNode.data.id);
+
+            for (let j = 0; j < this.nodes.length; j++) {
+                let toNode = this.nodes[j];
+                const toLayerIndex = parseInt(NetworkGraphBuildUtils.getNodeLayerIndexByNodeId(toNode.data.id));
+                const toNodeIndex = NetworkGraphBuildUtils.getNodeIndexInLayerById(toNode.data.id);
+                if (fromLayerIndex === (toLayerIndex - 1)){
+                    //console.log("l" + fromLayerIndex + " " + "from" + " " +fromNodeIndex + " " + "to" + " " + toNodeIndex);
+                    this.edges.push({
+                        group: this.groupTypes.EDGE,
+                        data: {
+                            id: "l" + fromLayerIndex + " " + "from" + " " +fromNodeIndex + " " + "to" + " " + toNodeIndex,
+                            source: fromNode.data.id, // the source node id (edge comes from this node)
+                            target: toNode.data.id  // the target node id (edge goes to this node)
+                        },
+                        pannable: true
+                    });
+                }
+            }
+        }
+        return this.CY.add(this.edges);
+    };
+
+
+    /**
+     * Building an artificial neural network visualisation from a JSON object passed as an input parameter.
+     * @param network
+     */
     buildNeuralNetworkVisualisation = (network) => {
         let layers = network.layers;
         const LAYERS_NUMBER = layers.length;
         this.maxNodesNumber = NetworkGraphBuildUtils.getMaximalNodesInLayers(layers);
 
-        for(let l = 0; l < LAYERS_NUMBER; l++){
+        for (let l = 0; l < LAYERS_NUMBER; l++) {
             this.addLayerNodes(layers[l]);
         }
-        return this.CY.center();
+        for (let l = 0; l < LAYERS_NUMBER; l++) {
+            if (l !== (LAYERS_NUMBER - 1)) {
+                this.addLayerEdges(layers[l], layers[l + 1], layers[l].index);
+            }
+        }
+
+        this.CY.center();
     }
 }

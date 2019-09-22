@@ -4,8 +4,14 @@ import {connect} from 'react-redux';
 import {LabelInfo} from "../../common/LabelInfo";
 import NetworkGraphBuilder from '../../../NetworkGraphBuilder/NetworkGraphBuilder';
 
+const ELEMENT_TYPES = {
+    NODE: 'nodes',
+    EDGE: 'edges'
+};
+
 class NetworkGraph extends React.Component {
 
+    // Graph's container ID
     networkGraphId = 'cy';
 
     state = {
@@ -13,7 +19,21 @@ class NetworkGraph extends React.Component {
             networkGraphContainer: {
                 transform: "translateX(-60vw)"
             }
+        },
+
+        graph:{
+            styles:{
+                node:{
+                   "background-color":"#f1f1f1",
+                    "border":"solid 1px white"
+
+                },
+                edge: {
+                    backgroundColor: "#f2f2f2"
+                }
+            }
         }
+
     };
 
     constructor(props) {
@@ -28,24 +48,34 @@ class NetworkGraph extends React.Component {
           layers:[
               {
                   type: "input",
-                  nodesNumber: 6,
+                  nodesNumber: 20,
                   index: 0
               },
 
               {
                   type: "hidden",
-                  nodesNumber: 5,
+                  nodesNumber: 8,
                   index: 1
               },
               {
                   type: "hidden",
-                  nodesNumber: 3,
+                  nodesNumber: 8,
                   index: 2
               },
               {
                   type: "hidden",
-                  nodesNumber: 4,
+                  nodesNumber: 6,
                   index: 3
+              },
+              {
+                  type: "hidden",
+                  nodesNumber: 3,
+                  index: 4
+              },
+              {
+                  type: "output",
+                  nodesNumber: 2,
+                  index: 5
               }
           ]
         };
@@ -53,6 +83,9 @@ class NetworkGraph extends React.Component {
 
     }
 
+    /**
+     * Styling the component(e.g moving scene)
+     */
 
     setupInitStyles = () => {
       this.setState({
@@ -67,37 +100,17 @@ class NetworkGraph extends React.Component {
      */
     initGraph = () => {
         return cytoscape({
-            container: document.getElementById('cy'), // Graph container. All the stuff is rendereing inside.
-
-            // elements: [ // list of graph elements to start with
-            //     { // node a
-            //         data: {id: 'a'},
-            //     },
-            //     { // node b
-            //         data: {id: 'b'}
-            //     },
-            //     { // edge ab
-            //         data: {id: 'ab', source: 'a', target: 'b'}
-            //     }
-            // ],
+            container: this.graph, // Graph container. All the stuff is rendereing inside.
 
             style: [ // default styles
                 {
-                    selector: 'node',
-                    style: {
-                        'background-color': '#666',
-                        //'label': 'data(id)'
-                    }
+                    selector:  ELEMENT_TYPES.NODE,
+                    style: this.state.graph.styles.node
                 },
 
                 {
-                    selector: 'edge',
-                    style: {
-                        'width': 3,
-                        'line-color': '#ccc',
-                        'target-arrow-color': '#ccc',
-                        'target-arrow-shape': 'triangle'
-                    }
+                    selector: ELEMENT_TYPES.EDGE,
+                    style: this.state.graph.styles.edge
                 }
             ],
 
@@ -118,8 +131,10 @@ class NetworkGraph extends React.Component {
                         text={projectName}
                         className={"ProjectName"}
                     />
-                    <div className={"NetworkGraph"}
-                         id={this.networkGraphId}/>
+                    <div
+                        ref={(div) => this.graph = div}
+                        className={"NetworkGraph"}
+                        id={this.networkGraphId}/>
                 </div>
         )
     }

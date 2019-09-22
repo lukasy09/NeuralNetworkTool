@@ -1,5 +1,13 @@
 export class NetworkGraphBuildUtils{
 
+    /**
+     * Computing the position of a node by parameters
+     * @param layer - node's layer
+     * @param nodeIndex -
+     * @param maxNodes - maximal value of nodes in a layer in a whole network
+     * @param gapObject
+     * @returns {{x: number|*, y: *}}
+     */
     static getNodePosition(layer, nodeIndex, maxNodes, gapObject){
         const layerIndex = layer.index;
         const nodesNumber = layer.nodesNumber;
@@ -39,5 +47,21 @@ export class NetworkGraphBuildUtils{
             }
         }
         return max;
+    }
+
+    /**
+     * Returning an index of layer by a given id which is "l[layerIndex] n[nodeIndex in the layer] e.g "l2 n5"
+     * @param nodeId
+     */
+    static getNodeLayerIndexByNodeId(nodeId){
+        return nodeId.split(" ")[0].substring(1);
+    }
+
+    /**
+     * Returning an index of a node in layer by a given id which is "l[layerIndex] n[nodeIndex in the layer] e.g "l2 n5"
+     * @param nodeId
+     */
+    static getNodeIndexInLayerById(nodeId){
+        return nodeId.split(" ")[1].substring(1);
     }
 }
