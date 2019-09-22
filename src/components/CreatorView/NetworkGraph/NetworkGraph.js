@@ -2,7 +2,8 @@ import React from 'react';
 import cytoscape from 'cytoscape';
 import {connect} from 'react-redux';
 import {LabelInfo} from "../../common/LabelInfo";
-import NetworkGraphBuilder from '../../../NetworkGraphBuilder/NetworkGraphBuilder'
+import NetworkGraphBuilder from '../../../NetworkGraphBuilder/NetworkGraphBuilder';
+
 class NetworkGraph extends React.Component {
 
     networkGraphId = 'cy';
@@ -26,15 +27,25 @@ class NetworkGraph extends React.Component {
         const TEST_NETWORK = {
           layers:[
               {
-                  type: "hidden",
+                  type: "input",
                   nodesNumber: 6,
-                  index: 6
+                  index: 0
               },
 
               {
                   type: "hidden",
+                  nodesNumber: 5,
+                  index: 1
+              },
+              {
+                  type: "hidden",
+                  nodesNumber: 3,
+                  index: 2
+              },
+              {
+                  type: "hidden",
                   nodesNumber: 4,
-                  index: 4
+                  index: 3
               }
           ]
         };

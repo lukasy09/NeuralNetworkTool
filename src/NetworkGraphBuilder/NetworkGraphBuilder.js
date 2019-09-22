@@ -46,17 +46,14 @@ export default class NetworkGraphBuilder {
                data: {
                    id:"l" + index + " " + "n" + (i+1).toString()
                },
-               position: {
-                   x: this.currentPosition.x,
-                   y: this.currentPosition.y
-               }
+
+                position: NetworkGraphBuildUtils.getNodePosition(layer, i, this.maxNodesNumber, this.nodesGap)
             });
             this.currentPosition.y += this.nodesGap.vertical;
-            console.log(NetworkGraphBuildUtils.getNodePosition(layer, i, this.maxNodesNumber, this.nodesGap));
         }
         this.currentPosition.x += this.nodesGap.horizontal;
         this.currentPosition.y = this.origin.y;
-        return this.nodes;
+        return this.CY.add(this.nodes);
     };
 
 
@@ -68,6 +65,6 @@ export default class NetworkGraphBuilder {
         for(let l = 0; l < LAYERS_NUMBER; l++){
             this.addLayerNodes(layers[l]);
         }
-        return this.CY.add(this.nodes);
+        return this.CY.center();
     }
 }

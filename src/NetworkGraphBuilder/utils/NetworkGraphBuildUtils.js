@@ -2,31 +2,25 @@ export class NetworkGraphBuildUtils{
 
     static getNodePosition(layer, nodeIndex, maxNodes, gapObject){
         const layerIndex = layer.index;
+        const nodesNumber = layer.nodesNumber;
+        let xAxisGap = gapObject.horizontal;
         let yAxisGap = gapObject.vertical;
+        let xAxisPosition;
+        let yAxisPosition;
+        let startIndex;
 
-      //  if(layer.nodesNumber < maxNodes){
-            let xAxisPosition = layerIndex * gapObject.horizontal;
-            let yAxisPosition = 0;
+        xAxisPosition = (layerIndex + 1) * xAxisGap;
 
-            if(maxNodes % 2 === 0){
-                let gapsNumber = maxNodes - 1;
-                let loopLength = gapsNumber - 1;
-                for(let i=0; i<loopLength; i++){
-                    yAxisPosition += yAxisGap;
-                }
-                yAxisPosition += (Math.round(yAxisGap/2));
-
-            }else{
-
-            }
-
-            return{
-                x: xAxisPosition,
-                y: yAxisPosition
-            }
-
-
-      //  }
+        if(layer.nodesNumber < maxNodes){
+            startIndex = (maxNodes - nodesNumber)/2;
+            yAxisPosition = (startIndex + nodeIndex) * yAxisGap;
+        }else{
+            yAxisPosition = nodeIndex * yAxisGap;
+        }
+        return{
+            x:xAxisPosition,
+            y:yAxisPosition
+        }
     }
 
 
