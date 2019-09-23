@@ -45,7 +45,7 @@ export default class NetworkGraphBuilder {
             this.nodes.push({
                 group: this.groupTypes.NODE,
                 data: {
-                    id: "l" + layerIndex + " " + "n" + (i).toString()
+                    id: `l${layerIndex.toString()} n${i.toString()}`
                 },
                 position: NetworkGraphBuildUtils.getNodePosition(layer, i, this.maxNodesNumber, this.nodesGap)
             });
@@ -57,6 +57,9 @@ export default class NetworkGraphBuilder {
     };
 
 
+    /**
+     * Adding a connections between nodes
+     */
     addLayerEdges = () => {
         for (let i = 0; i < this.nodes.length; i++) {
             let fromNode = this.nodes[i];
@@ -68,11 +71,11 @@ export default class NetworkGraphBuilder {
                 const toLayerIndex = parseInt(NetworkGraphBuildUtils.getNodeLayerIndexByNodeId(toNode.data.id));
                 const toNodeIndex = NetworkGraphBuildUtils.getNodeIndexInLayerById(toNode.data.id);
                 if (fromLayerIndex === (toLayerIndex - 1)){
-                    //console.log("l" + fromLayerIndex + " " + "from" + " " +fromNodeIndex + " " + "to" + " " + toNodeIndex);
                     this.edges.push({
                         group: this.groupTypes.EDGE,
                         data: {
-                            id: "l" + fromLayerIndex + " " + "from" + " " +fromNodeIndex + " " + "to" + " " + toNodeIndex,
+                            id: //"l" + fromLayerIndex + " " + "from" + " " +fromNodeIndex + " " + "to" + " " + toNodeIndex,
+                                `l${fromLayerIndex.toString()} from ${fromNodeIndex.toString()} to ${toNodeIndex}`,
                             source: fromNode.data.id, // the source node id (edge comes from this node)
                             target: toNode.data.id  // the target node id (edge goes to this node)
                         },

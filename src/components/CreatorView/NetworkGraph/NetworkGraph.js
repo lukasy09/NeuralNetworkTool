@@ -25,8 +25,6 @@ class NetworkGraph extends React.Component {
             styles:{
                 node:{
                    "background-color":"#f1f1f1",
-                    "border":"solid 1px white"
-
                 },
                 edge: {
                     backgroundColor: "#f2f2f2"
@@ -35,10 +33,6 @@ class NetworkGraph extends React.Component {
         }
 
     };
-
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         this.setupInitStyles();

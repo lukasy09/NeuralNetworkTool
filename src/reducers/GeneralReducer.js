@@ -1,5 +1,4 @@
 import {SET_PROJECT_NAME} from "../actions/generalActions";
-import {SETTINGS} from "../settings/ApplicationSettings";
 
 /**
  * @TODO remove "general" field from GeneralReducer. Makes no sense
