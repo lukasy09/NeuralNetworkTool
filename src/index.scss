@@ -16,6 +16,7 @@
 @import "components/DesktopMainView/StartInfoInput/StartInfoInput";
 @import "components/CreatorView/CreatorView";
 @import "components/NetworkGraph/NetworkGraph";
+@import "components/ModelToolBox/ModelToolBox";
 
 body {
   margin: 0;
@@ -24,6 +25,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  color: $lightColor;
 }
 
 code {

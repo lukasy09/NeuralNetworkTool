@@ -1,0 +1,9 @@
+@import "../../styles/mixins";
+@import "../../settings/StylesSettings";
+
+.ModelToolBox{
+  @include col-flex-box;
+  min-width: 40%;
+  justify-content: center;
+  border-left: solid 1px $lightColor;
+}

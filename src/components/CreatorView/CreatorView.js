@@ -1,5 +1,6 @@
 import React from 'react';
 import NetworkGraph from "../NetworkGraph/NetworkGraph";
+import ModelToolBox from "../ModelToolBox/ModelToolBox";
 
 
 export default class CreatorView extends React.Component {
@@ -8,8 +9,7 @@ export default class CreatorView extends React.Component {
         return(
             <div className = "CreatorContainer">
                 <NetworkGraph/>
-                <div className={"ToolBoxContainer"}>
-                </div>
+                <ModelToolBox/>
             </div>
         )
     }
