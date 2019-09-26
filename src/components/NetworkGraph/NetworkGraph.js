@@ -1,8 +1,8 @@
 import React from 'react';
 import cytoscape from 'cytoscape';
 import {connect} from 'react-redux';
-import {LabelInfo} from "../../common/LabelInfo";
-import NetworkGraphBuilder from '../../../NetworkGraphBuilder/NetworkGraphBuilder';
+import {LabelInfo} from "../common/LabelInfo";
+import NetworkGraphBuilder from '../../NetworkGraphBuilder/NetworkGraphBuilder';
 
 const ELEMENT_TYPES = {
     NODE: 'nodes',
@@ -41,44 +41,32 @@ class NetworkGraph extends React.Component {
         const TEST_NETWORK = {
           layers:[
               {
-                  type: "input",
-                  nodesNumber: 20,
+                  type: "INPUT",
+                  nodesNumber: 5,
                   index: 0
               },
-
               {
-                  type: "hidden",
-                  nodesNumber: 8,
+                  type: "HIDDEN",
+                  nodesNumber: 4,
                   index: 1
               },
               {
-                  type: "hidden",
-                  nodesNumber: 8,
+                  type: "HIDDEN",
+                  nodesNumber: 4,
                   index: 2
               },
               {
-                  type: "hidden",
-                  nodesNumber: 6,
-                  index: 3
-              },
-              {
-                  type: "hidden",
-                  nodesNumber: 3,
-                  index: 4
-              },
-              {
-                  type: "output",
+                  type: "OUTPUT",
                   nodesNumber: 2,
-                  index: 5
+                  index: 3
               }
           ]
         };
         this.networkGraphBuilder.buildNeuralNetworkVisualisation(TEST_NETWORK)
-
     }
 
     /**
-     * Styling the component(e.g moving scene)
+     * Styling the component(e.g moving scene) at the beginning.
      */
 
     setupInitStyles = () => {
@@ -90,7 +78,8 @@ class NetworkGraph extends React.Component {
     };
 
     /**
-     * Method initializing network graph
+     * Method initializing network graph.
+     * Returning the main cytoscape object responsible for all actions.
      */
     initGraph = () => {
         return cytoscape({

@@ -1,4 +1,5 @@
 import {NetworkGraphBuildUtils} from "./utils/NetworkGraphBuildUtils";
+import {NetworkGraphStyleManager} from "./NetworkGraphStyleManager";
 
 export default class NetworkGraphBuilder {
 
@@ -38,8 +39,9 @@ export default class NetworkGraphBuilder {
      *      nodesNumber: 8,
      *      layerIndex: 3
      * }
+     * @param style
      */
-    addLayerNodes = (layer) => {
+    addLayerNodes = (layer, style) => {
         const {nodesNumber, index: layerIndex} = layer;
         for (let i = 0; i < nodesNumber; i++) {
             this.nodes.push({
@@ -47,7 +49,8 @@ export default class NetworkGraphBuilder {
                 data: {
                     id: `l${layerIndex.toString()} n${i.toString()}`
                 },
-                position: NetworkGraphBuildUtils.getNodePosition(layer, i, this.maxNodesNumber, this.nodesGap)
+                position: NetworkGraphBuildUtils.getNodePosition(layer, i, this.maxNodesNumber, this.nodesGap),
+                style: style ? style : NetworkGraphStyleManager.defaultNodesStyle
             });
             this.currentPosition.y += this.nodesGap.vertical;
         }
@@ -98,7 +101,8 @@ export default class NetworkGraphBuilder {
         this.maxNodesNumber = NetworkGraphBuildUtils.getMaximalNodesInLayers(layers);
 
         for (let l = 0; l < LAYERS_NUMBER; l++) {
-            this.addLayerNodes(layers[l]);
+            const styles = NetworkGraphStyleManager.getLayerNodesStyles(layers[l]);
+            this.addLayerNodes(layers[l], styles);
         }
         for (let l = 0; l < LAYERS_NUMBER; l++) {
             if (l !== (LAYERS_NUMBER - 1)) {
@@ -106,6 +110,6 @@ export default class NetworkGraphBuilder {
             }
         }
 
-        this.CY.center();
+        return this.CY.center();
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import NetworkGraph from "./NetworkGraph/NetworkGraph";
+import NetworkGraph from "../NetworkGraph/NetworkGraph";
 
 
 export default class CreatorView extends React.Component {
@@ -9,7 +9,6 @@ export default class CreatorView extends React.Component {
             <div className = "CreatorContainer">
                 <NetworkGraph/>
                 <div className={"ToolBoxContainer"}>
-
                 </div>
             </div>
         )
