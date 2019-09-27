@@ -24,11 +24,13 @@ export const SETTINGS = {
 
     model:{
         layerTypes:{
-            input: 'INPUT',
-            hidden: 'HIDDEN',
-            output: 'OUTPUT'
+            INPUT: 'input',
+            HIDDEN: 'hidden',
+            OUTPUT: 'output'
+        },
+        layerClassTypes:{
+            DENSE: 'dense'
         }
-
     }
 
 };

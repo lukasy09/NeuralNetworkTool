@@ -34,7 +34,7 @@ class StartInfoInput extends React.Component {
     };
 
     /**
-     * Enabling input for
+     * Enabling INPUT for
      */
     startProject = () => {
         this.setState({

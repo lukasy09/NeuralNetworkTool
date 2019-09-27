@@ -9,7 +9,7 @@ const NON_MATCHING = false;
 const POSITIVE_INFO = "Correct project name!";
 const NEGATIVE_INFO = "The project name must start from a letter or a number and not contain any special characters!";
 /**
- * The class is responsible for validating all user input data.
+ * The class is responsible for validating all user INPUT data.
  */
 export default class UserInputValidator {
 

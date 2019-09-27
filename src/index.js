@@ -7,10 +7,13 @@ import { BrowserRouter as Router, Route} from "react-router-dom"
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import {generalReducer} from './reducers/GeneralReducer';
+import {modelReducer} from "./reducers/ModelReducer";
+import {graphReducer} from "./reducers/GraphReducer";
 
 const allReducers = combineReducers({
-
-    generalReducer: generalReducer
+    generalReducer: generalReducer,
+    modelReducer: modelReducer,
+    graphReducer: graphReducer
 });
 
 export const store = createStore(allReducers);

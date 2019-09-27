@@ -3,6 +3,7 @@ import cytoscape from 'cytoscape';
 import {connect} from 'react-redux';
 import {LabelInfo} from "../common/LabelInfo";
 import NetworkGraphBuilder from '../../NetworkGraphBuilder/NetworkGraphBuilder';
+import {TEST_NETWORK} from "../../examples/networks";
 
 const ELEMENT_TYPES = {
     NODE: 'nodes',
@@ -37,31 +38,6 @@ class NetworkGraph extends React.Component {
     componentDidMount() {
         this.setupInitStyles();
         this.networkGraphBuilder = new NetworkGraphBuilder(this.initGraph());
-
-        const TEST_NETWORK = {
-          layers:[
-              {
-                  type: "INPUT",
-                  nodesNumber: 5,
-                  index: 0
-              },
-              {
-                  type: "HIDDEN",
-                  nodesNumber: 4,
-                  index: 1
-              },
-              {
-                  type: "HIDDEN",
-                  nodesNumber: 4,
-                  index: 2
-              },
-              {
-                  type: "OUTPUT",
-                  nodesNumber: 2,
-                  index: 3
-              }
-          ]
-        };
         this.networkGraphBuilder.buildNeuralNetworkVisualisation(TEST_NETWORK)
     }
 

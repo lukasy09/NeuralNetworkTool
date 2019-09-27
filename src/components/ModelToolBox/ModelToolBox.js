@@ -1,15 +1,21 @@
 import React from 'react';
 import {TextButton} from "../common/TextButton";
+import {connect} from 'react-redux';
+import {setModel} from "../../actions/modelActions";
+import {setGraph} from "../../actions/graphActions";
+
+class ModelToolBox extends React.Component {
 
 
-export default class ModelToolBox extends React.Component {
+    state = {
 
+    };
 
     /**
      * Event listener, adding a new layer on user's click.
      */
     addNewLayer = () => {
-        console.log("Adding a new layer!")
+        this.props.setGraph();
     };
 
     render(){
@@ -22,7 +28,22 @@ export default class ModelToolBox extends React.Component {
                         action={this.addNewLayer}
                     />
                 </div>
+
             </div>
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        model: state.modelReducer,
+        graph: state.graphReducer
+    }
+};
+
+const mapActionsToProps = {
+    setModel: setModel,
+    setGraph: setGraph
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(ModelToolBox);

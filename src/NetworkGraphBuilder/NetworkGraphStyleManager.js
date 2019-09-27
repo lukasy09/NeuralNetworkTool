@@ -9,16 +9,16 @@ export class NetworkGraphStyleManager{
         const layerTypes = SETTINGS.model.layerTypes;
 
         switch (layer.type){
-            case layerTypes.input:
+            case layerTypes.INPUT:
                 return{
                     backgroundColor: '#DF6D16',
 
                 };
-            case layerTypes.hidden:
+            case layerTypes.HIDDEN:
                 return {
                     backgroundColor: '#01B2FE'
                 };
-            case layerTypes.output:
+            case layerTypes.OUTPUT:
                 return{
                     backgroundColor: '#f1f1f1'
                 };

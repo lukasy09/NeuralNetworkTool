@@ -34,8 +34,8 @@ export default class NetworkGraphBuilder {
     /**
      * Adding a nodes' layer(without connections between nodes)
      * @param layer
-     * E.G input: {
-     *      type: "hidden",
+     * E.G INPUT: {
+     *      type: "HIDDEN",
      *      nodesNumber: 8,
      *      layerIndex: 3
      * }
@@ -92,7 +92,7 @@ export default class NetworkGraphBuilder {
 
 
     /**
-     * Building an artificial neural network visualisation from a JSON object passed as an input parameter.
+     * Building an artificial neural network visualisation from a JSON object passed as an INPUT parameter.
      * @param network
      */
     buildNeuralNetworkVisualisation = (network) => {
