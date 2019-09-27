@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const TextButton = (props)=>{
     const additionalClassName = props.className ? props.className : "";
@@ -11,4 +12,11 @@ export const TextButton = (props)=>{
             <span>{props.text}</span>
         </div>
     )
+};
+
+TextButton.propTypes = {
+  text: PropTypes.string,
+  action: PropTypes.func,
+  className: PropTypes.string,
+  style: PropTypes.object
 };

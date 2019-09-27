@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 export const UserInput = (props)=>{
     return(
@@ -13,4 +14,11 @@ export const UserInput = (props)=>{
         </div>
 
     )
+};
+
+UserInput.propTypes = {
+    action: PropTypes.func,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    placeholder: PropTypes.string
 };

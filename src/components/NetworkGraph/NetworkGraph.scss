@@ -21,11 +21,7 @@
       top: 17px;
       color: $lightColor;
       font-weight: 900;
-      text-shadow: 0 0 15px rgba(255,255,255,.5), 0 0 10px rgba(255,255,255,.5);
-
-      span{
-        color: $darkColor;
-      }
+      text-shadow: 0 0 15px $specialColorSecond, 0 0 10px $specialColorSecond;
     }
   }
 }

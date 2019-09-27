@@ -98,9 +98,11 @@ class NetworkGraph extends React.Component {
             ],
 
             layout: {
-                name: 'grid',
-                rows: 1
-            }
+                name: "cose",
+                padding: 60,
+                gravity: 12,
+            },
+
 
         });
     };
