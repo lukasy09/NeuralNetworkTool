@@ -38,6 +38,7 @@ class AddLayerPopup extends React.Component {
         this.activationDefaultValue = SETTINGS.model.layerActivations.RELU;
 
         this.layer = {
+            index: this.layerIndex,
             name: `Layer ${this.layerIndex}`,
             classType: this.classTypeDefaultValue,
             type: this.typeDefaultValue,
@@ -46,6 +47,15 @@ class AddLayerPopup extends React.Component {
         };
         this.layers =[];
     }
+
+    /**
+     * Adding a current layer(with data displayed on popup) to layers list and updating the index
+     */
+    addLayer = () => {
+        this.layer.index = this.layerIndex;
+        this.layers.push(Object.assign({}, this.layer));
+        this.layerIndex++;
+    };
 
 
     render() {
@@ -64,7 +74,7 @@ class AddLayerPopup extends React.Component {
                         />
                     </div>
                     <div className={"FeatureWrapper"}>
-                        <UserSelect action={(e) => {this.layer.classType = e.target.value}}
+                        <UserSelect action={(e) => {this.layer.classType = e.target.value.toLowerCase()}}
                                     className={"LayerClassTypeSelect"}
                                     label={{
                                         text: 'Layer class type'
@@ -74,7 +84,7 @@ class AddLayerPopup extends React.Component {
                     </div>
 
                     <div className={"FeatureWrapper"}>
-                        <UserSelect action={(e) => {this.layer.type = e.target.value}}
+                        <UserSelect action={(e) => {this.layer.type = e.target.value.toLowerCase()}}
                                     className={"LayerClassTypeSelect"}
                                     label={{
                                         text: 'Layer type'
@@ -84,7 +94,7 @@ class AddLayerPopup extends React.Component {
                     </div>
 
                     <div className={"FeatureWrapper"}>
-                        <UserSelect action={(e) => {this.layer.activation = e.target.value}}
+                        <UserSelect action={(e) => {this.layer.activation = e.target.value.toLowerCase()}}
                                     className={"LayerActivation"}
                                     label={{
                                         text: 'Layer activation'
@@ -106,7 +116,7 @@ class AddLayerPopup extends React.Component {
                     </div>
 
                     <TextButton text={"Add"}
-                                action={() => {this.layers.push(this.layer)}}
+                                action={this.addLayer}
                                 className={"AddBtn"}/>
 
                     <TextButton text={"Submit"}

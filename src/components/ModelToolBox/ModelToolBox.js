@@ -3,7 +3,7 @@ import {TextButton} from "../common/TextButton";
 import {connect} from 'react-redux';
 import {setModel} from "../../actions/modelActions";
 import {setGraph} from "../../actions/graphActions";
-import AddLayerPopup from "./AddLayerForm/AddLayerPopup";
+import AddLayerPopup from "./AddLayerPopup/AddLayerPopup";
 
 class ModelToolBox extends React.Component {
 
@@ -21,9 +21,9 @@ class ModelToolBox extends React.Component {
             })
     };
 
-    submitLayers = ( l) => {
-        console.log("HERE WE GO");
-        console.log(l);
+    submitLayers = (layers) => {
+        this.props.setGraph(layers);
+        this.triggerPopup();
     };
 
     render() {

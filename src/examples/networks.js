@@ -42,4 +42,30 @@ const COMPLICATED_NETWORK = {
     ]
 };
 
-export const TEST_NETWORK = COMPLICATED_NETWORK;
+const SIMPLE_NETWORK = {
+    layers:[
+        {
+            type: "input",
+            nodesNumber: 5,
+            index: 0
+        },
+        {
+            type: "hidden",
+            nodesNumber: 5,
+            index: 1
+        },
+        {
+            type: "hidden",
+            nodesNumber: 4,
+            index: 2
+        },
+        {
+            type: "output",
+            nodesNumber: 2,
+            index: 3
+        }
+    ]
+};
+
+
+export const TEST_NETWORK = SIMPLE_NETWORK;

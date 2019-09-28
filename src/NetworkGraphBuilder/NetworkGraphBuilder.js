@@ -4,7 +4,7 @@ import {NetworkGraphStyleManager} from "./NetworkGraphStyleManager";
 export default class NetworkGraphBuilder {
 
     origin = {
-        x: 100,
+        x: 0,
         y: 0
     };
 
@@ -109,7 +109,6 @@ export default class NetworkGraphBuilder {
                 this.addLayerEdges(layers[l], layers[l + 1], layers[l].index);
             }
         }
-
         return this.CY.center();
     }
 }

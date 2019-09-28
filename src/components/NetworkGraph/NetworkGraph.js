@@ -37,8 +37,8 @@ class NetworkGraph extends React.Component {
 
     componentDidMount() {
         this.setupInitStyles();
-        this.networkGraphBuilder = new NetworkGraphBuilder(this.initGraph());
-        this.networkGraphBuilder.buildNeuralNetworkVisualisation(TEST_NETWORK)
+        //this.networkGraphBuilder = new NetworkGraphBuilder(this.initGraph());
+        //this.networkGraphBuilder.buildNeuralNetworkVisualisation(TEST_NETWORK);
     }
 
     /**
@@ -83,6 +83,12 @@ class NetworkGraph extends React.Component {
         });
     };
 
+
+    componentDidUpdate(){
+        this.networkGraphBuilder = new NetworkGraphBuilder(this.initGraph());
+        this.networkGraphBuilder.buildNeuralNetworkVisualisation(this.props.graph);
+    }
+
     render() {
         const projectName = this.props.general.projectName;
         return (
@@ -103,7 +109,8 @@ class NetworkGraph extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        general: state.generalReducer.general
+        general: state.generalReducer.general,
+        graph: state.graphReducer
     };
 };
 

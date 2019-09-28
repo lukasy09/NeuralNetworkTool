@@ -72,7 +72,6 @@
       transition: all 0.3s ease-in-out;
       &:hover {
         background: $specialColorSecond;
-        @include scale(1.05);
       }
     }
 
@@ -100,14 +99,19 @@
 
     .AddBtn{
       @extend %Btn;
-      bottom: 10%;
-      right: 50%;
+      bottom: 7%;
+      right: 34.5%;
+      width: 125px;
     }
     .SubmitBtn {
       @extend %Btn;
       border: solid 2px $specialColorSecond;
-      bottom: 20%;
-      right: 10%;
+      bottom: 2%;
+      right: 1%;
+
+      &:hover{
+        @include scale(1.02);
+      }
     }
   }
 }
