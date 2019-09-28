@@ -85,6 +85,10 @@ class App extends React.Component {
         this.setRunningView();
     }
 
+    componentWillUnmount(){
+        window.removeEventListener("resize", this.setRunningView);
+    }
+
 }
 
 export default App;

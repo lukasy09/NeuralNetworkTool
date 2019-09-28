@@ -29,7 +29,13 @@ export const SETTINGS = {
             OUTPUT: 'output'
         },
         layerClassTypes:{
-            DENSE: 'dense'
+            DENSE: 'dense',
+            CONV2D: 'conv2d'
+        },
+        layerActivations:{
+            SIGMOID: 'sigmoid',
+            RELU: 'relu',
+            SOFTMAX: 'softmax'
         }
     }
 

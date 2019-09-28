@@ -2,7 +2,7 @@
 /*
     From here we can import some test networks for development purposes.
  */
-export const TEST_NETWORK = {
+const COMPLICATED_NETWORK = {
     layers:[
         {
             type: "input",
@@ -41,3 +41,5 @@ export const TEST_NETWORK = {
         }
     ]
 };
+
+export const TEST_NETWORK = COMPLICATED_NETWORK;

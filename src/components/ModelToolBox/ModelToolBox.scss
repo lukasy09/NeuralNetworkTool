@@ -1,25 +1,27 @@
 @import "../../styles/mixins";
 @import "../../settings/StylesSettings";
 
-.ModelToolBox{
+.ModelToolBox {
   @include col-flex-box;
   min-width: 40%;
   justify-content: center;
   align-items: center;
   border-left: solid 1px $lightColor;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
 
-  .NewLayerContainer{
-    width: auto;
+  &:hover {
+    opacity: 0.8;
+  }
+
+  .AddNewLayerBtn {
+    color: $lightColor;
     border: solid 1px $lightColor;
-    max-width: 35%;
-    .AddNewLayerBtn{
-      color: $lightColor;
-      border: solid 1px $lightColor;
-      transition: all 0.7s ease-in-out;
-      &:hover{
-        background: $specialColorFirst;
-      }
-
+    transition: all 0.7s ease-in-out;
+    &:hover {
+      background: $specialColorFirst;
     }
   }
 }

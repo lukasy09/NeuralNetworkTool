@@ -3,33 +3,40 @@ import {TextButton} from "../common/TextButton";
 import {connect} from 'react-redux';
 import {setModel} from "../../actions/modelActions";
 import {setGraph} from "../../actions/graphActions";
+import AddLayerPopup from "./AddLayerForm/AddLayerPopup";
 
 class ModelToolBox extends React.Component {
 
 
     state = {
-
+        popupActive: true,
     };
 
     /**
      * Event listener, adding a new layer on user's click.
      */
-    addNewLayer = () => {
-        this.props.setGraph();
+    triggerLayerForm = () => {
+        if (!this.state.popupActive) {
+            this.setState({
+                popupActive: true
+            })
+        }
     };
 
-    render(){
-        return(
-            <div className = {"ModelToolBox"}>
-                <div className={"NewLayerContainer"}>
+    render() {
+        return (
+            <>
+                <div className={"ModelToolBox"}>
                     <TextButton
                         text={"Add a new layer"}
                         className={"AddNewLayerBtn"}
-                        action={this.addNewLayer}
+                        action={this.triggerLayerForm}
                     />
                 </div>
-
-            </div>
+                {this.state.popupActive ?
+                   <AddLayerPopup/>: <></>
+                }
+            </>
         )
     }
 }

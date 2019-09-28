@@ -1,0 +1,16 @@
+@import "../../../styles/mixins";
+@import "../../../settings/StylesSettings";
+
+.AddLayerPopupContainer{
+  @include col-flex-box;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: $darkColor;
+  position: absolute;
+  top:0;
+  right: 0;
+  opacity: 0.9;
+
+}
