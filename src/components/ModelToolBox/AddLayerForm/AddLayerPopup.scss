@@ -1,16 +1,113 @@
 @import "../../../styles/mixins";
 @import "../../../settings/StylesSettings";
 
-.AddLayerPopupContainer{
+.AddLayerPopupContainer {
   @include col-flex-box;
+  @include box-shadow($lightColor);
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background: $darkColor;
+  width: 80vw;
+  height: 90vh;
+  background: lighten($darkColor, 5%);
   position: absolute;
-  top:0;
+  left: 0;
+  top: 0;
   right: 0;
-  opacity: 0.9;
+  bottom: 0;
+  margin: auto;
+  opacity: 0.98;
 
+  .Layer {
+    @include col-flex-box;
+    justify-content: center;
+    padding: 25px 10px 25px 10px;
+
+    .FeatureWrapper {
+      padding: 20px 50px 20px 50px;
+      box-sizing: border-box;
+
+      .LayerNameInput,
+      .LayerCountInput,
+      .LayerClassTypeSelect,
+      .LayerActivation {
+        color: $lightColor;
+        label {
+          display: inline-block;
+          box-sizing: border-box;
+          padding: 12px 10px 12px 10px;
+          width: 250px;
+          font-weight: bolder;
+        }
+        input[type=text], input[type=number] {
+          color: $lightColor;
+          font-size: 12pt;
+          border: solid 2px $lightColor;
+          margin-left: 15px;
+          padding: 12px 10px 12px 10px;
+          width: 100px;
+        }
+        select{
+          padding: 12px 10px 12px 10px;
+          margin-left: 15px;
+          background: $darkColor;
+          color: $lightColor;
+          font-weight: 800;
+          border: solid 2px $lightColor;
+          width: 125px;
+
+          option{
+            font-weight: 800;
+            background: transparent;
+            color: $lightColor;
+            padding: 2px 5px 2px 5px;
+          }
+        }
+      }
+    }
+
+    %Btn{
+      color: $lightColor;
+      max-width: 200px;
+      position: absolute;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        background: $specialColorSecond;
+        @include scale(1.05);
+      }
+    }
+
+    .ExitBtn{
+      @extend %Btn;
+      top:0;
+      right:0;
+      padding: 12px;
+      box-sizing: content-box;
+      width: 20px;
+      height: 20px;
+      background: $specialColorFirst;
+      border: none;
+      text-align: center;
+      opacity: 0.8;
+      span{
+        position: relative;
+        bottom: 2px;
+      }
+      &:hover{
+        transform: none;
+        background: darken($specialColorFirst, 10%);
+       }
+    }
+
+    .AddBtn{
+      @extend %Btn;
+      bottom: 10%;
+      right: 50%;
+    }
+    .SubmitBtn {
+      @extend %Btn;
+      border: solid 2px $specialColorSecond;
+      bottom: 20%;
+      right: 10%;
+    }
+  }
 }

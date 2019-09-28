@@ -28,12 +28,11 @@
     color: $darkColor;
   }
   &:hover {
-    background: $specialColorSecond;
     color: $lightColor;
   }
 }
 
-.UserInput {
+.UserInput, .UserSelect {
   input {
     border: 0;
     border-bottom: 3px solid #0c0c0c;
@@ -42,6 +41,10 @@
     background: transparent;
     font-weight: 800;
     outline: none;
+
+    select{
+      font-weight: 800;
+    }
     &:focus {
       &::placeholder {
         @include translateWithScale(-55px, -13px, 0.7);
@@ -54,3 +57,4 @@
     }
   }
 }
+

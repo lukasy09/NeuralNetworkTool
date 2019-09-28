@@ -15,12 +15,15 @@ class ModelToolBox extends React.Component {
     /**
      * Event listener, adding a new layer on user's click.
      */
-    triggerLayerForm = () => {
-        if (!this.state.popupActive) {
+    triggerPopup = () => {
             this.setState({
-                popupActive: true
+                popupActive: !this.state.popupActive
             })
-        }
+    };
+
+    submitLayers = ( l) => {
+        console.log("HERE WE GO");
+        console.log(l);
     };
 
     render() {
@@ -30,11 +33,12 @@ class ModelToolBox extends React.Component {
                     <TextButton
                         text={"Add a new layer"}
                         className={"AddNewLayerBtn"}
-                        action={this.triggerLayerForm}
+                        action={this.triggerPopup}
                     />
                 </div>
                 {this.state.popupActive ?
-                   <AddLayerPopup/>: <></>
+                   <AddLayerPopup triggerPopup = {this.triggerPopup}
+                                  submitLayers={this.submitLayers}/>: <></>
                 }
             </>
         )

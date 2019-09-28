@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {SETTINGS} from "../../../settings/ApplicationSettings";
 import {TextButton} from "../../common/TextButton";
+import {UserInput} from "../../common/UserInput";
+import {UserSelect} from "../../common/UserSelect";
 
 const layerClassTypes = [
     SETTINGS.model.layerClassTypes.DENSE,
@@ -15,36 +17,105 @@ const layerTypes = [
     SETTINGS.model.layerTypes.OUTPUT
 ];
 
-class AddLayerPopup extends React.Component{
-    state = {
-      addLayersNumber: 1 // Represents the number of layers on the popup
-    };
+const layerActivations = [
+  SETTINGS.model.layerActivations.RELU,
+  SETTINGS.model.layerActivations.SIGMOID,
+  SETTINGS.model.layerActivations.SOFTMAX
+];
 
-    render(){
-        const layerIndex = (this.props.model.layers.length + this.state.addLayersNumber) - 1;
-        const classTypeDefaultValue = SETTINGS.model.layerClassTypes.DENSE;
+class AddLayerPopup extends React.Component {
 
-        return(
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            newLayersCount: 0, // Represents the number of (new)layers on the popup,
+        };
+
+        this.layerIndex = this.props.model.layers.length + this.state.newLayersCount;
+        this.classTypeDefaultValue = SETTINGS.model.layerClassTypes.DENSE;
+        this.typeDefaultValue = SETTINGS.model.layerTypes.INPUT;
+        this.activationDefaultValue = SETTINGS.model.layerActivations.RELU;
+
+        this.layer = {
+            name: `Layer ${this.layerIndex}`,
+            classType: this.classTypeDefaultValue,
+            type: this.typeDefaultValue,
+            activation: this.activationDefaultValue,
+            nodesNumber: 1
+        };
+        this.layers =[];
+    }
+
+
+    render() {
+        return (
             <div className={"AddLayerPopupContainer"}>
                 <div className={"Layer"}>
-                    <input defaultValue={`Layer ${layerIndex}`}
-                            type={"text"}/>
-                    <select defaultValue={classTypeDefaultValue}>
-                        {layerClassTypes.map((layerClassType, index)=>{
-                            return(
-                                <option key={index}>
-                                    {layerClassType.toUpperCase()}
-                                </option>
-                            )
-                        })}
-                    </select>
-                    <label>
-                    Neuron's count
-                    <input type={"number"}
-                           defaultValue={1}
-                           min={1}/>
-                    </label>
-                    <TextButton text={"Submit"}/>
+                    <div className={"FeatureWrapper"}>
+                        <UserInput action={(e) => {this.layer.name = e.target.value}}
+                                   className={"LayerNameInput"}
+                                   type={"text"}
+                                   defaultValue={`Layer ${this.layerIndex}`}
+                                   label={{
+                                       text: 'Layer name'
+                                   }}
+
+                        />
+                    </div>
+                    <div className={"FeatureWrapper"}>
+                        <UserSelect action={(e) => {this.layer.classType = e.target.value}}
+                                    className={"LayerClassTypeSelect"}
+                                    label={{
+                                        text: 'Layer class type'
+                                    }}
+                                    defaultValue={this.classTypeDefaultValue}
+                                    options={layerClassTypes}/>
+                    </div>
+
+                    <div className={"FeatureWrapper"}>
+                        <UserSelect action={(e) => {this.layer.type = e.target.value}}
+                                    className={"LayerClassTypeSelect"}
+                                    label={{
+                                        text: 'Layer type'
+                                    }}
+                                    defaultValue={this.typeDefaultValue}
+                                    options={layerTypes}/>
+                    </div>
+
+                    <div className={"FeatureWrapper"}>
+                        <UserSelect action={(e) => {this.layer.activation = e.target.value}}
+                                    className={"LayerActivation"}
+                                    label={{
+                                        text: 'Layer activation'
+                                    }}
+                                    defaultValue={this.activationDefaultValue}
+                                    options={layerActivations}/>
+                    </div>
+
+                    <div className={"FeatureWrapper"}>
+                        <UserInput action={(e) => {this.layer.nodesNumber = parseInt(e.target.value)}}
+                                   className={"LayerCountInput"}
+                                   type={"number"}
+                                   defaultValue={"1"}
+                                   min={1}
+                                   label={{
+                                       text: "Neuron's count"
+                                   }}
+                        />
+                    </div>
+
+                    <TextButton text={"Add"}
+                                action={() => {this.layers.push(this.layer)}}
+                                className={"AddBtn"}/>
+
+                    <TextButton text={"Submit"}
+                                action={() => {this.props.submitLayers(this.layers)}}
+                                className={"SubmitBtn"}/>
+
+                    <TextButton text={"X"}
+                                action={this.props.triggerPopup}
+                                className={"ExitBtn"}/>
                 </div>
 
             </div>
