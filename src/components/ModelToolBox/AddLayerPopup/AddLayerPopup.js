@@ -1,10 +1,11 @@
 import React from 'react';
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {SETTINGS} from "../../../settings/ApplicationSettings";
 import {TextButton} from "../../common/TextButton";
 import {UserInput} from "../../common/UserInput";
 import {UserSelect} from "../../common/UserSelect";
+import {PreviewGraph} from "./PreviewGraph/PreviewGraph";
 
 const layerClassTypes = [
     SETTINGS.model.layerClassTypes.DENSE,
@@ -30,6 +31,7 @@ class AddLayerPopup extends React.Component {
 
         this.state = {
             newLayersCount: 0, // Represents the number of (new)layers on the popup,
+            subGraph:{layers:[]}
         };
 
         this.layerIndex = this.props.graph.layers.length + this.state.newLayersCount;
@@ -55,6 +57,12 @@ class AddLayerPopup extends React.Component {
         this.layer.index = this.layerIndex;
         this.layers.push(Object.assign({}, this.layer));
         this.layerIndex++;
+
+        this.setState({
+            subGraph:{
+                layers: this.layers
+            }
+        })
     };
 
 
@@ -128,6 +136,8 @@ class AddLayerPopup extends React.Component {
                                 action={this.props.triggerPopup}
                                 className={"ExitBtn"}/>
                 </div>
+
+                <PreviewGraph graph={this.state.subGraph}/>
 
             </div>
         )

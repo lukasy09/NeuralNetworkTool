@@ -2,7 +2,7 @@
 @import "../../../settings/StylesSettings";
 
 .AddLayerPopupContainer {
-  @include col-flex-box;
+  @include row-flex-box;
   @include box-shadow($lightColor);
   justify-content: center;
   align-items: center;
@@ -22,6 +22,7 @@
     @include col-flex-box;
     justify-content: center;
     padding: 25px 10px 25px 10px;
+    width: 50%;
 
     .FeatureWrapper {
       padding: 20px 50px 20px 50px;
@@ -101,15 +102,17 @@
 
     .AddBtn{
       @extend %Btn;
-      bottom: 7%;
-      right: 34.5%;
-      width: 125px;
+      bottom: 2%;
+      border: solid 2px $specialColorSecond;
+      right: 10.5%;
+      width: 100px;
     }
     .SubmitBtn {
       @extend %Btn;
       border: solid 2px $specialColorSecond;
       bottom: 2%;
       right: 1%;
+      width: 100px;
 
       &:hover{
         @include scale(1.02);
