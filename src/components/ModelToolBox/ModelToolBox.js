@@ -9,7 +9,7 @@ class ModelToolBox extends React.Component {
 
 
     state = {
-        popupActive: true,
+        popupActive: false,
     };
 
     /**
@@ -21,8 +21,10 @@ class ModelToolBox extends React.Component {
             })
     };
 
-    submitLayers = (layers) => {
-        this.props.setGraph(layers);
+    submitLayers = (nextLayers) => {
+        let prevLayers = this.props.graph.layers;
+        let merged = prevLayers.concat(nextLayers);
+        this.props.setGraph(merged);
         this.triggerPopup();
     };
 

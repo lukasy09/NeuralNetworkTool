@@ -32,7 +32,7 @@ class AddLayerPopup extends React.Component {
             newLayersCount: 0, // Represents the number of (new)layers on the popup,
         };
 
-        this.layerIndex = this.props.model.layers.length + this.state.newLayersCount;
+        this.layerIndex = this.props.graph.layers.length + this.state.newLayersCount;
         this.classTypeDefaultValue = SETTINGS.model.layerClassTypes.DENSE;
         this.typeDefaultValue = SETTINGS.model.layerTypes.INPUT;
         this.activationDefaultValue = SETTINGS.model.layerActivations.RELU;
