@@ -60,7 +60,8 @@ class AddLayerPopup extends React.Component {
 
     render() {
         return (
-            <div className={"AddLayerPopupContainer"}>
+            <div className={"AddLayerPopupContainer"}
+                 style={this.props.style}>
                 <div className={"Layer"}>
                     <div className={"FeatureWrapper"}>
                         <UserInput action={(e) => {this.layer.name = e.target.value}}

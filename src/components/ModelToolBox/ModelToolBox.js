@@ -7,18 +7,32 @@ import AddLayerPopup from "./AddLayerPopup/AddLayerPopup";
 
 class ModelToolBox extends React.Component {
 
-
     state = {
-        popupActive: false,
+        styles: {
+            popup: {
+                transform: 'translateY(-100vh)'
+            }
+        }
+
     };
 
     /**
      * Event listener, adding a new layer on user's click.
      */
     triggerPopup = () => {
-            this.setState({
-                popupActive: !this.state.popupActive
-            })
+        let popupStyle;
+        if (this.state.styles.popup) {
+             popupStyle = null;
+        } else {
+            popupStyle = {
+                transform:  "translateY(-100vh)",
+            }
+        }
+        this.setState({
+            styles: {
+                popup: popupStyle
+            }
+        })
     };
 
     submitLayers = (nextLayers) => {
@@ -38,10 +52,9 @@ class ModelToolBox extends React.Component {
                         action={this.triggerPopup}
                     />
                 </div>
-                {this.state.popupActive ?
-                   <AddLayerPopup triggerPopup = {this.triggerPopup}
-                                  submitLayers={this.submitLayers}/>: <></>
-                }
+                <AddLayerPopup triggerPopup={this.triggerPopup}
+                               submitLayers={this.submitLayers}
+                               style={this.state.styles.popup}/>: <></>
             </>
         )
     }

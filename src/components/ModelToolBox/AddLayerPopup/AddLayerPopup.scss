@@ -16,6 +16,7 @@
   bottom: 0;
   margin: auto;
   opacity: 0.98;
+  transition: all 0.7s ease-in-out;
 
   .Layer {
     @include col-flex-box;
