@@ -54,7 +54,7 @@ class ModelToolBox extends React.Component {
                 </div>
                 <AddLayerPopup triggerPopup={this.triggerPopup}
                                submitLayers={this.submitLayers}
-                               style={this.state.styles.popup}/>: <></>
+                               style={this.state.styles.popup}/>
             </>
         )
     }

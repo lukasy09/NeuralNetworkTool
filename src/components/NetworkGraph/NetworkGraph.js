@@ -5,11 +5,6 @@ import {LabelInfo} from "../common/LabelInfo";
 import NetworkGraphBuilder from '../../NetworkGraphBuilder/NetworkGraphBuilder';
 //import {TEST_NETWORK} from "../../examples/networks";
 
-const ELEMENT_TYPES = {
-    NODE: 'nodes',
-    EDGE: 'edges'
-};
-
 class NetworkGraph extends React.Component {
 
     // Graph's container ID
@@ -62,18 +57,6 @@ class NetworkGraph extends React.Component {
         return cytoscape({
             container: this.graph, // Graph container. All the stuff is rendereing inside.
 
-            style: [ // default styles
-                {
-                    selector:  ELEMENT_TYPES.NODE,
-                    style: this.state.graph.styles.node
-                },
-
-                {
-                    selector: ELEMENT_TYPES.EDGE,
-                    style: this.state.graph.styles.edge
-                }
-            ],
-
             layout: {
                 name: "cose",
                 padding: 60,
@@ -109,7 +92,7 @@ class NetworkGraph extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        general: state.generalReducer.general,
+        general: state.generalReducer,
         graph: state.graphReducer
     };
 };

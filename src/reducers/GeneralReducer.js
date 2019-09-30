@@ -1,23 +1,16 @@
 import {SET_PROJECT_NAME} from "../actions/generalActions";
 
-/**
- * @TODO remove "general" field from GeneralReducer. Makes no sense
- */
 const defaultGeneralState = {
-    general:{
-        projectName: 'my-project'
-    }
+    projectName: 'my-project'
 };
 
 export function generalReducer(state = defaultGeneralState, action) {
 
-    switch(action.type){
+    switch (action.type) {
         case SET_PROJECT_NAME:
-            return{
+            return {
                 ...state,
-                general:{
-                    projectName: action.payload
-                }
+                projectName: action.payload
             };
         default:
             return state;

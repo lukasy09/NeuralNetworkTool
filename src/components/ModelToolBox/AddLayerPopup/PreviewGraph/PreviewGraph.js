@@ -2,12 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import cytoscape from "cytoscape";
 import NetworkGraphBuilder from "../../../../NetworkGraphBuilder/NetworkGraphBuilder";
-import {TEST_NETWORK} from "../../../../examples/networks";
-
-const ELEMENT_TYPES = {
-    NODE: 'nodes',
-    EDGE: 'edges'
-};
+//import {TEST_NETWORK} from "../../../../examples/networks";
 
 export class PreviewGraph extends React.Component{
     previewGraphId = "previewCy";
@@ -15,22 +10,6 @@ export class PreviewGraph extends React.Component{
     initGraph = () => {
         return cytoscape({
             container: this.previewGraph, // Graph container. All the stuff is rendereing inside.
-
-            style: [ // default styles
-                {
-                    selector:  ELEMENT_TYPES.NODE,
-                    style:{
-                        background: "background-color: #f1f1f1"
-                    }
-                },
-
-                {
-                    selector: ELEMENT_TYPES.EDGE,
-                    style:{
-                        backgroundColor: "#f2f2f2"
-                    }
-                }
-            ],
 
             layout: {
                 name: "cose",
