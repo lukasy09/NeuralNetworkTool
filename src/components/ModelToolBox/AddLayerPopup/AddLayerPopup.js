@@ -1,5 +1,5 @@
 import React from 'react';
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {SETTINGS} from "../../../settings/ApplicationSettings";
 import {TextButton} from "../../common/TextButton";
@@ -30,41 +30,34 @@ class AddLayerPopup extends React.Component {
         super(props);
 
         this.state = {
-            newLayersCount: 0, // Represents the number of (new)layers on the popup,
-            subGraph:{layers:[]}
+            subGraph:{layers:[]},
+            currentLayer:{
+                index: this.props.graph.layers.length,
+                name: `Layer`,
+                classType: SETTINGS.model.layerClassTypes.DENSE,
+                type: SETTINGS.model.layerTypes.INPUT,
+                activation: SETTINGS.model.layerActivations.RELU,
+                nodesNumber: 5
+            }
         };
-
-        this.layerIndex = this.props.graph.layers.length + this.state.newLayersCount;
-        this.classTypeDefaultValue = SETTINGS.model.layerClassTypes.DENSE;
-        this.typeDefaultValue = SETTINGS.model.layerTypes.INPUT;
-        this.activationDefaultValue = SETTINGS.model.layerActivations.RELU;
-
-        this.layer = {
-            index: this.layerIndex,
-            name: `Layer ${this.layerIndex}`,
-            classType: this.classTypeDefaultValue,
-            type: this.typeDefaultValue,
-            activation: this.activationDefaultValue,
-            nodesNumber: 1
-        };
-        this.layers =[];
     }
 
     /**
      * Adding a current layer(with data displayed on popup) to layers list and updating the index
      */
     addLayer = () => {
-        this.layer.index = this.layerIndex;
-        this.layers.push(Object.assign({}, this.layer));
-        this.layerIndex++;
-
+        const newIndex = this.state.currentLayer.index + 1;
         this.setState({
+            index: newIndex,
             subGraph:{
-                layers: this.layers
-            }
-        })
+                layers: this.state.subGraph.layers.concat(this.state.currentLayer)
+            },
+           currentLayer:{
+               ...this.state.currentLayer,
+               index: newIndex
+           },
+        });
     };
-
 
     render() {
         return (
@@ -72,10 +65,10 @@ class AddLayerPopup extends React.Component {
                  style={this.props.style}>
                 <div className={"Layer"}>
                     <div className={"FeatureWrapper"}>
-                        <UserInput action={(e) => {this.layer.name = e.target.value}}
+                        <UserInput action={(e) => {this.setState({currentLayer:{...this.state.currentLayer,name: e.target.value}})}}
                                    className={"LayerNameInput"}
                                    type={"text"}
-                                   defaultValue={`Layer ${this.layerIndex}`}
+                                   value={`Layer ${this.state.currentLayer.index}`}
                                    label={{
                                        text: 'Layer name'
                                    }}
@@ -83,7 +76,7 @@ class AddLayerPopup extends React.Component {
                         />
                     </div>
                     <div className={"FeatureWrapper"}>
-                        <UserSelect action={(e) => {this.layer.classType = e.target.value.toLowerCase()}}
+                        <UserSelect action={(e) => {this.setState({currentLayer:{...this.state.currentLayer,classType: e.target.value.toLowerCase()}})}}
                                     className={"LayerClassTypeSelect"}
                                     label={{
                                         text: 'Layer class type'
@@ -93,7 +86,7 @@ class AddLayerPopup extends React.Component {
                     </div>
 
                     <div className={"FeatureWrapper"}>
-                        <UserSelect action={(e) => {this.layer.type = e.target.value.toLowerCase()}}
+                        <UserSelect action={(e) => {this.setState({currentLayer:{...this.state.currentLayer,type: e.target.value.toLowerCase()}})}}
                                     className={"LayerClassTypeSelect"}
                                     label={{
                                         text: 'Layer type'
@@ -103,7 +96,7 @@ class AddLayerPopup extends React.Component {
                     </div>
 
                     <div className={"FeatureWrapper"}>
-                        <UserSelect action={(e) => {this.layer.activation = e.target.value.toLowerCase()}}
+                        <UserSelect action={(e) => {this.setState({currentLayer:{...this.state.currentLayer,activation: e.target.value.toLowerCase()}})}}
                                     className={"LayerActivation"}
                                     label={{
                                         text: 'Layer activation'
@@ -113,10 +106,10 @@ class AddLayerPopup extends React.Component {
                     </div>
 
                     <div className={"FeatureWrapper"}>
-                        <UserInput action={(e) => {this.layer.nodesNumber = parseInt(e.target.value)}}
+                        <UserInput action={(e) => {this.setState({currentLayer:{...this.state.currentLayer,nodesNumber: parseInt(e.target.value)}})}}
                                    className={"LayerCountInput"}
                                    type={"number"}
-                                   defaultValue={"1"}
+                                   defaultValue={"5"}
                                    min={1}
                                    label={{
                                        text: "Neuron's count"
@@ -129,7 +122,7 @@ class AddLayerPopup extends React.Component {
                                 className={"AddBtn"}/>
 
                     <TextButton text={"Submit"}
-                                action={() => {this.props.submitLayers(this.layers)}}
+                                action={() => {this.props.submitLayers(this.state.subGraph.layers)}}
                                 className={"SubmitBtn"}/>
 
                     <TextButton text={"X"}
@@ -144,7 +137,6 @@ class AddLayerPopup extends React.Component {
     }
 }
 
-
 const mapStateToProps = state => {
     return {
         model: state.modelReducer,
@@ -154,6 +146,8 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(AddLayerPopup);
 
-// AddLayerPopup.PropTypes = {
-//
-// };
+AddLayerPopup.propTypes = {
+    triggerPopup: PropTypes.func,
+    submitLayers: PropTypes.func,
+    style: PropTypes.object
+};

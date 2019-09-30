@@ -10,7 +10,7 @@ export const SETTINGS = {
     },
 
     /*
-       @TODO In the future probably section "routes" will be removed from the global settings
+       @TODO In the future probably section "routes" will be removed from the global settings. And consider changing the name "creator" into "editor"
      */
     routes:{
         root: '/',

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import cytoscape from "cytoscape";
 import NetworkGraphBuilder from "../../../../NetworkGraphBuilder/NetworkGraphBuilder";
+import {NetworkGraphStyleManager} from "../../../../NetworkGraphBuilder/NetworkGraphStyleManager";
 //import {TEST_NETWORK} from "../../../../examples/networks";
 
 export class PreviewGraph extends React.Component{
@@ -10,6 +11,7 @@ export class PreviewGraph extends React.Component{
     initGraph = () => {
         return cytoscape({
             container: this.previewGraph, // Graph container. All the stuff is rendereing inside.
+            style: NetworkGraphStyleManager.getGraphStyleConfiguration(),
 
             layout: {
                 name: "cose",
@@ -20,10 +22,6 @@ export class PreviewGraph extends React.Component{
         });
     };
 
-    /**
-     * @todo Check why nodes have wrong styles on popup
-     */
-
     componentDidUpdate(){
         this.networkGraphBuilder = new NetworkGraphBuilder(this.initGraph());
         this.networkGraphBuilder.buildNeuralNetworkVisualisation(this.props.graph);
@@ -32,7 +30,6 @@ export class PreviewGraph extends React.Component{
     render(){
         return(
             <div className={"PreviewGraphContainer"}>
-
                 <div
                     ref={(div) => this.previewGraph = div}
                     className={"PreviewGraph"}
@@ -42,7 +39,6 @@ export class PreviewGraph extends React.Component{
     }
 }
 
-
 PreviewGraph.propTypes = {
-
+    graph:PropTypes.object
 };

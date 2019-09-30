@@ -15,6 +15,7 @@ export const UserInput = (props) => {
                 onChange={props.action}
                 placeholder={props.placeholder}
                 defaultValue={props.defaultValue}
+                value={props.value}
                 min={props.min}
                 max={props.max}>
             </input>
@@ -28,6 +29,7 @@ UserInput.propTypes = {
     style: PropTypes.object,
     placeholder: PropTypes.string,
     defaultValue: PropTypes.string,
+    value: PropTypes.string,
     label: PropTypes.object,
     min: PropTypes.number,
     max: PropTypes.number

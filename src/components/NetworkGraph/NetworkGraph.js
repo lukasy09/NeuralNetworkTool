@@ -3,6 +3,7 @@ import cytoscape from 'cytoscape';
 import {connect} from 'react-redux';
 import {LabelInfo} from "../common/LabelInfo";
 import NetworkGraphBuilder from '../../NetworkGraphBuilder/NetworkGraphBuilder';
+import {NetworkGraphStyleManager} from "../../NetworkGraphBuilder/NetworkGraphStyleManager";
 //import {TEST_NETWORK} from "../../examples/networks";
 
 class NetworkGraph extends React.Component {
@@ -16,7 +17,6 @@ class NetworkGraph extends React.Component {
                 transform: "translateX(-60vw)"
             }
         },
-
         graph:{
             styles:{
                 node:{
@@ -56,13 +56,12 @@ class NetworkGraph extends React.Component {
     initGraph = () => {
         return cytoscape({
             container: this.graph, // Graph container. All the stuff is rendereing inside.
-
+            style: NetworkGraphStyleManager.getGraphStyleConfiguration(),
             layout: {
                 name: "cose",
                 padding: 60,
                 gravity: 12,
             },
-
         });
     };
 

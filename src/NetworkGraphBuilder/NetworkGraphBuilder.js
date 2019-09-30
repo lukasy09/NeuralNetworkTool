@@ -1,5 +1,4 @@
 import {NetworkGraphBuildUtils} from "./utils/NetworkGraphBuildUtils";
-import {NetworkGraphStyleManager} from "./NetworkGraphStyleManager";
 
 export default class NetworkGraphBuilder {
 
@@ -39,18 +38,17 @@ export default class NetworkGraphBuilder {
      *      nodesNumber: 8,
      *      layerIndex: 3
      * }
-     * @param style
      */
-    addLayerNodes = (layer, style) => {
-        const {nodesNumber, index: layerIndex} = layer;
+    addLayerNodes = (layer) => {
+        const {nodesNumber, index: layerIndex, type} = layer;
         for (let i = 0; i < nodesNumber; i++) {
             this.nodes.push({
                 group: this.groupTypes.NODE,
                 data: {
-                    id: `l${layerIndex.toString()} n${i.toString()}`
+                    id: `l${layerIndex.toString()} n${i.toString()}`,
+                    inLayerType: type
                 },
                 position: NetworkGraphBuildUtils.getNodePosition(layer, i, this.maxNodesNumber, this.nodesGap),
-                style: style ? style : NetworkGraphStyleManager.defaultNodesStyle
             });
             this.currentPosition.y += this.nodesGap.vertical;
         }
@@ -101,8 +99,7 @@ export default class NetworkGraphBuilder {
         this.maxNodesNumber = NetworkGraphBuildUtils.getMaximalNodesInLayers(layers);
 
         for (let l = 0; l < LAYERS_NUMBER; l++) {
-            const styles = NetworkGraphStyleManager.getLayerNodesStyles(layers[l]);
-            this.addLayerNodes(layers[l], styles);
+            this.addLayerNodes(layers[l]);
         }
         for (let l = 0; l < LAYERS_NUMBER; l++) {
             if (l !== (LAYERS_NUMBER - 1)) {
