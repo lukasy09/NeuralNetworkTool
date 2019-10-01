@@ -101,6 +101,14 @@
        }
     }
 
+    .RemoveBtn {
+      @extend %Btn;
+      bottom: 2%;
+      border: solid 2px $specialColorSecond;
+      left: 1.5%;
+      width: 100px;
+    }
+
     .AddBtn{
       @extend %Btn;
       bottom: 2%;
