@@ -86,17 +86,18 @@
       box-sizing: content-box;
       width: 20px;
       height: 20px;
-      background: $specialColorFirst;
+      background: $specialColorSecond;
       border: none;
       text-align: center;
       opacity: 0.8;
+      border-bottom-left-radius: 5px;
       span{
         position: relative;
         bottom: 2px;
       }
       &:hover{
         transform: none;
-        background: darken($specialColorFirst, 10%);
+        background: darken($specialColorSecond, 10%);
        }
     }
 
@@ -113,10 +114,6 @@
       bottom: 2%;
       right: 1%;
       width: 100px;
-
-      &:hover{
-        @include scale(1.02);
-      }
     }
   }
 }

@@ -5,7 +5,7 @@ const ELEMENT_TYPES = {
     EDGE: "edge"
 };
 
-export class NetworkGraphStyleManager {
+export class NetworkGraphConfigurator {
 
     /**
      * Returns default styles configuration for graph's nodes/edges depending on the layer type
@@ -21,27 +21,27 @@ export class NetworkGraphStyleManager {
                 selector: ELEMENT_TYPES.NODE,
                 css: {
                     //'content': 'data(id)', // Uncomment if you want to see node's label
-                    ...NetworkGraphStyleManager.getCommonStyles()
+                    ...NetworkGraphConfigurator.getCommonStyles()
                 }
             },
             {
                 css: {
                     'background-color': '#f1f1f1',
-                    ...NetworkGraphStyleManager.getCommonStyles()
+                    ...NetworkGraphConfigurator.getCommonStyles()
                 }
             },
             {
                 selector: `${ELEMENT_TYPES.NODE}node[inLayerType = '${INPUT}']`,
                 css: {
                     'background-color': '#ff471a',
-                    ...NetworkGraphStyleManager.getCommonStyles()
+                    ...NetworkGraphConfigurator.getCommonStyles()
                 }
             },
             {
                 selector: `${ELEMENT_TYPES.NODE}node[inLayerType = '${HIDDEN}']`,
                 css: {
-                    'background-color': '#e73827',
-                    ...NetworkGraphStyleManager.getCommonStyles()
+                    'background-color': '#0066ff',
+                    ...NetworkGraphConfigurator.getCommonStyles()
 
                 }
             },
@@ -49,7 +49,7 @@ export class NetworkGraphStyleManager {
                 selector: `${ELEMENT_TYPES.NODE}node[inLayerType = '${OUTPUT}']`,
                 css: {
                     'background-color': '#f1f1f1',
-                    ...NetworkGraphStyleManager.getCommonStyles()
+                    ...NetworkGraphConfigurator.getCommonStyles()
 
 
                 }

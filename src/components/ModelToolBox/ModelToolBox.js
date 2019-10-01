@@ -11,7 +11,11 @@ class ModelToolBox extends React.Component {
         styles: {
             popup: {
                 transform: 'translateY(-100vh)'
+            },
+            modelToolBoxContainer: {
+                transform: "translateY(60vw)"
             }
+
         }
 
     };
@@ -35,6 +39,10 @@ class ModelToolBox extends React.Component {
         })
     };
 
+    /**
+     * Submitting layers on the preview and merging with the existing ones
+     * @param nextLayers
+     */
     submitLayers = (nextLayers) => {
         let prevLayers = this.props.graph.layers;
         let merged = prevLayers.concat(nextLayers);
@@ -42,10 +50,30 @@ class ModelToolBox extends React.Component {
         this.triggerPopup();
     };
 
+    /**
+     * Styling the component(e.g moving scene) at the beginning.
+     */
+
+    setupInitStyles = () => {
+        this.setState({
+            styles:{
+                ...this.state.styles,
+                modelToolBoxContainer: {
+                    transform: 'none'
+                }
+            }
+        })
+    };
+
+    componentDidMount(){
+        this.setupInitStyles();
+    }
+
     render() {
         return (
             <>
-                <div className={"ModelToolBox"}>
+                <div className={"ModelToolBox"}
+                      style={this.state.styles.modelToolBoxContainer}>
                     <TextButton
                         text={"Add a new layer"}
                         className={"AddNewLayerBtn"}

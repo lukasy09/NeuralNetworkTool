@@ -14,7 +14,7 @@
   padding: 12px 18px;
   cursor: pointer;
   transition: all 0.7s ease-in-out;
-  color: $darkColor;
+  color: $lightColor;
   a, span {
     font-size: 14pt;
     font-weight: 800;
@@ -25,17 +25,18 @@
     transition: all 0.7s ease-in-out;
   }
   a{
-    color: $darkColor;
+    color: $lightColor
   }
   &:hover {
-    color: $lightColor;
+    color: $specialColorFirst
   }
 }
 
 .UserInput, .UserSelect {
+  color: $lightColor;
   input {
     border: 0;
-    border-bottom: 3px solid #0c0c0c;
+    border-bottom: 3px solid $lightColor;
     padding: 1rem .75rem .3rem;
     font-size: 1.5rem;
     background: transparent;
@@ -53,7 +54,7 @@
     &::placeholder {
       transition: 0.4s ease;
       z-index: 100;
-      color: $darkColor;
+      color: $lightColor;
     }
   }
 }

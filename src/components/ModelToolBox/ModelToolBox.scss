@@ -11,17 +11,17 @@
   right: 0;
   bottom: 0;
   height: 100vh;
-
-  &:hover {
-    opacity: 0.8;
-  }
+  transition: all 1.4s ease-in-out;
+  background: $darkColor;
+  opacity: 0.98;
+  z-index: 10;
 
   .AddNewLayerBtn {
     color: $lightColor;
     border: solid 1px $lightColor;
     transition: all 0.7s ease-in-out;
     &:hover {
-      background: $specialColorFirst;
+      background: $specialColorSecond;
     }
   }
 }

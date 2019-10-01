@@ -64,8 +64,22 @@
   -webkit-transform: rotate($deg);
 }
 
+/*
+  Box shadow section
+ */
 @mixin box-shadow($color){
   -webkit-box-shadow: 0 0 5px 1px $color;
   -moz-box-shadow: 0 0 5px 1px $color;
   box-shadow: 0 0 5px 1px $color;
+}
+
+@mixin box-shadow-right($color){
+  box-shadow: 5px 0 5px -5px $color;
+  -webkit-box-shadow: 5px 0 5px -5px $color;
+  -moz-box-shadow: 5px 0 5px -5px $color;
+}
+
+@mixin touched-plane($color, $opacity){
+  background: $color;
+  opacity: $opacity;
 }

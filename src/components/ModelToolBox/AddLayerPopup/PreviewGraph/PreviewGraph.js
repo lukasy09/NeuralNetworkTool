@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import cytoscape from "cytoscape";
 import NetworkGraphBuilder from "../../../../NetworkGraphBuilder/NetworkGraphBuilder";
-import {NetworkGraphStyleManager} from "../../../../NetworkGraphBuilder/NetworkGraphStyleManager";
+import {NetworkGraphConfigurator} from "../../../../NetworkGraphBuilder/NetworkGraphConfigurator";
 //import {TEST_NETWORK} from "../../../../examples/networks";
 
 export class PreviewGraph extends React.Component{
@@ -11,7 +11,7 @@ export class PreviewGraph extends React.Component{
     initGraph = () => {
         return cytoscape({
             container: this.previewGraph, // Graph container. All the stuff is rendereing inside.
-            style: NetworkGraphStyleManager.getGraphStyleConfiguration(),
+            style: NetworkGraphConfigurator.getGraphStyleConfiguration(),
 
             layout: {
                 name: "cose",
