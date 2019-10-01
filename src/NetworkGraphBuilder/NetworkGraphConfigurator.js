@@ -5,6 +5,15 @@ const ELEMENT_TYPES = {
     EDGE: "edge"
 };
 
+const ACTIVATION_TYPES = {
+    RELU: SETTINGS.model.layerActivations.RELU,
+    SIGMOID: SETTINGS.model.layerActivations.SIGMOID,
+    SOFTMAX: SETTINGS.model.layerActivations.SOFTMAX
+};
+
+const RELU_RESOURCE = "http://i.imgur.com/6K4n9mZ.png";
+const SIGMOID_RESOURCE = "http://i.imgur.com/sbTRr0E.png";
+
 export class NetworkGraphConfigurator {
 
     /**
@@ -15,7 +24,6 @@ export class NetworkGraphConfigurator {
         const INPUT = SETTINGS.model.layerTypes.INPUT;
         const HIDDEN = SETTINGS.model.layerTypes.HIDDEN;
         const OUTPUT = SETTINGS.model.layerTypes.OUTPUT;
-
         return [
             {
                 selector: ELEMENT_TYPES.NODE,
@@ -25,23 +33,15 @@ export class NetworkGraphConfigurator {
                 }
             },
             {
-                css: {
-                    'background-color': '#f1f1f1',
-                    ...NetworkGraphConfigurator.getCommonStyles()
-                }
-            },
-            {
                 selector: `${ELEMENT_TYPES.NODE}node[inLayerType = '${INPUT}']`,
                 css: {
-                    'background-color': '#ff471a',
-                    ...NetworkGraphConfigurator.getCommonStyles()
+                    'background-color': '#99ff99',
                 }
             },
             {
                 selector: `${ELEMENT_TYPES.NODE}node[inLayerType = '${HIDDEN}']`,
                 css: {
                     'background-color': '#0066ff',
-                    ...NetworkGraphConfigurator.getCommonStyles()
 
                 }
             },
@@ -49,11 +49,21 @@ export class NetworkGraphConfigurator {
                 selector: `${ELEMENT_TYPES.NODE}node[inLayerType = '${OUTPUT}']`,
                 css: {
                     'background-color': '#f1f1f1',
-                    ...NetworkGraphConfigurator.getCommonStyles()
+                },
 
-
+            },
+            {
+                selector: `${ELEMENT_TYPES.NODE}node[activation = '${ACTIVATION_TYPES.RELU}']`,
+                css: {
+                    backgroundImage: RELU_RESOURCE,
                 }
-            }
+            },
+            {
+                selector: `${ELEMENT_TYPES.NODE}node[activation = '${ACTIVATION_TYPES.SIGMOID}']`,
+                css: {
+                    backgroundImage: SIGMOID_RESOURCE,
+                }
+            },
         ]
 
     }
@@ -61,14 +71,14 @@ export class NetworkGraphConfigurator {
 
     /**
      * Storing common (nodes') styles
-     * @returns {{color: string, borderWidth: string, borderColor: string}}
+     * @returns {{color: string, borderWidth: string, borderColor: string, backgroundFit: string, backgroundImageOpacity: number}}
      */
     static getCommonStyles(){
         return{
             color: 'black',
             borderWidth: '1px',
-            borderColor: 'black'
+            borderColor: 'black',
+            backgroundFit: "contain",
         }
-
     }
 }

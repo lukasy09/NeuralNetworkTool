@@ -40,13 +40,14 @@ export default class NetworkGraphBuilder {
      * }
      */
     addLayerNodes = (layer) => {
-        const {nodesNumber, index: layerIndex, type} = layer;
+        const {nodesNumber, index: layerIndex, type, activation} = layer;
         for (let i = 0; i < nodesNumber; i++) {
             this.nodes.push({
                 group: this.groupTypes.NODE,
                 data: {
                     id: `l${layerIndex.toString()} n${i.toString()}`,
-                    inLayerType: type
+                    inLayerType: type,
+                    activation: activation
                 },
                 position: NetworkGraphBuildUtils.getNodePosition(layer, i, this.maxNodesNumber, this.nodesGap),
             });
