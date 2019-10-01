@@ -47,13 +47,13 @@ class AddLayerPopup extends React.Component {
      * @TODO This feature is bugged. Check this ASAP.
      */
     removeLastLayer = () => {
+        const newIndex = this.state.currentLayer.index - 1;
         if (this.state.subGraph.layers.length >= 1) {
-            const newIndex = this.state.currentLayer.index - 1;
-            let currentLayers = this.state.subGraph.layers;
-            currentLayers.pop();
+            let current = this.state.subGraph.layers;
+            current.pop();
             this.setState({
                 subGraph: {
-                    layers: currentLayers
+                    layers: current
                 },
                 currentLayer: {
                     ...this.state.currentLayer,
