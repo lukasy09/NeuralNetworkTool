@@ -1,6 +1,15 @@
-import {SET_MODEL} from "../actions/modelActions";
+import {SET_MODEL, SET_MODEL_LAYERS} from "../actions/modelActions";
 
+
+/**
+ * @TODO Don't assign the following data directly to attributes of the object. Place them into some configs(ApplicationSettings)
+ * @type {{name: string, optimizer: string, loss: string, metrics: string[], layers: Array}}
+ */
 const defaultModelState = {
+    name: 'my-project',
+    optimizer: 'rmsprop',
+    loss: 'categorical_crossentropy',
+    metrics: ['accuracy'],
     layers:[]
 };
 
@@ -11,6 +20,11 @@ export function modelReducer(state = defaultModelState, action) {
             return{
                 ...state,
                 model: action.payload
+            };
+        case SET_MODEL_LAYERS:
+            return {
+                ...state,
+                layers: action.payload
             };
         default:
             return state;

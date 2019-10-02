@@ -1,0 +1,12 @@
+@import "../settings/StylesSettings";
+
+/*
+  Returning the default layer color. If you want to change, synchronise changes with SETTINGS
+ */
+@function getLayerColor($type) {
+  $types: ('input', 'hidden', 'output');
+  @if (index($types, $type)) {
+    @return $type;
+  }
+  @return 'white';
+}

@@ -1,0 +1,82 @@
+@import "../../../styles/mixins";
+@import "../../../styles/functions";
+@import "../../../settings/StylesSettings";
+
+.LayersContainer {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30px 45px 30px 45px;
+
+  .LayerRepresentation {
+    width: auto;
+    min-height: 100px;
+    margin-bottom: 70px;
+
+    &:after {
+      content: '';
+      display: block;
+      margin: auto;
+      height: 70px;
+      width: 2px;
+      position: relative;
+      top: 70px;
+      border-radius: 10px;
+      background-color: $lightColor;
+    }
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
+
+    &.input {
+      @include box-shadow($inputLayerColor);
+      &:after {
+        background: $inputLayerColor;
+      }
+
+    }
+
+    &.hidden {
+      @include box-shadow($hiddenLayerColor);
+      &:after {
+        background: $hiddenLayerColor;
+      }
+
+    }
+    &.output {
+      @include box-shadow($outputLayerColor);
+      &:after {
+        background: $outputLayerColor;
+      }
+    }
+
+    .Type {
+      left: 20px;
+      top: 0;
+      font-weight: 900;
+      max-width: 20%;
+      text-align: center;
+      box-sizing: border-box;
+      padding: 4px 8px 4px 8px;
+
+      &.input {
+        border-bottom: solid 1px $inputLayerColor;
+        border-right: solid 1px $inputLayerColor;
+        color: $inputLayerColor;
+      }
+
+      &.hidden {
+        border-bottom: solid 1px $hiddenLayerColor;
+        border-right: solid 1px $hiddenLayerColor;
+        color: $hiddenLayerColor;
+      }
+
+      &.output {
+        border-bottom: solid 1px $outputLayerColor;
+        border-right: solid 1px $outputLayerColor;
+        $color: $outputLayerColor;
+      }
+    }
+  }
+}

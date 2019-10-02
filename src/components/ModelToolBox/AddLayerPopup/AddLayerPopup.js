@@ -38,13 +38,13 @@ class AddLayerPopup extends React.Component {
             },
             currentLayer: {
                 ...this.state.currentLayer,
+                name: `Layer ${newIndex}`,
                 index: newIndex
             },
         });
     };
     /**
      * Removing(popping) last layer from the state list. "Back btn" listener.
-     * @TODO This feature is bugged. Check this ASAP.
      */
     removeLastLayer = () => {
         const newIndex = this.state.currentLayer.index - 1;
@@ -57,6 +57,7 @@ class AddLayerPopup extends React.Component {
                 },
                 currentLayer: {
                     ...this.state.currentLayer,
+                    name: `Layer ${newIndex}`,
                     index: newIndex
                 }
             })
@@ -70,7 +71,7 @@ class AddLayerPopup extends React.Component {
             subGraph: {layers: []},
             currentLayer: {
                 index: this.props.graph.layers.length,
-                name: `Layer`,
+                name: `Layer ${this.props.graph.layers.length}`,
                 classType: SETTINGS.model.layerClassTypes.DENSE,
                 type: SETTINGS.model.layerTypes.INPUT,
                 activation: SETTINGS.model.layerActivations.RELU,
@@ -168,7 +169,7 @@ class AddLayerPopup extends React.Component {
                     </div>
 
                     {this.state.subGraph.layers.length >= 1 ?
-                        <TextButton text={"Back"}
+                        <TextButton text={"Revert"}
                                     action={this.removeLastLayer}
                                     className={"RemoveBtn"}/> : <></>
                     }

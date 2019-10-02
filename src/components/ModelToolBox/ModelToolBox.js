@@ -1,9 +1,11 @@
 import React from 'react';
 import {TextButton} from "../common/TextButton";
 import {connect} from 'react-redux';
-import {setModel} from "../../actions/modelActions";
+import {setModel, setModelLayers} from "../../actions/modelActions";
 import {setGraph} from "../../actions/graphActions";
 import AddLayerPopup from "./AddLayerPopup/AddLayerPopup";
+import {Layer} from "./Layer/Layer";
+import {TEST_MODEL} from "../../examples/models";
 
 class ModelToolBox extends React.Component {
 
@@ -26,10 +28,10 @@ class ModelToolBox extends React.Component {
     triggerPopup = () => {
         let popupStyle;
         if (this.state.styles.popup) {
-             popupStyle = null;
+            popupStyle = null;
         } else {
             popupStyle = {
-                transform:  "translateY(-100vh)",
+                transform: "translateY(-100vh)",
             }
         }
         this.setState({
@@ -44,9 +46,8 @@ class ModelToolBox extends React.Component {
      * @param nextLayers
      */
     submitLayers = (nextLayers) => {
-        let prevLayers = this.props.graph.layers;
-        let merged = prevLayers.concat(nextLayers);
-        this.props.setGraph(merged);
+        this.props.setGraph(nextLayers);
+        this.props.setModelLayers(nextLayers);
         this.triggerPopup();
     };
 
@@ -56,7 +57,7 @@ class ModelToolBox extends React.Component {
 
     setupInitStyles = () => {
         this.setState({
-            styles:{
+            styles: {
                 ...this.state.styles,
                 modelToolBoxContainer: {
                     transform: 'none'
@@ -65,17 +66,32 @@ class ModelToolBox extends React.Component {
         })
     };
 
-    componentDidMount(){
+    componentDidMount() {
         this.setupInitStyles();
     }
 
     render() {
+        const {layers: modelLayers} = TEST_MODEL;
         return (
             <>
                 <div className={"ModelToolBox"}
-                      style={this.state.styles.modelToolBoxContainer}>
+                     style={this.state.styles.modelToolBoxContainer}>
+                    <div className={"LayersContainer"}>
+                        {
+                            modelLayers.map((layer, index) => {
+                                return (
+                                    <Layer key={index}
+                                           index={layer.index}
+                                           name={layer.name}
+                                           type={layer.type}
+                                           classType={layer.classType}
+                                    />
+                                )
+                            })
+                        }
+                    </div>
                     <TextButton
-                        text={"Add a new layer"}
+                        text={"New layer"}
                         className={"AddNewLayerBtn"}
                         action={this.triggerPopup}
                     />
@@ -97,7 +113,8 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = {
     setModel: setModel,
-    setGraph: setGraph
+    setGraph: setGraph,
+    setModelLayers: setModelLayers
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(ModelToolBox);

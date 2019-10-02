@@ -5,6 +5,7 @@
 @import "styles/animations";
 @import "styles/mixins";
 @import "styles/common";
+@import "styles/functions";
 
 
 /*
@@ -18,6 +19,7 @@
 @import "components/NetworkGraph/NetworkGraph";
 @import "components/ModelToolBox/ModelToolBox";
 @import "components/ModelToolBox/AddLayerPopup/AddLayerPopup";
+@import "components/ModelToolBox/Layer/Layer";
 @import "components/ModelToolBox/AddLayerPopup/PreviewGraph/PreviewGraph";
 
 body {
