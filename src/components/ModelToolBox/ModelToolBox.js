@@ -85,6 +85,8 @@ class ModelToolBox extends React.Component {
                                            name={layer.name}
                                            type={layer.type}
                                            classType={layer.classType}
+                                           activation={layer.activation}
+                                           nodesNumber={layer.nodesNumber}
                                     />
                                 )
                             })

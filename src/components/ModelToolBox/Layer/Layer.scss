@@ -5,10 +5,14 @@
 .LayersContainer {
   width: 100%;
   box-sizing: border-box;
-  padding: 30px 45px 30px 45px;
+  padding: 0 120px 0 120px;
 
+  &:first-child{
+    margin-top: 60px;
+  }
   .LayerRepresentation {
     width: auto;
+    height: 140px;
     min-height: 100px;
     margin-bottom: 70px;
 
@@ -19,7 +23,7 @@
       height: 70px;
       width: 2px;
       position: relative;
-      top: 70px;
+      top: 110px;
       border-radius: 10px;
       background-color: $lightColor;
     }
@@ -51,6 +55,14 @@
       }
     }
 
+    .Name{
+      height: 0;
+      font-size: 17pt;
+      font-weight: 800;
+      position: relative;
+      top: 40px;
+      left: 40px
+    }
     .Type {
       left: 20px;
       top: 0;
@@ -78,5 +90,26 @@
         $color: $outputLayerColor;
       }
     }
+
+    .ActivationGroup{
+      position: relative;
+      left: 220px;
+      top: 50px;
+      width: 250px;
+      height: 0;
+
+      span{
+        height: 0;
+        display: block;
+        position: relative;
+        bottom: 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+      .LinearChartContainer{
+        margin: 0;
+      }
+    }
+
   }
 }
