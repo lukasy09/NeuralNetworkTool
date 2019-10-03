@@ -35,7 +35,8 @@ export const SETTINGS = {
         layerActivations:{
             SIGMOID: 'sigmoid',
             RELU: 'relu',
-            SOFTMAX: 'softmax'
+            SOFTMAX: 'softmax',
+            NONE: 'none'
         }
     }
 

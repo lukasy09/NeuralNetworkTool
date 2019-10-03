@@ -6,6 +6,7 @@ import {TextButton} from "../../common/TextButton";
 import {UserInput} from "../../common/UserInput";
 import {UserSelect} from "../../common/UserSelect";
 import {PreviewGraph} from "./PreviewGraph/PreviewGraph";
+import {ModelValidator} from "../../../logic/ModelValidator/ModelValidator";
 
 const layerClassTypes = [
     SETTINGS.model.layerClassTypes.DENSE,
@@ -19,6 +20,7 @@ const layerTypes = [
 ];
 
 const layerActivations = [
+    SETTINGS.model.layerActivations.NONE,
     SETTINGS.model.layerActivations.RELU,
     SETTINGS.model.layerActivations.SIGMOID,
     SETTINGS.model.layerActivations.SOFTMAX
@@ -39,7 +41,8 @@ class AddLayerPopup extends React.Component {
             currentLayer: {
                 ...this.state.currentLayer,
                 name: `Layer ${newIndex}`,
-                index: newIndex
+                index: newIndex,
+                type: newIndex > 0 ? SETTINGS.model.layerTypes.HIDDEN : SETTINGS.model.layerTypes.INPUT
             },
         });
     };
@@ -58,7 +61,8 @@ class AddLayerPopup extends React.Component {
                 currentLayer: {
                     ...this.state.currentLayer,
                     name: `Layer ${newIndex}`,
-                    index: newIndex
+                    index: newIndex,
+                    type: newIndex > 0 ? SETTINGS.model.layerTypes.HIDDEN : SETTINGS.model.layerTypes.INPUT
                 }
             })
         }
@@ -74,13 +78,20 @@ class AddLayerPopup extends React.Component {
                 name: `Layer ${this.props.graph.layers.length}`,
                 classType: SETTINGS.model.layerClassTypes.DENSE,
                 type: SETTINGS.model.layerTypes.INPUT,
-                activation: SETTINGS.model.layerActivations.RELU,
+                activation: SETTINGS.model.layerActivations.NONE,
                 nodesNumber: 5
             }
         };
     }
 
+    componentDidMount() {
+        this.setState({
+            defaultLayerType: this.state.subGraph.layers.length > 0 ? SETTINGS.model.layerTypes.HIDDEN : SETTINGS.model.layerTypes.INPUT
+        })
+    }
+
     render() {
+        let filteredLayerTypes = ModelValidator.filterOpenLayerTypes(this.state.subGraph.layers);
         return (
             <div className={"AddLayerPopupContainer"}
                  style={this.props.style}>
@@ -111,7 +122,7 @@ class AddLayerPopup extends React.Component {
                                     label={{
                                         text: 'Layer class type'
                                     }}
-                                    defaultValue={this.classTypeDefaultValue}
+                                    value={this.state.defaultLayerType}
                                     options={layerClassTypes}/>
                     </div>
 
@@ -128,8 +139,8 @@ class AddLayerPopup extends React.Component {
                                     label={{
                                         text: 'Layer type'
                                     }}
-                                    defaultValue={this.typeDefaultValue}
-                                    options={layerTypes}/>
+                                    defaultValue={this.state.defaultLayerType}
+                                    options={filteredLayerTypes}/>
                     </div>
 
                     <div className={"FeatureWrapper"}>
@@ -145,7 +156,7 @@ class AddLayerPopup extends React.Component {
                                     label={{
                                         text: 'Layer activation'
                                     }}
-                                    defaultValue={this.activationDefaultValue}
+                                    defaultValue={SETTINGS.model.layerActivations.NONE}
                                     options={layerActivations}/>
                     </div>
 

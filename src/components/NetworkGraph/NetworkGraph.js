@@ -4,7 +4,11 @@ import {connect} from 'react-redux';
 import {LabelInfo} from "../common/LabelInfo";
 import NetworkGraphBuilder from '../../NetworkGraphBuilder/NetworkGraphBuilder';
 import {NetworkGraphConfigurator} from "../../NetworkGraphBuilder/NetworkGraphConfigurator";
+import {GraphSideUtil} from "./GraphSideUtil/GraphSideUtil";
+import {EXPORTS_TYPES} from "../../NetworkGraphBuilder/utils/Exports";
 //import {TEST_NETWORK} from "../../examples/networks";
+
+const EXPORTS = [EXPORTS_TYPES.PNG, EXPORTS_TYPES.JPEG, EXPORTS_TYPES.JSON];
 
 class NetworkGraph extends React.Component {
 
@@ -76,6 +80,7 @@ class NetworkGraph extends React.Component {
         return (
                 <div className={"NetworkGraphContainer"}
                      style={this.state.styles.networkGraphContainer}>
+                    <GraphSideUtil text={"Exports"}/>
                     <LabelInfo
                         text={projectName}
                         className={"ProjectName"}
