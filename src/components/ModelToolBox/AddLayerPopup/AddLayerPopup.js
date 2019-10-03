@@ -20,10 +20,10 @@ const layerTypes = [
 ];
 
 const layerActivations = [
-    SETTINGS.model.layerActivations.NONE,
     SETTINGS.model.layerActivations.RELU,
     SETTINGS.model.layerActivations.SIGMOID,
-    SETTINGS.model.layerActivations.SOFTMAX
+    SETTINGS.model.layerActivations.SOFTMAX,
+    SETTINGS.model.layerActivations.NONE,
 ];
 
 class AddLayerPopup extends React.Component {
@@ -42,7 +42,10 @@ class AddLayerPopup extends React.Component {
                 ...this.state.currentLayer,
                 name: `Layer ${newIndex}`,
                 index: newIndex,
-                type: newIndex > 0 ? SETTINGS.model.layerTypes.HIDDEN : SETTINGS.model.layerTypes.INPUT
+                // type: newIndex > 0 ? SETTINGS.model.layerTypes.HIDDEN : SETTINGS.model.layerTypes.INPUT,
+                // activation: newIndex === 0 || this.state.currentLayer.type === SETTINGS.model.layerTypes.OUTPUT ? SETTINGS.model.layerActivations.NONE
+                //     : (this.state.currentLayer.activation === SETTINGS.model.layerActivations.NONE ? SETTINGS.model.layerActivations.RELU :
+                //     this.state.currentLayer.activation)
             },
         });
     };
@@ -62,7 +65,9 @@ class AddLayerPopup extends React.Component {
                     ...this.state.currentLayer,
                     name: `Layer ${newIndex}`,
                     index: newIndex,
-                    type: newIndex > 0 ? SETTINGS.model.layerTypes.HIDDEN : SETTINGS.model.layerTypes.INPUT
+                    // type: newIndex > 0 ? SETTINGS.model.layerTypes.HIDDEN : SETTINGS.model.layerTypes.INPUT,
+                    // activation: newIndex === 0 || this.state.currentLayer.type === SETTINGS.model.layerTypes.OUTPUT ? SETTINGS.model.layerActivations.NONE
+                    //     : this.state.currentLayer.activation
                 }
             })
         }
@@ -91,7 +96,8 @@ class AddLayerPopup extends React.Component {
     }
 
     render() {
-        let filteredLayerTypes = ModelValidator.filterOpenLayerTypes(this.state.subGraph.layers);
+        //let filteredLayerTypes = ModelValidator.filterOpenLayerTypes(this.state.subGraph.layers);
+        //let filteredLayerActivation = ModelValidator.filterActivationsByLayerType(this.state.currentLayer.type, layerActivations);
         return (
             <div className={"AddLayerPopupContainer"}
                  style={this.props.style}>
@@ -140,7 +146,7 @@ class AddLayerPopup extends React.Component {
                                         text: 'Layer type'
                                     }}
                                     defaultValue={this.state.defaultLayerType}
-                                    options={filteredLayerTypes}/>
+                                    options={layerTypes}/>
                     </div>
 
                     <div className={"FeatureWrapper"}>
@@ -156,7 +162,7 @@ class AddLayerPopup extends React.Component {
                                     label={{
                                         text: 'Layer activation'
                                     }}
-                                    defaultValue={SETTINGS.model.layerActivations.NONE}
+                                    defaultValue={this.state.currentLayer.activation}
                                     options={layerActivations}/>
                     </div>
 

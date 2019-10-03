@@ -18,7 +18,7 @@ export class ModelValidator {
         const OUTPUT = SETTINGS.model.layerTypes.OUTPUT;
 
         if (currentLayers.length === 0) {
-            return [INPUT, HIDDEN, OUTPUT]
+            return [INPUT]
         } else {
 
             for (let i = 0; i < currentLayers.length; i++) {
@@ -28,5 +28,16 @@ export class ModelValidator {
             }
             return [HIDDEN, OUTPUT]
         }
+    };
+
+    static filterActivationsByLayerType(type, activations){
+        const OUTPUT = SETTINGS.model.layerTypes.OUTPUT;
+        const INPUT = SETTINGS.model.layerTypes.INPUT;
+        const NONE = SETTINGS.model.layerActivations.NONE;
+
+        if(type === OUTPUT || type === INPUT){
+            return [NONE];
+        }
+        return activations;
     }
 }
