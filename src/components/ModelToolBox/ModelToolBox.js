@@ -71,7 +71,9 @@ class ModelToolBox extends React.Component {
     }
 
     render() {
-        const {layers: modelLayers} = TEST_MODEL;
+        const modelLayers = this.props.model.layers;
+        console.log("model");
+        console.log(this.props.model.layers);
         return (
             <>
                 <div className={"ModelToolBox"}

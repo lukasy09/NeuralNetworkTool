@@ -6,6 +6,7 @@
   width: 100%;
   box-sizing: border-box;
   padding: 0 120px 0 120px;
+  overflow: auto;
 
   &:first-child{
     margin-top: 60px;
@@ -15,6 +16,7 @@
     height: 140px;
     min-height: 100px;
     margin-bottom: 70px;
+    margin-top: 20px;
 
     &:after {
       content: '';
@@ -94,7 +96,7 @@
     .ActivationGroup{
       position: relative;
       left: 220px;
-      top: 50px;
+      top: 10px;
       width: 250px;
       height: 0;
 

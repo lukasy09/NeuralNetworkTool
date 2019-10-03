@@ -9,8 +9,7 @@ export class DataGenerator{
         for(let x = options.from; x < options.to; x += options.threshold){
             data.push({
                 "name": `Point ${x}`,
-                "uv": x,
-                "amt": this.activation(x)
+                "y": this.activation(x)
             })
         }
         return data;

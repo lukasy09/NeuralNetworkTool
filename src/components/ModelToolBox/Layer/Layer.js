@@ -1,22 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Chart} from "../../Chart/Chart";
-import {DataGenerator} from "../../../logic/DataGenerator/DataGenerator";
-import {sigmoid} from "../../../logic/Activations/sigmoid";
-import {relu} from "../../../logic/Activations/relu";
+import {DataGeneratorUtil} from "../../../logic/utils/DataGeneratorUtil";
 
-let gen = new DataGenerator(relu);
-const data = gen.generate({
-    from: -100,
-    to: 100,
-    threshold: 30
-});
+
+/**
+ * Configuration for generating custom data to display activation function.
+ * @type {{from: number, to: number, threshold: number}}
+ */
+const OPTIONS = {
+    from: -10,
+    to: 10,
+    threshold: 0.1
+};
+
+const SIZE = {
+    width: 140,
+    height: 80
+};
 
 export const Layer = (props) => {
-    const SIZE = {
-      width: 140,
-      height: 60
-    };
+    let data;
+    let gen;
+    if(props.activation){
+        gen = DataGeneratorUtil.getGeneratorByActivation(props.activation);
+        data = gen.generate(OPTIONS);
+    }
     return (
         <div className={`LayerRepresentation ${props.type}`}>
             <div className={`Type ${props.type}`}>

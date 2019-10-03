@@ -1,6 +1,4 @@
 export const TEST_MODEL = {
-    name: 'my-project',
-
     optimizer: 'rmsprop',
     loss: 'categorical_crossentropy',
     metrics: ['accuracy'],
@@ -19,7 +17,7 @@ export const TEST_MODEL = {
             name: 'Layer 1',
             type: 'hidden',
             classType: 'dense',
-            activation: 'relu',
+            activation: 'sigmoid',
             nodesNumber: 5
         },
         {
