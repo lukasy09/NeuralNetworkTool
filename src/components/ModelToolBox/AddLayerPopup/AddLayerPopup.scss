@@ -74,7 +74,7 @@
       position: absolute;
       transition: all 0.3s ease-in-out;
       &:hover {
-        background: $specialColorSecond;
+        background: $specialColorFirst;
       }
     }
 
@@ -86,7 +86,7 @@
       box-sizing: content-box;
       width: 20px;
       height: 20px;
-      background: $specialColorSecond;
+      background: $specialColorFirst;
       border: none;
       text-align: center;
       opacity: 0.8;
@@ -97,14 +97,14 @@
       }
       &:hover{
         transform: none;
-        background: darken($specialColorSecond, 10%);
+        background: darken($specialColorFirst, 10%);
        }
     }
 
     .RemoveBtn {
       @extend %Btn;
       bottom: 2%;
-      border: solid 2px $specialColorSecond;
+      border: solid 2px $specialColorFirst;
       left: 1.5%;
       width: 100px;
     }
@@ -112,13 +112,13 @@
     .AddBtn{
       @extend %Btn;
       bottom: 2%;
-      border: solid 2px $specialColorSecond;
+      border: solid 2px $specialColorFirst;
       right: 10.5%;
       width: 100px;
     }
     .SubmitBtn {
       @extend %Btn;
-      border: solid 2px $specialColorSecond;
+      border: solid 2px $specialColorFirst;
       bottom: 2%;
       right: 1%;
       width: 100px;

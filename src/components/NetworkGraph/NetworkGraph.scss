@@ -4,6 +4,7 @@
 .NetworkGraphContainer{
   @include col-flex-box;
   justify-content: center;
+  align-items: center;
   min-width: 60%;
   height: 100%;
   box-sizing: border-box;
@@ -19,11 +20,11 @@
   .LabelInfoWrapper{
     &.ProjectName{
       position: absolute;
-      left: 15px;
+      left: 52px;
       top: 17px;
       color: $lightColor;
       font-weight: 900;
-      text-shadow: 0 0 15px $specialColorSecond, 0 0 10px $specialColorSecond;
+      text-shadow: 0 0 15px $specialColorFirst, 0 0 10px $specialColorFirst;
     }
   }
 }
