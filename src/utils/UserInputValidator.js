@@ -15,11 +15,12 @@ export default class UserInputValidator {
 
     static projectNameRegex = SETTINGS.regex.projectName;
 
+    /**
+     * @TODO remove info attribute from here and put it into the invoking compenent
+     * @param name
+     * @returns {*}
+     */
     static validateProjectName = (name) => {
-
-        /**
-         * @TODO Create the class and place REGEX in settings
-         */
 
         if (name.length >= 1) {
             return {

@@ -40,14 +40,15 @@ export const Layer = (props) => {
                     <Chart size={SIZE}
                        data={data}/> : <></>}
             </div>
-
         </div>
     )
 };
 
 Layer.propTypes = {
+    index: PropTypes.number,
     name: PropTypes.string,
     type: PropTypes.string,
     classType: PropTypes.string,
-    activation: PropTypes.string
+    activation: PropTypes.string,
+    nodesNumber: PropTypes.number
 };

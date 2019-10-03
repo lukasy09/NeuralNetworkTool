@@ -5,11 +5,13 @@ import {setModel, setModelLayers} from "../../actions/modelActions";
 import {setGraph} from "../../actions/graphActions";
 import AddLayerPopup from "./AddLayerPopup/AddLayerPopup";
 import {Layer} from "./Layer/Layer";
-import {TEST_MODEL} from "../../examples/models";
+import {ESCAPE} from "../../utils/Keyboard";
+//import {TEST_MODEL} from "../../examples/models";
 
 class ModelToolBox extends React.Component {
 
     state = {
+        activePopup: false,
         styles: {
             popup: {
                 transform: 'translateY(-100vh)'
@@ -35,8 +37,10 @@ class ModelToolBox extends React.Component {
             }
         }
         this.setState({
+            ...this.state,
+            activePopup: !this.state.activePopup,
             styles: {
-                popup: popupStyle
+                popup: popupStyle,
             }
         })
     };
@@ -68,12 +72,18 @@ class ModelToolBox extends React.Component {
 
     componentDidMount() {
         this.setupInitStyles();
+
+        window.addEventListener('keydown', (e)=>{
+            if(e.keyCode === ESCAPE.code){
+                if(this.state.activePopup){
+                    this.triggerPopup();
+                }
+            }
+        });
     }
 
     render() {
         const modelLayers = this.props.model.layers;
-        console.log("model");
-        console.log(this.props.model.layers);
         return (
             <>
                 <div className={"ModelToolBox"}
