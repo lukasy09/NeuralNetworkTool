@@ -6,6 +6,6 @@
   .PreviewGraph{
     height: 460px;
     width: 500px;
-    @include box-shadow($lightColor);
+    @include box-shadow($specialColorFirst);
   }
 }

@@ -13,7 +13,7 @@
 
 
   .NetworkGraph{
-   @include box-shadow($lightColor);
+   @include box-shadow($specialColorFirst);
    width: 90%;
    height: 90%;
  }

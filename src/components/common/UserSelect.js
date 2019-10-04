@@ -9,6 +9,7 @@ export const UserSelect = (props) => {
             {props.label ?
                 <label>{props.label.text}</label> : <></>}
             <select onChange={props.action}
+                    value={props.value}
                     defaultValue={props.defaultValue}>
                 {props.options.map((value, index)=>{
                     return(
@@ -28,4 +29,5 @@ UserSelect.propTypes = {
     style: PropTypes.object,
     defaultValue: PropTypes.string,
     label: PropTypes.object,
+    value: PropTypes.string
 };

@@ -83,3 +83,8 @@
   background: $color;
   opacity: $opacity;
 }
+
+@mixin blur($px) {
+  filter: blur($px);
+  -webkit-filter: blur($px);
+}

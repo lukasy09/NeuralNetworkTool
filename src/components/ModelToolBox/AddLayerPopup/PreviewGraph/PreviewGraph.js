@@ -30,10 +30,10 @@ export class PreviewGraph extends React.Component{
     render(){
         return(
             <div className={"PreviewGraphContainer"}>
-                <div
-                    ref={(div) => this.previewGraph = div}
-                    className={"PreviewGraph"}
-                    id={this.previewGraphId}/>
+                <div ref={(div) => this.previewGraph = div}
+                     className={"PreviewGraph"}
+                     id={this.previewGraphId}
+                     style={{backgroundColor: '#f1ebe0'}}/>
             </div>
         )
     }

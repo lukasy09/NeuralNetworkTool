@@ -85,10 +85,10 @@ class NetworkGraph extends React.Component {
                         text={projectName}
                         className={"ProjectName"}
                     />
-                    <div
-                        ref={(div) => this.graph = div}
+                    <div ref={(div) => this.graph = div}
                         className={"NetworkGraph"}
-                        id={this.networkGraphId}/>
+                        id={this.networkGraphId}
+                        style={{backgroundColor: '#f1ebe0'}}/>
                 </div>
         )
     }

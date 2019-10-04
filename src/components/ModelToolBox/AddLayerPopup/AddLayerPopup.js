@@ -6,7 +6,7 @@ import {TextButton} from "../../common/TextButton";
 import {UserInput} from "../../common/UserInput";
 import {UserSelect} from "../../common/UserSelect";
 import {PreviewGraph} from "./PreviewGraph/PreviewGraph";
-import {ModelValidator} from "../../../logic/ModelValidator/ModelValidator";
+import {PopupBLur} from "../../common/PopupBlur";
 
 const layerClassTypes = [
     SETTINGS.model.layerClassTypes.DENSE,
@@ -20,13 +20,31 @@ const layerTypes = [
 ];
 
 const layerActivations = [
+    SETTINGS.model.layerActivations.NONE,
     SETTINGS.model.layerActivations.RELU,
     SETTINGS.model.layerActivations.SIGMOID,
     SETTINGS.model.layerActivations.SOFTMAX,
-    SETTINGS.model.layerActivations.NONE,
 ];
 
 class AddLayerPopup extends React.Component {
+
+
+
+    constructor(props) {
+        super(props);
+        //this.modelValidator = new ModelValidator();
+        this.state = {
+            subGraph: {layers: []},
+            currentLayer: {
+                index: this.props.graph.layers.length,
+                name: `Layer ${this.props.graph.layers.length}`,
+                classType: SETTINGS.model.layerClassTypes.DENSE,
+                type: SETTINGS.model.layerTypes.INPUT,
+                activation: SETTINGS.model.layerActivations.NONE,
+                nodesNumber: 5
+            }
+        };
+    }
 
     /**
      * Adding a current layer(with data displayed on popup) to layers list and updating the index
@@ -48,6 +66,7 @@ class AddLayerPopup extends React.Component {
                 //     this.state.currentLayer.activation)
             },
         });
+
     };
     /**
      * Removing(popping) last layer from the state list. "Back btn" listener.
@@ -73,22 +92,6 @@ class AddLayerPopup extends React.Component {
         }
     };
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            subGraph: {layers: []},
-            currentLayer: {
-                index: this.props.graph.layers.length,
-                name: `Layer ${this.props.graph.layers.length}`,
-                classType: SETTINGS.model.layerClassTypes.DENSE,
-                type: SETTINGS.model.layerTypes.INPUT,
-                activation: SETTINGS.model.layerActivations.NONE,
-                nodesNumber: 5
-            }
-        };
-    }
-
     componentDidMount() {
         this.setState({
             defaultLayerType: this.state.subGraph.layers.length > 0 ? SETTINGS.model.layerTypes.HIDDEN : SETTINGS.model.layerTypes.INPUT
@@ -96,11 +99,10 @@ class AddLayerPopup extends React.Component {
     }
 
     render() {
-        //let filteredLayerTypes = ModelValidator.filterOpenLayerTypes(this.state.subGraph.layers);
-        //let filteredLayerActivation = ModelValidator.filterActivationsByLayerType(this.state.currentLayer.type, layerActivations);
         return (
             <div className={"AddLayerPopupContainer"}
                  style={this.props.style}>
+                <PopupBLur/>
                 <div className={"Layer"}>
                     <div className={"FeatureWrapper"}>
                         <UserInput action={(e) => {
@@ -162,7 +164,7 @@ class AddLayerPopup extends React.Component {
                                     label={{
                                         text: 'Layer activation'
                                     }}
-                                    defaultValue={this.state.currentLayer.activation}
+                                    value={this.state.currentLayer.activation}
                                     options={layerActivations}/>
                     </div>
 

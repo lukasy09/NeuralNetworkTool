@@ -105,7 +105,7 @@ class ModelToolBox extends React.Component {
                         }
                     </div>
                     <TextButton
-                        text={"New layer"}
+                        text={"Edit"}
                         className={"AddNewLayerBtn"}
                         action={this.triggerPopup}
                     />
