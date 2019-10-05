@@ -8,6 +8,7 @@ import {Select} from "../../common/Select";
 import {PreviewGraph} from "./PreviewGraph/PreviewGraph";
 import {PopupBlur} from "../../common/PopupBlur";
 
+
 const layerClassTypes = [
     SETTINGS.model.layerClassTypes.DENSE,
     //SETTINGS.model.layerClassTypes.CONV2D,
@@ -28,11 +29,9 @@ const layerActivations = [
 
 class AddLayerPopup extends React.Component {
 
-
-
     constructor(props) {
         super(props);
-        //this.modelValidator = new ModelValidator();
+
         this.state = {
             subGraph: {layers: []},
             currentLayer: {
@@ -66,7 +65,6 @@ class AddLayerPopup extends React.Component {
                 //     this.state.currentLayer.activation)
             },
         });
-
     };
     /**
      * Removing(popping) last layer from the state list. "Back btn" listener.

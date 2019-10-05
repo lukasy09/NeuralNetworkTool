@@ -6,6 +6,7 @@ import {setGraph} from "../../actions/graphActions";
 import AddLayerPopup from "./AddLayerPopup/AddLayerPopup";
 import {Layer} from "./Layer/Layer";
 import {ESCAPE} from "../../utils/Keyboard";
+import {ModelValidator} from "../../logic/ModelValidator/ModelValidator";
 //import {TEST_MODEL} from "../../examples/models";
 
 class ModelToolBox extends React.Component {
@@ -23,6 +24,11 @@ class ModelToolBox extends React.Component {
         }
 
     };
+
+    constructor(props){
+        super(props);
+        this.modelValidator = new ModelValidator();
+    }
 
     /**
      * Event listener, adding a new layer on user's click.
@@ -53,6 +59,7 @@ class ModelToolBox extends React.Component {
         this.props.setGraph(nextLayers);
         this.props.setModelLayers(nextLayers);
         this.triggerPopup();
+
     };
 
     /**
@@ -69,6 +76,13 @@ class ModelToolBox extends React.Component {
             }
         })
     };
+
+    componentDidUpdate(){
+        // console.log("model");
+        // console.log(this.props.model);
+        // console.log(this.modelValidator.validateModel(this.props.model));
+        // console.log(this.modelValidator.getInfoStack());
+    }
 
     componentDidMount() {
         this.setupInitStyles();
