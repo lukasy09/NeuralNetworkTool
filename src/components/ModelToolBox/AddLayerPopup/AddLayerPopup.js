@@ -130,7 +130,7 @@ class AddLayerPopup extends React.Component {
                                 label={{
                                         text: 'Layer class type'
                                     }}
-                                value={this.state.defaultLayerType}
+                                defaultValue = {this.state.defaultLayerType}
                                 options={layerClassTypes}/>
                     </div>
 
@@ -164,7 +164,7 @@ class AddLayerPopup extends React.Component {
                                 label={{
                                         text: 'Layer activation'
                                     }}
-                                value={this.state.currentLayer.activation}
+                                defaultValue={this.state.currentLayer.activation}
                                 options={layerActivations}/>
                     </div>
 
