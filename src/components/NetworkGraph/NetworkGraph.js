@@ -72,7 +72,7 @@ class NetworkGraph extends React.Component {
      * Returning the main cytoscape object responsible for all actions.
      */
     initGraph = () => {
-        return cytoscape({
+        this.cy = cytoscape({
             container: this.graph, // Graph container. All the stuff is rendereing inside.
             style: NetworkGraphConfigurator.getGraphStyleConfiguration(),
             layout: {
@@ -81,6 +81,8 @@ class NetworkGraph extends React.Component {
                 gravity: 12,
             },
         });
+
+        return this.cy;
     };
 
     triggerExportsPopup = ()=>{
@@ -111,10 +113,10 @@ class NetworkGraph extends React.Component {
         return (
                 <div className={"NetworkGraphContainer"}
                      style={this.state.styles.networkGraphContainer}>
-                    <GraphSideUtil
-                            action={this.triggerExportsPopup}
-                            style={this.state.styles.exportsPopup}
-                            exportText={"Exports"}/>
+                    <GraphSideUtil cy={this.cy}
+                                   action={this.triggerExportsPopup}
+                                   style={this.state.styles.exportsPopup}
+                                   exportText={"Exports"}/>
                     <LabelInfo
                         text={projectName}
                         className={"ProjectName"}

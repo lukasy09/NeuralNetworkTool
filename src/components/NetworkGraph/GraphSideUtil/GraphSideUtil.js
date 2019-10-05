@@ -11,7 +11,8 @@ const EXPORTS = [EXPORTS_TYPES.PNG, EXPORTS_TYPES.JPEG, EXPORTS_TYPES.JSON];
 export const GraphSideUtil = (props) => {
     return (
         <>
-            <Exports action={props.action}
+            <Exports cy={props.cy}
+                     action={props.action}
                      style={props.style}
                      formats={EXPORTS}/>
             <div onClick={props.action}
