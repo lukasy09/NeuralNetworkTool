@@ -1,27 +1,32 @@
 import React from 'react';
 import {LabelInfo} from "../../common/LabelInfo";
+import {Exports} from "../Exports/Exports";
 import PropTypes from "prop-types";
+import {EXPORTS_TYPES} from "../../../NetworkGraphBuilder/utils/Exports";
+
+
+const EXPORTS = [EXPORTS_TYPES.PNG, EXPORTS_TYPES.JPEG, EXPORTS_TYPES.JSON];
+
 
 export const GraphSideUtil = (props) => {
     return (
-        <div className={"GraphSideUtilContainer"}>
-            {/*{props.exportsTypes.map((type, index) => {*/}
-            {/*return (*/}
-            {/*<div key={index}*/}
-            {/*className={`ExportType ${type.toUpperCase()}`}>*/}
-            {/*{type.toUpperCase()}*/}
-            {/*</div>*/}
-            {/*)*/}
-            {/*})}*/}
-
-            <LabelInfo
-                text={props.text}
-            />
-        </div>
+        <>
+            <Exports style={props.style}
+                     formats={EXPORTS}/>
+            <div onClick={props.action}
+                 className={"GraphSideUtilContainer"}>
+                <LabelInfo
+                    text={props.exportText}
+                    action={props.action}
+                />
+            </div>
+        </>
     )
 };
 
 GraphSideUtil.propTypes = {
-    text: PropTypes.string
+    exportText: PropTypes.string,
+    action: PropTypes.func,
+    style: PropTypes.object
 };
 

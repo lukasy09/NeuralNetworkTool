@@ -4,17 +4,12 @@
 .AddLayerPopupContainer {
   @include row-flex-box;
   @include box-shadow($lightColor);
+  @include absolute-center-element;
   justify-content: center;
   align-items: center;
   width: 80vw;
   height: 90vh;
   background: lighten($darkColor, 5%);
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
   opacity: 0.98;
   transition: all 0.7s ease-in-out;
 

@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-export const UserInput = (props) => {
+export const Input = (props) => {
     const additionalClassName = props.className ? props.className : "";
-    const defaultClassName = "UserInput";
+    const defaultClassName = "Input";
     return (
         <div className={additionalClassName ? defaultClassName+ " " + additionalClassName : defaultClassName}
              style={props.style}>
             {props.label ?
                 <label>{props.label.text}</label> : <></>}
             <input
-                className={"UserInput"}
+                className={"Input"}
                 type={props.type}
                 onChange={props.action}
                 placeholder={props.placeholder}
@@ -23,7 +23,7 @@ export const UserInput = (props) => {
     )
 };
 
-UserInput.propTypes = {
+Input.propTypes = {
     action: PropTypes.func,
     className: PropTypes.string,
     style: PropTypes.object,

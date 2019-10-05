@@ -1,7 +1,7 @@
 import React from 'react';
 import {TextButton} from "../../common/TextButton";
 import {LinkButton} from "../../common/LinkButton";
-import {UserInput} from "../../common/UserInput";
+import {Input} from "../../common/Input";
 import {connect} from 'react-redux';
 import {setProjectName} from "../../../actions/generalActions";
 import UserInputValidator from "../../../utils/UserInputValidator";
@@ -107,7 +107,7 @@ class StartInfoInput extends React.Component {
                     className={"TextButton"}
                     action={this.startProject}/>
 
-                <UserInput
+                <Input
                     type={"text"}
                     placeholder={"Enter a project name"}
                     action={this.changeProjectName}

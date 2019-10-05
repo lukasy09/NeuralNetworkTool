@@ -2,9 +2,9 @@
 @import "../../../settings/StylesSettings";
 
 .GraphSideUtilContainer {
-  @include row-flex-box;
+  @include col-flex-box;
   @include rotate(-90deg);
-  background: #009efd;
+  background: $specialColorSecond;
   color: $lightColor;
   position: absolute;
   left: -20px;
@@ -14,7 +14,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: lighten(#009efd, 10%);
+    background-color: lighten($specialColorSecond, 10%);
   }
   div {
     span {

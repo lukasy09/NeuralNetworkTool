@@ -5,10 +5,7 @@ import {LabelInfo} from "../common/LabelInfo";
 import NetworkGraphBuilder from '../../NetworkGraphBuilder/NetworkGraphBuilder';
 import {NetworkGraphConfigurator} from "../../NetworkGraphBuilder/NetworkGraphConfigurator";
 import {GraphSideUtil} from "./GraphSideUtil/GraphSideUtil";
-import {EXPORTS_TYPES} from "../../NetworkGraphBuilder/utils/Exports";
-//import {TEST_NETWORK} from "../../examples/networks";
 
-const EXPORTS = [EXPORTS_TYPES.PNG, EXPORTS_TYPES.JPEG, EXPORTS_TYPES.JSON];
 
 class NetworkGraph extends React.Component {
 
@@ -19,7 +16,11 @@ class NetworkGraph extends React.Component {
         styles: {
             networkGraphContainer: {
                 transform: "translateX(-60vw)"
+            },
+            exportsPopup:{
+                display: 'block'
             }
+
         },
         graph:{
             styles:{
@@ -46,6 +47,7 @@ class NetworkGraph extends React.Component {
     setupInitStyles = () => {
       this.setState({
           styles:{
+              ...this.state.styles,
               networkGraphContainer: {
                   transform: 'none'
               }
@@ -69,6 +71,21 @@ class NetworkGraph extends React.Component {
         });
     };
 
+    triggerExportsPopup = ()=>{
+        let style;
+
+        if(this.state.styles.exportsPopup){
+            style = null;
+        }else{
+            style={display:'none'};
+        }
+        this.setState({
+            styles:{
+                ...this.state.styles,
+                exportsPopup: style
+            }
+        });
+    };
 
     componentDidUpdate(){
         this.networkGraphBuilder = new NetworkGraphBuilder(this.initGraph());
@@ -80,7 +97,10 @@ class NetworkGraph extends React.Component {
         return (
                 <div className={"NetworkGraphContainer"}
                      style={this.state.styles.networkGraphContainer}>
-                    <GraphSideUtil text={"Exports"}/>
+                    <GraphSideUtil
+                            action={this.triggerExportsPopup}
+                            style={this.state.styles.exportsPopup}
+                            exportText={"Exports"}/>
                     <LabelInfo
                         text={projectName}
                         className={"ProjectName"}

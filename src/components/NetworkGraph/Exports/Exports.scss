@@ -1,0 +1,73 @@
+@import "../../../styles/mixins";
+@import "../../../settings/StylesSettings";
+
+.ExportsContainer{
+  @include absolute-center-element;
+  @include col-flex-box;
+  z-index: 1;
+  max-width: 40vw;
+  max-height: 60vh;
+  background: lighten($darkColor, 10%);
+  box-sizing: border-box;
+  text-align: center;
+  font-weight: 800;
+
+  .ExportsHeader{
+    width: 100%;
+    background: lighten($darkColor, 2%);
+
+    color: $lightColor;
+    text-align: center;
+    font-size: 14pt;
+    box-sizing: border-box;
+    padding: 12px 8px 12px 8px;
+  }
+
+  .ExportFormats{
+    @include col-flex-box;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+
+    .Format{
+      box-sizing: padding-box;
+      padding: 12px 16px 12px 16px;
+      margin-bottom: 20px;
+      width: 160px;
+
+      &:nth-child(2){
+        div{
+          left: 2px;
+        }
+
+      }
+      &:nth-child(3){
+        div{
+          left: 4px;
+        }
+      }
+
+      div{
+        position: relative;
+      }
+    }
+
+  }
+  .ExportsFooter{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    padding: 12px 8px 12px 8px;
+    .ExportBtn{
+      max-width: 25%;
+      margin: auto;
+      transition: none;
+      background: $specialColorSecond;
+
+      &:hover{
+        background: darken($specialColorSecond, 10%);
+      }
+    }
+  }
+
+}

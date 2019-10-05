@@ -88,3 +88,13 @@
   filter: blur($px);
   -webkit-filter: blur($px);
 }
+
+
+@mixin absolute-center-element{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}

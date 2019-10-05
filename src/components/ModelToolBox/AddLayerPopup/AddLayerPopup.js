@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {SETTINGS} from "../../../settings/ApplicationSettings";
 import {TextButton} from "../../common/TextButton";
-import {UserInput} from "../../common/UserInput";
-import {UserSelect} from "../../common/UserSelect";
+import {Input} from "../../common/Input";
+import {Select} from "../../common/Select";
 import {PreviewGraph} from "./PreviewGraph/PreviewGraph";
-import {PopupBLur} from "../../common/PopupBlur";
+import {PopupBlur} from "../../common/PopupBlur";
 
 const layerClassTypes = [
     SETTINGS.model.layerClassTypes.DENSE,
@@ -102,23 +102,23 @@ class AddLayerPopup extends React.Component {
         return (
             <div className={"AddLayerPopupContainer"}
                  style={this.props.style}>
-                <PopupBLur/>
+                <PopupBlur/>
                 <div className={"Layer"}>
                     <div className={"FeatureWrapper"}>
-                        <UserInput action={(e) => {
+                        <Input action={(e) => {
                             this.setState({currentLayer: {...this.state.currentLayer, name: e.target.value}})
                         }}
-                                   className={"LayerNameInput"}
-                                   type={"text"}
-                                   value={`Layer ${this.state.currentLayer.index}`}
-                                   label={{
+                               className={"LayerNameInput"}
+                               type={"text"}
+                               value={`Layer ${this.state.currentLayer.index}`}
+                               label={{
                                        text: 'Layer name'
                                    }}
 
                         />
                     </div>
                     <div className={"FeatureWrapper"}>
-                        <UserSelect action={(e) => {
+                        <Select action={(e) => {
                             this.setState({
                                 currentLayer: {
                                     ...this.state.currentLayer,
@@ -126,16 +126,16 @@ class AddLayerPopup extends React.Component {
                                 }
                             })
                         }}
-                                    className={"LayerClassTypeSelect"}
-                                    label={{
+                                className={"LayerClassTypeSelect"}
+                                label={{
                                         text: 'Layer class type'
                                     }}
-                                    value={this.state.defaultLayerType}
-                                    options={layerClassTypes}/>
+                                value={this.state.defaultLayerType}
+                                options={layerClassTypes}/>
                     </div>
 
                     <div className={"FeatureWrapper"}>
-                        <UserSelect action={(e) => {
+                        <Select action={(e) => {
                             this.setState({
                                 currentLayer: {
                                     ...this.state.currentLayer,
@@ -143,16 +143,16 @@ class AddLayerPopup extends React.Component {
                                 }
                             })
                         }}
-                                    className={"LayerClassTypeSelect"}
-                                    label={{
+                                className={"LayerClassTypeSelect"}
+                                label={{
                                         text: 'Layer type'
                                     }}
-                                    defaultValue={this.state.defaultLayerType}
-                                    options={layerTypes}/>
+                                defaultValue={this.state.defaultLayerType}
+                                options={layerTypes}/>
                     </div>
 
                     <div className={"FeatureWrapper"}>
-                        <UserSelect action={(e) => {
+                        <Select action={(e) => {
                             this.setState({
                                 currentLayer: {
                                     ...this.state.currentLayer,
@@ -160,16 +160,16 @@ class AddLayerPopup extends React.Component {
                                 }
                             })
                         }}
-                                    className={"LayerActivation"}
-                                    label={{
+                                className={"LayerActivation"}
+                                label={{
                                         text: 'Layer activation'
                                     }}
-                                    value={this.state.currentLayer.activation}
-                                    options={layerActivations}/>
+                                value={this.state.currentLayer.activation}
+                                options={layerActivations}/>
                     </div>
 
                     <div className={"FeatureWrapper"}>
-                        <UserInput action={(e) => {
+                        <Input action={(e) => {
                             this.setState({
                                 currentLayer: {
                                     ...this.state.currentLayer,
@@ -177,11 +177,11 @@ class AddLayerPopup extends React.Component {
                                 }
                             })
                         }}
-                                   className={"LayerCountInput"}
-                                   type={"number"}
-                                   defaultValue={"5"}
-                                   min={1}
-                                   label={{
+                               className={"LayerCountInput"}
+                               type={"number"}
+                               defaultValue={"5"}
+                               min={1}
+                               label={{
                                        text: "Neuron's count"
                                    }}
                         />

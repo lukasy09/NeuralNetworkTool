@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-export const UserSelect = (props) => {
+export const Select = (props) => {
     const additionalClassName = props.className ? props.className : "";
-    const defaultClassName = "UserSelect";
+    const defaultClassName = "Select";
     return (
         <div className={additionalClassName ? defaultClassName+ " " + additionalClassName : defaultClassName}>
             {props.label ?
@@ -23,7 +23,7 @@ export const UserSelect = (props) => {
     )
 };
 
-UserSelect.propTypes = {
+Select.propTypes = {
     action: PropTypes.func,
     className: PropTypes.string,
     style: PropTypes.object,
