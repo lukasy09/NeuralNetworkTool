@@ -1,10 +1,13 @@
 import React from 'react';
 import cytoscape from 'cytoscape';
 import {connect} from 'react-redux';
+
 import {LabelInfo} from "../common/LabelInfo";
 import NetworkGraphBuilder from '../../NetworkGraphBuilder/NetworkGraphBuilder';
 import {NetworkGraphConfigurator} from "../../NetworkGraphBuilder/NetworkGraphConfigurator";
 import {GraphSideUtil} from "./GraphSideUtil/GraphSideUtil";
+
+import {ESCAPE} from "../../utils/Keyboard";
 
 
 class NetworkGraph extends React.Component {
@@ -13,12 +16,13 @@ class NetworkGraph extends React.Component {
     networkGraphId = 'cy';
 
     state = {
+        exportsPopupActive: false,
         styles: {
             networkGraphContainer: {
                 transform: "translateX(-60vw)"
             },
             exportsPopup:{
-                display: 'block'
+                display: 'none'
             }
 
         },
@@ -38,6 +42,14 @@ class NetworkGraph extends React.Component {
     componentDidMount() {
         this.setupInitStyles();
         this.initGraph();
+
+        window.addEventListener('keydown', (e)=>{
+            if(e.keyCode === ESCAPE.code){
+                if(this.state.exportsPopupActive){
+                    this.triggerExportsPopup();
+                }
+            }
+        });
     }
 
     /**
@@ -80,6 +92,8 @@ class NetworkGraph extends React.Component {
             style={display:'none'};
         }
         this.setState({
+            ...this.state,
+            exportsPopupActive: !this.state.exportsPopupActive,
             styles:{
                 ...this.state.styles,
                 exportsPopup: style

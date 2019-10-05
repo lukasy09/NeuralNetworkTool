@@ -72,7 +72,6 @@ class ModelToolBox extends React.Component {
 
     componentDidMount() {
         this.setupInitStyles();
-
         window.addEventListener('keydown', (e)=>{
             if(e.keyCode === ESCAPE.code){
                 if(this.state.activePopup){

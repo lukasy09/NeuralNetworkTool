@@ -15,7 +15,6 @@
   .ExportsHeader{
     width: 100%;
     background: lighten($darkColor, 2%);
-
     color: $lightColor;
     text-align: center;
     font-size: 14pt;
@@ -53,19 +52,22 @@
     }
 
   }
+
   .ExportsFooter{
     width: 100%;
     position: absolute;
     bottom: 0;
     padding: 12px 8px 12px 8px;
+    box-sizing: border-box;
+    background: lighten($darkColor, 2%);
     .ExportBtn{
       max-width: 25%;
       margin: auto;
       transition: none;
       background: $specialColorSecond;
-
       &:hover{
         background: darken($specialColorSecond, 10%);
+        color: lighten($darkColor, 2%);
       }
     }
   }

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export const Select = (props) => {
     const additionalClassName = props.className ? props.className : "";
-    const defaultClassName = "Select";
+    const defaultClassName = "UserSelect";
     return (
         <div className={additionalClassName ? defaultClassName+ " " + additionalClassName : defaultClassName}>
             {props.label ?

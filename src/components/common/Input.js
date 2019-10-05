@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export const Input = (props) => {
     const additionalClassName = props.className ? props.className : "";
-    const defaultClassName = "Input";
+    const defaultClassName = "UserInput";
     return (
         <div className={additionalClassName ? defaultClassName+ " " + additionalClassName : defaultClassName}
              style={props.style}>

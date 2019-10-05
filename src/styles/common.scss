@@ -18,7 +18,6 @@
     width: 100%;
     text-align: center;
     text-decoration: none;
-    transition: all 0.7s ease-in-out;
   }
   a{
     color: $lightColor
@@ -58,8 +57,13 @@
 .Popup {
   width: 100vw;
   height: 100vh;
-  position: absolute;
-  z-index: -1;
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 
   &.Blur {
     @include blur(8px);
@@ -88,6 +92,30 @@
     color: $lightColor;
     font-weight: 900;
     text-transform: uppercase;
+  }
+}
+
+.ExitBtn{
+  top:0;
+  right:0;
+  padding: 12px;
+  box-sizing: content-box;
+  width: 20px;
+  height: 20px;
+  background: $specialColorFirst;
+  border: none;
+  text-align: center;
+  opacity: 1;
+  border-bottom-left-radius: 5px;
+  position: absolute;
+  span{
+    position: relative;
+    bottom: 3px;
+    right: 4px;
+  }
+  &:hover{
+    transform: none;
+    background: darken($specialColorFirst, 10%);
   }
 }
 

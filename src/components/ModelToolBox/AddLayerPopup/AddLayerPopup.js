@@ -203,7 +203,7 @@ class AddLayerPopup extends React.Component {
                                 }}
                                 className={"SubmitBtn"}/>
 
-                    <TextButton text={"X"}
+                    <TextButton text={"Esc"}
                                 action={this.props.triggerPopup}
                                 className={"ExitBtn"}/>
                 </div>

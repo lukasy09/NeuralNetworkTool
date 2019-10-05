@@ -10,19 +10,23 @@ const DEFAULT_CHECKBOX = "FormatCheckbox";
 export class  Exports extends React.Component{
     exportTypes=[];
 
+    /**
+     * Adding a format to list || removing the format if already exists in the list.
+     * @param e
+     */
     selectFormat = (e)=>{
         const selectedFormat = e.target.name;
         this.exportTypes.indexOf(selectedFormat) === -1 ? this.exportTypes.push(selectedFormat):
-            this.exportTypes.splice(this.exportTypes.indexOf(selectedFormat), 1)
+            this.exportTypes.splice(this.exportTypes.indexOf(selectedFormat), 1);
     };
 
     render(){
         const props = this.props;
         return (
             <>
-                <PopupBlur/>
                 <div className={"ExportsContainer"}
                      style={props.style}>
+                    <PopupBlur/>
                     <LabelInfo className={"ExportsHeader"}
                                text={"Export your graph"}/>
 
@@ -45,13 +49,22 @@ export class  Exports extends React.Component{
                                     className={"ExportBtn"}
                                     action={()=>{console.log("test")}}/>
                     </div>
+
+                    <TextButton text={"Esc"}
+                                action={props.action}
+                                className={"ExitBtn"}/>
                 </div>
             </>
         )
     }
 }
 
+
+
+
 Exports.propTypes = {
+    action: PropTypes.func,
     formats: PropTypes.array,
     style: PropTypes.object,
+    label: PropTypes.object
 };

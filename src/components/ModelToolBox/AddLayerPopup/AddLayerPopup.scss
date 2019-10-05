@@ -73,29 +73,6 @@
       }
     }
 
-    .ExitBtn{
-      @extend %Btn;
-      top:0;
-      right:0;
-      padding: 12px;
-      box-sizing: content-box;
-      width: 20px;
-      height: 20px;
-      background: $specialColorFirst;
-      border: none;
-      text-align: center;
-      opacity: 0.8;
-      border-bottom-left-radius: 5px;
-      span{
-        position: relative;
-        bottom: 2px;
-      }
-      &:hover{
-        transform: none;
-        background: darken($specialColorFirst, 10%);
-       }
-    }
-
     .RemoveBtn {
       @extend %Btn;
       bottom: 2%;
