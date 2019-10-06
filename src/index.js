@@ -9,11 +9,13 @@ import {Provider} from 'react-redux';
 import {generalReducer} from './reducers/GeneralReducer';
 import {modelReducer} from "./reducers/ModelReducer";
 import {graphReducer} from "./reducers/GraphReducer";
+import {alertsReducer} from "./reducers/AlertsReducer";
 
 const allReducers = combineReducers({
     generalReducer: generalReducer,
     modelReducer: modelReducer,
-    graphReducer: graphReducer
+    graphReducer: graphReducer,
+    alertsReducer: alertsReducer
 });
 
 export const store = createStore(allReducers);

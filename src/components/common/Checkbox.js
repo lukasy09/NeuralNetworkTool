@@ -20,10 +20,9 @@ export const Checkbox = (props)=>{
     )
 };
 
-// CustomCheckbox.propTypes = {
-//     text: PropTypes.string,
-//     action: PropTypes.func,
-//     className: PropTypes.string,
-//     style: PropTypes.object,
-//     path: PropTypes.string
-// };
+Checkbox.propTypes = {
+    action: PropTypes.func,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    label: PropTypes.object
+};

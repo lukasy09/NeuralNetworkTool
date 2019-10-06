@@ -1,0 +1,12 @@
+.AlertsContainer{
+  position: absolute;
+  left: 1%;
+  top: 1%;
+
+  .ShowAlertsBtn{
+    width: 30px;
+    height: 30px;
+    background: url("../../../assets/images/svg/exclamation-mark.svg");
+    cursor: pointer;
+  }
+}

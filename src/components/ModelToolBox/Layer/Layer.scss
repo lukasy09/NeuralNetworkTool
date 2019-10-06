@@ -80,7 +80,7 @@
       left: 20px;
       top: 0;
       font-weight: 900;
-      max-width: 20%;
+      max-width: 22%;
       text-align: center;
       box-sizing: border-box;
       padding: 4px 8px 4px 8px;
@@ -115,7 +115,8 @@
         height: 0;
         display: block;
         position: relative;
-        bottom: 20px;
+        bottom: 0;
+        right: 40px;
         text-transform: uppercase;
         font-weight: bold;
       }

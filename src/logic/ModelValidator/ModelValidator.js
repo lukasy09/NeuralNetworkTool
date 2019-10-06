@@ -1,5 +1,5 @@
 import {SETTINGS} from "../../settings/ApplicationSettings";
-import {STATUS} from "./ValidationStatus";
+import {ALERT_STATUS} from "./ValidationStatus";
 
 /**
  * The class is to validate the correctness of the built model.
@@ -48,53 +48,49 @@ export class ModelValidator {
      * Validating method - checking if created model(by user) has a correct structure.
      * e.g Does the model have only a single input layer?
      * @TODO Split code into many shorter parts
-     * @param model
+     * @param layers
      */
 
-    validateModel(model) {
+    validateModelLayers(layers) {
+        this.outputInfo = [];
         const OUTPUT = SETTINGS.model.layerTypes.OUTPUT;
         const INPUT = SETTINGS.model.layerTypes.INPUT;
         const NONE = SETTINGS.model.layerActivations.NONE;
-
-        const layers = model.layers;
         const length = layers.length;
 
         if (length > 0) {
             // Checking if the first layer has type 'input'
-            if (ModelValidator.checkLayerType(layers[0], INPUT)) {
-                this.outputInfo.push(STATUS.order.input);
-                return this.outputInfo;
+            if (!ModelValidator.checkLayerType(layers[0], INPUT)) {
+                this.outputInfo.push(ALERT_STATUS.order.input);
             }
             // Checking if the last layer has type 'output'
-            if (ModelValidator.checkLayerType(layers[layers.length - 1], OUTPUT)) {
-                this.outputInfo.push(STATUS.order.output);
-                return this.outputInfo;
+            if (!ModelValidator.checkLayerType(layers[layers.length - 1], OUTPUT)) {
+                this.outputInfo.push(ALERT_STATUS.order.output);
             }
 
             // Checking the correctness of activation function binding
             for (let i = 0; i < length; i++) {
                 const layer = layers[i];
                 if (layer.type === INPUT && layer.activation !== NONE) {
-                    this.outputInfo.push(STATUS.feature.input.activation);
+                    this.outputInfo.push(ALERT_STATUS.feature.input.activation);
                     continue;
                 }
                 if (layer.type === OUTPUT && layer.activation !== NONE) {
-                    this.outputInfo.push(STATUS.feature.output.activation);
+                    this.outputInfo.push(ALERT_STATUS.feature.output.activation);
                 }
             }
 
             //Warnings
 
             if (layers[0].length === 0) {
-                this.outputInfo.push(STATUS.count.input);
+                this.outputInfo.push(ALERT_STATUS.count.input);
             }
         }
-
 
         return (this.outputInfo.length === 0);
     }
 
-    getInfoStack = () => {
+    getAlerts = () => {
         return this.outputInfo;
     };
 

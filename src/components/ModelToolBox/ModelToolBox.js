@@ -7,12 +7,15 @@ import AddLayerPopup from "./AddLayerPopup/AddLayerPopup";
 import {Layer} from "./Layer/Layer";
 import {ESCAPE} from "../../utils/Keyboard";
 import {ModelValidator} from "../../logic/ModelValidator/ModelValidator";
-//import {TEST_MODEL} from "../../examples/models";
+import Alerts from "./Alerts/Alerts";
+import {setAlerts} from "../../actions/alertsActions";
 
 class ModelToolBox extends React.Component {
 
     state = {
         activePopup: false,
+        activeAlerts: false,
+
         styles: {
             popup: {
                 transform: 'translateY(-100vh)'
@@ -20,8 +23,10 @@ class ModelToolBox extends React.Component {
             modelToolBoxContainer: {
                 transform: "translateY(60vw)"
             }
+        },
 
-        }
+        isModelValid: false,
+        alerts:[]
 
     };
 
@@ -52,14 +57,26 @@ class ModelToolBox extends React.Component {
     };
 
     /**
-     * Submitting layers on the preview and merging with the existing ones
-     * @param nextLayers
+     * Submitting layers on the preview and replacing with the existing ones
+     * @param newLayers
      */
-    submitLayers = (nextLayers) => {
-        this.props.setGraph(nextLayers);
-        this.props.setModelLayers(nextLayers);
+    submitLayers = (newLayers) => {
+        this.props.setGraph(newLayers);
+        this.props.setModelLayers(newLayers);
+        this.updateAlerts(newLayers);
         this.triggerPopup();
+    };
 
+
+    /**
+     * Calling validation method to check if the network has a properly built structure
+     */
+    updateAlerts = (layers) => {
+        this.modelValidator.validateModelLayers(layers);
+        let alerts = this.modelValidator.getAlerts();
+        console.log("my alerts");
+        console.log(alerts);
+        this.props.setAlerts(alerts);
     };
 
     /**
@@ -77,13 +94,6 @@ class ModelToolBox extends React.Component {
         })
     };
 
-    componentDidUpdate(){
-        // console.log("model");
-        // console.log(this.props.model);
-        // console.log(this.modelValidator.validateModel(this.props.model));
-        // console.log(this.modelValidator.getInfoStack());
-    }
-
     componentDidMount() {
         this.setupInitStyles();
         window.addEventListener('keydown', (e)=>{
@@ -97,10 +107,17 @@ class ModelToolBox extends React.Component {
 
     render() {
         const modelLayers = this.props.model.layers;
+        console.log(this.props.alerts);
         return (
             <>
                 <div className={"ModelToolBox"}
                      style={this.state.styles.modelToolBoxContainer}>
+                    {this.props.alerts.length > 0 ?
+                        <Alerts activeAlerts={this.state.activeAlerts}
+                                triggerAlerts={()=>{this.setState({...this.state, activeAlerts: !this.state.activeAlerts})}}/>
+                        : <></>
+                    }
+
                     <div className={"LayersContainer"}>
                         {
                             modelLayers.map((layer, index) => {
@@ -134,14 +151,16 @@ class ModelToolBox extends React.Component {
 const mapStateToProps = state => {
     return {
         model: state.modelReducer,
-        graph: state.graphReducer
+        graph: state.graphReducer,
+        alerts: state.alertsReducer.alerts
     }
 };
 
 const mapActionsToProps = {
     setModel: setModel,
     setGraph: setGraph,
-    setModelLayers: setModelLayers
+    setModelLayers: setModelLayers,
+    setAlerts: setAlerts
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(ModelToolBox);
