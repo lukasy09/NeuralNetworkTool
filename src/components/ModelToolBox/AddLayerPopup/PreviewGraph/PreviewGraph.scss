@@ -4,8 +4,8 @@
 .PreviewGraphContainer{
   padding: 25px 40px 25px 40px;
   .PreviewGraph{
-    height: 460px;
-    width: 500px;
+    height: 420px;
+    width: 450px;
     @include box-shadow($specialColorFirst);
   }
 }
