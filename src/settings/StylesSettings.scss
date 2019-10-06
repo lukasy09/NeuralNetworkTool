@@ -25,3 +25,13 @@ $specialColorFirst: rgba(214, 0, 0, 1);
 $inputLayerColor: #99ff99;
 $hiddenLayerColor: #0066ff;
 $outputLayerColor: #f1f1f1;
+
+/*
+  Error, warning colors
+ */
+
+$errorColor: $lightColor;
+$errorBgColor: #D8000C;
+
+$warningColor: $lightColor;
+$warningBgColor: #ffcc00;

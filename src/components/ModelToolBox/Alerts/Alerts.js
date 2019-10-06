@@ -5,15 +5,17 @@ import {connect} from "react-redux";
 const Alerts = (props)=>{
     return(
         <div className={"AlertsContainer"}>
-            {props.activeAlerts?
+            <div className={"Alerts"}>
+            {props.activeAlerts ?
                 props.alertsObject.alerts.map((alert, index)=>{
                     return(
                         <div key={index}
-                             className={"Alert"}>
+                             className={`Alert ${alert.type}`}>
                             {alert.content}
                         </div>
                     )
                 }) : <></>}
+            </div>
                 <div onClick={props.triggerAlerts}
                      className={"ShowAlertsBtn"} />
 
@@ -23,8 +25,9 @@ const Alerts = (props)=>{
 };
 
 Alerts.propTypes = {
-    //triggerAlerts: PropTypes.func,
-    alerts: PropTypes.array
+    triggerAlerts: PropTypes.func,
+    alerts: PropTypes.array,
+    activeAlerts: PropTypes.bool
 };
 
 const mapStateToProps = state => {

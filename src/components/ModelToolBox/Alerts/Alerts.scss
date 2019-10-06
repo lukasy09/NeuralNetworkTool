@@ -1,12 +1,47 @@
+@import "../../../settings/StylesSettings";
+@import "../../../styles/mixins";
 .AlertsContainer{
   position: absolute;
-  left: 1%;
-  top: 1%;
+  left: 0;
+  top: 0;
+  z-index: 1;
 
+  .Alerts{
+    font-weight: 700;
+    font-size: 8pt;
+    .Alert{
+      box-shadow: 1px 1px 1px $specialColorSecond;
+      box-sizing: border-box;
+      padding: 8px 16px;
+      opacity: 0.9;
+      &.error{
+        background-color: $errorBgColor;
+        color: $errorColor;
+
+        &:hover{
+          background-color: darken($errorBgColor, 5%);
+        }
+      }
+
+      &.warning{
+        background-color: $warningBgColor;
+        color: $warningColor;
+        &:hover{
+          background-color: darken($warningBgColor, 5%);
+        }
+
+
+      }
+    }
+
+  }
   .ShowAlertsBtn{
+    position: absolute;
     width: 30px;
     height: 30px;
     background: url("../../../assets/images/svg/exclamation-mark.svg");
     cursor: pointer;
+    left: 5px;
+    margin-top: 10px;
   }
 }

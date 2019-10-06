@@ -73,7 +73,6 @@ export class ModelValidator {
                 const layer = layers[i];
                 if (layer.type === INPUT && layer.activation !== NONE) {
                     this.outputInfo.push(ALERT_STATUS.feature.input.activation);
-                    continue;
                 }
                 if (layer.type === OUTPUT && layer.activation !== NONE) {
                     this.outputInfo.push(ALERT_STATUS.feature.output.activation);
@@ -81,8 +80,7 @@ export class ModelValidator {
             }
 
             //Warnings
-
-            if (layers[0].length === 0) {
+            if (layers[0].nodesNumber === 1) {
                 this.outputInfo.push(ALERT_STATUS.count.input);
             }
         }

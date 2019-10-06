@@ -31,7 +31,7 @@ export const ALERT_STATUS = {
 
     count:{
         input:{
-            content: 'The input layer\'s count is very small',
+            content: 'The input layer\'s node\'s is equal to 1' ,
             type: ALERT_TYPES.WARNING
         }
     }
