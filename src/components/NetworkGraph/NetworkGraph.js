@@ -1,5 +1,4 @@
 import React from 'react';
-import cytoscape from 'cytoscape';
 import {connect} from 'react-redux';
 
 import {LabelInfo} from "../common/LabelInfo";
@@ -72,15 +71,7 @@ class NetworkGraph extends React.Component {
      * Returning the main cytoscape object responsible for all actions.
      */
     initGraph = () => {
-        this.cy = cytoscape({
-            container: this.graph, // Graph container. All the stuff is rendereing inside.
-            style: NetworkGraphConfigurator.getGraphStyleConfiguration(),
-            layout: {
-                name: "cose",
-                padding: 60,
-                gravity: 12,
-            },
-        });
+        this.cy = NetworkGraphConfigurator.initializeCytoObject(this.graph);
 
         return this.cy;
     };

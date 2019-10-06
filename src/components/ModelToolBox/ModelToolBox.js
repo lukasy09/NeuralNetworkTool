@@ -107,7 +107,6 @@ class ModelToolBox extends React.Component {
 
     render() {
         const modelLayers = this.props.model.layers;
-        console.log(this.props.alerts);
         return (
             <>
                 <div className={"ModelToolBox"}
@@ -135,7 +134,13 @@ class ModelToolBox extends React.Component {
                         }
                     </div>
                     <TextButton
-                        text={"Edit"}
+                        text={"Settings"}
+                        className={"NetworkSettingsBtn"}
+                        action={this.triggerPopup}
+                    />
+
+                    <TextButton
+                        text={"Layers"}
                         className={"AddNewLayerBtn"}
                         action={this.triggerPopup}
                     />

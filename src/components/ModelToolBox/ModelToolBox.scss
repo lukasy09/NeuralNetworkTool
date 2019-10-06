@@ -22,6 +22,19 @@
   //  z-index: -1;
   //}
 
+  .NetworkSettingsBtn {
+    color: $lightColor;
+    border: solid 1px $lightColor;
+    transition: all 0.7s ease-in-out;
+    background-color: $darkColor;
+    position: absolute;
+    right: 24%;
+    top: 10px;
+    &:hover {
+      background: $specialColorFirst;
+    }
+  }
+
   .AddNewLayerBtn {
     color: $lightColor;
     border: solid 1px $lightColor;

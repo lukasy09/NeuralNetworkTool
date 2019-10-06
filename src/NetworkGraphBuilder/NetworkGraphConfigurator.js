@@ -1,4 +1,5 @@
 import {SETTINGS} from "../settings/ApplicationSettings";
+import cytoscape from "cytoscape";
 
 const ELEMENT_TYPES = {
     NODE: "node",
@@ -15,6 +16,13 @@ const RELU_RESOURCE = "http://i.imgur.com/6K4n9mZ.png";
 const SIGMOID_RESOURCE = "http://i.imgur.com/sbTRr0E.png";
 
 export class NetworkGraphConfigurator {
+
+    static layoutConfig = {
+        name: "cose",
+        padding: 60,
+        gravity: 12,
+    };
+
 
     /**
      * Returns default styles configuration for graph's nodes/edges depending on the layer type
@@ -68,17 +76,30 @@ export class NetworkGraphConfigurator {
 
     }
 
+    static initializeCytoObject = (graphContainer) => {
+        return cytoscape({
+            container: graphContainer, // Graph container. All the stuff is rendereing inside.
+            style: NetworkGraphConfigurator.getGraphStyleConfiguration(),
+            layout: NetworkGraphConfigurator.getGraphLayoutConfiguration()
+        });
+    };
+
 
     /**
      * Storing common (nodes') styles
      * @returns {{color: string, borderWidth: string, borderColor: string, backgroundFit: string, backgroundImageOpacity: number}}
      */
-    static getCommonStyles(){
-        return{
+    static getCommonStyles() {
+        return {
             color: 'black',
             borderWidth: '1px',
             borderColor: 'black',
             backgroundFit: "contain",
         }
+    }
+
+
+    static getGraphLayoutConfiguration() {
+        return this.layoutConfig;
     }
 }
