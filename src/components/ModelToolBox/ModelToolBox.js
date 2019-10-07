@@ -10,11 +10,17 @@ import {ModelValidator} from "../../logic/ModelValidator/ModelValidator";
 import Alerts from "./Alerts/Alerts";
 import {setAlerts} from "../../actions/alertsActions";
 
+export const EDITOR_SCENE = {
+    LAYER: 'layers',
+    PARAMETER: 'parameters'
+};
+
 class ModelToolBox extends React.Component {
 
     state = {
         activePopup: false,
         activeAlerts: false,
+        scene: EDITOR_SCENE.LAYER,
 
         styles: {
             popup: {
@@ -57,6 +63,29 @@ class ModelToolBox extends React.Component {
     };
 
     /**
+     * Switching editor scenes.
+     * (Between layer and parameters boxes)
+     */
+    switchScene = () => {
+        let newScene;
+
+        switch (this.state.scene){
+            case EDITOR_SCENE.LAYER:
+                newScene = EDITOR_SCENE.PARAMETER;
+                break;
+            case EDITOR_SCENE.PARAMETER:
+                newScene = EDITOR_SCENE.LAYER;
+                break;
+            default:
+                console.log("Wrong scene!");
+        }
+        this.setState({
+            ...this.state,
+            scene: newScene
+        })
+    };
+
+    /**
      * Submitting layers on the preview and replacing with the existing ones
      * @param newLayers
      */
@@ -74,8 +103,6 @@ class ModelToolBox extends React.Component {
     updateAlerts = (layers) => {
         this.modelValidator.validateModelLayers(layers);
         let alerts = this.modelValidator.getAlerts();
-        console.log("my alerts");
-        console.log(alerts);
         this.props.setAlerts(alerts);
     };
 
@@ -133,11 +160,6 @@ class ModelToolBox extends React.Component {
                             })
                         }
                     </div>
-                    <TextButton
-                        text={"Settings"}
-                        className={"NetworkSettingsBtn"}
-                        action={this.triggerPopup}
-                    />
 
                     <TextButton
                         text={"Layers"}
@@ -147,7 +169,10 @@ class ModelToolBox extends React.Component {
                 </div>
                 <Editor triggerPopup={this.triggerPopup}
                         submitLayers={this.submitLayers}
-                        style={this.state.styles.popup}/>
+                        switchScene={this.switchScene}
+                        style={this.state.styles.popup}
+                        scene={this.state.scene}
+                        altScene={this.state.scene === EDITOR_SCENE.LAYER ? EDITOR_SCENE.PARAMETER : EDITOR_SCENE.LAYER}/>
             </>
         )
     }

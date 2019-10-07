@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {SETTINGS} from "../../../settings/ApplicationSettings";
+import {EDITOR_SCENE} from "../ModelToolBox";
 import {TextButton} from "../../common/TextButton";
 import {Input} from "../../common/Input";
 import {Select} from "../../common/Select";
@@ -101,112 +102,123 @@ class Editor extends React.Component {
             <div className={"EditorContainer"}
                  style={this.props.style}>
                 <PopupBlur/>
-                <div className={"Layer"}>
-                    <div className={"FeatureWrapper"}>
-                        <Input action={(e) => {
-                            this.setState({currentLayer: {...this.state.currentLayer, name: e.target.value}})
-                        }}
-                               className={"LayerNameInput"}
-                               type={"text"}
-                               value={`Layer ${this.state.currentLayer.index}`}
-                               label={{
-                                       text: 'Layer name'
-                                   }}
+                <TextButton text={this.props.altScene.toUpperCase()}
+                            className={'SceneSwitchBtn'}
+                            action={this.props.switchScene}/>
+                <TextButton text={"Esc"}
+                            action={this.props.triggerPopup}
+                            className={"ExitBtn"}/>
 
-                        />
-                    </div>
-                    <div className={"FeatureWrapper"}>
-                        <Select action={(e) => {
-                            this.setState({
-                                currentLayer: {
-                                    ...this.state.currentLayer,
-                                    classType: e.target.value.toLowerCase()
-                                }
-                            })
-                        }}
-                                className={"LayerClassTypeSelect"}
-                                label={{
-                                        text: 'Layer class type'
-                                    }}
-                                defaultValue = {this.state.defaultLayerType}
-                                options={layerClassTypes}/>
-                    </div>
-
-                    <div className={"FeatureWrapper"}>
-                        <Select action={(e) => {
-                            this.setState({
-                                currentLayer: {
-                                    ...this.state.currentLayer,
-                                    type: e.target.value.toLowerCase()
-                                }
-                            })
-                        }}
-                                className={"LayerClassTypeSelect"}
-                                label={{
-                                        text: 'Layer type'
-                                    }}
-                                defaultValue={this.state.defaultLayerType}
-                                options={layerTypes}/>
-                    </div>
-
-                    <div className={"FeatureWrapper"}>
-                        <Select action={(e) => {
-                            this.setState({
-                                currentLayer: {
-                                    ...this.state.currentLayer,
-                                    activation: e.target.value.toLowerCase()
-                                }
-                            })
-                        }}
-                                className={"LayerActivation"}
-                                label={{
-                                        text: 'Layer activation'
-                                    }}
-                                defaultValue={this.state.currentLayer.activation}
-                                options={layerActivations}/>
-                    </div>
-
-                    <div className={"FeatureWrapper"}>
-                        <Input action={(e) => {
-                            this.setState({
-                                currentLayer: {
-                                    ...this.state.currentLayer,
-                                    nodesNumber: parseInt(e.target.value)
-                                }
-                            })
-                        }}
-                               className={"LayerCountInput"}
-                               type={"number"}
-                               defaultValue={"5"}
-                               min={1}
-                               label={{
-                                       text: "Neuron's count"
-                                   }}
-                        />
-                    </div>
-
-                    {this.state.subGraph.layers.length >= 1 ?
-                        <TextButton text={"Revert"}
-                                    action={this.removeLastLayer}
-                                    className={"RemoveBtn"}/> : <></>
-                    }
-
-                    <TextButton text={"Add"}
-                                action={this.addLayer}
-                                className={"AddBtn"}/>
-
-                    <TextButton text={"Submit"}
-                                action={() => {
-                                    this.props.submitLayers(this.state.subGraph.layers)
+                {this.props.scene === EDITOR_SCENE.LAYER ?
+                    <div className={"LayerScene"}>
+                        <div className={"Layer"}>
+                            <div className={"FeatureWrapper"}>
+                                <Input action={(e) => {
+                                    this.setState({currentLayer: {...this.state.currentLayer, name: e.target.value}})
                                 }}
-                                className={"SubmitBtn"}/>
+                                       className={"LayerNameInput"}
+                                       type={"text"}
+                                       value={`Layer ${this.state.currentLayer.index}`}
+                                       label={{
+                                           text: 'Layer name'
+                                       }}
 
-                    <TextButton text={"Esc"}
-                                action={this.props.triggerPopup}
-                                className={"ExitBtn"}/>
-                </div>
+                                />
+                            </div>
+                            <div className={"FeatureWrapper"}>
+                                <Select action={(e) => {
+                                    this.setState({
+                                        currentLayer: {
+                                            ...this.state.currentLayer,
+                                            classType: e.target.value.toLowerCase()
+                                        }
+                                    })
+                                }}
+                                        className={"LayerClassTypeSelect"}
+                                        label={{
+                                            text: 'Layer class type'
+                                        }}
+                                        defaultValue={this.state.defaultLayerType}
+                                        options={layerClassTypes}/>
+                            </div>
 
-                <PreviewGraph graph={this.state.subGraph}/>
+                            <div className={"FeatureWrapper"}>
+                                <Select action={(e) => {
+                                    this.setState({
+                                        currentLayer: {
+                                            ...this.state.currentLayer,
+                                            type: e.target.value.toLowerCase()
+                                        }
+                                    })
+                                }}
+                                        className={"LayerClassTypeSelect"}
+                                        label={{
+                                            text: 'Layer type'
+                                        }}
+                                        defaultValue={this.state.defaultLayerType}
+                                        options={layerTypes}/>
+                            </div>
+
+                            <div className={"FeatureWrapper"}>
+                                <Select action={(e) => {
+                                    this.setState({
+                                        currentLayer: {
+                                            ...this.state.currentLayer,
+                                            activation: e.target.value.toLowerCase()
+                                        }
+                                    })
+                                }}
+                                        className={"LayerActivation"}
+                                        label={{
+                                            text: 'Layer activation'
+                                        }}
+                                        defaultValue={this.state.currentLayer.activation}
+                                        options={layerActivations}/>
+                            </div>
+
+                            <div className={"FeatureWrapper"}>
+                                <Input action={(e) => {
+                                    this.setState({
+                                        currentLayer: {
+                                            ...this.state.currentLayer,
+                                            nodesNumber: parseInt(e.target.value)
+                                        }
+                                    })
+                                }}
+                                       className={"LayerCountInput"}
+                                       type={"number"}
+                                       defaultValue={"5"}
+                                       min={1}
+                                       label={{
+                                           text: "Neuron's count"
+                                       }}
+                                />
+                            </div>
+
+                            {this.state.subGraph.layers.length >= 1 ?
+                                <TextButton text={"Revert"}
+                                            action={this.removeLastLayer}
+                                            className={"RemoveBtn"}/> : <></>
+                            }
+
+                            <TextButton text={"Add"}
+                                        action={this.addLayer}
+                                        className={"AddBtn"}/>
+
+                            <TextButton text={"Submit"}
+                                        action={() => {
+                                            this.props.submitLayers(this.state.subGraph.layers)
+                                        }}
+                                        className={"SubmitBtn"}/>
+                        </div>
+
+                        <PreviewGraph graph={this.state.subGraph}/>
+                    </div>
+                    :
+                    <div className={'ParametersScene'}>
+
+                    </div>
+                }
 
             </div>
         )
@@ -220,10 +232,13 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(Editor);
-
 Editor.propTypes = {
     triggerPopup: PropTypes.func,
     submitLayers: PropTypes.func,
+    switchScene: PropTypes.func,
+    scene: PropTypes.object,
+    altScene: PropTypes.object,
     style: PropTypes.object
 };
+
+export default connect(mapStateToProps)(Editor);

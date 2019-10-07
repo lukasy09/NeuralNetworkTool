@@ -2,100 +2,129 @@
 @import "../../../settings/StylesSettings";
 
 .EditorContainer {
-  @include row-flex-box;
-  @include box-shadow($lightColor);
   @include absolute-center-element;
-  justify-content: center;
-  align-items: center;
+  transition: all 0.7s ease-in-out;
   width: 80vw;
   height: 90vh;
-  background: lighten($darkColor, 5%);
-  opacity: 0.98;
-  transition: all 0.7s ease-in-out;
-  z-index: 10;
 
-  .Layer {
-    @include col-flex-box;
+  %Scene{
+    @include row-flex-box;
+    @include box-shadow($lightColor);
+    @include absolute-center-element;
     justify-content: center;
-    padding: 25px 10px 25px 10px;
-    width: 50%;
-    z-index: 1;
+    align-items: center;
+    width: 80vw;
+    height: 90vh;
+    background: lighten($darkColor, 5%);
+    opacity: 0.98;
+  }
 
-    .FeatureWrapper {
-      padding: 20px 50px 20px 50px;
-      box-sizing: border-box;
+  .LayerScene {
+    @extend %Scene;
 
-      .LayerNameInput,
-      .LayerCountInput,
-      .LayerClassTypeSelect,
-      .LayerActivation {
-        color: $lightColor;
-        label {
-          display: inline-block;
-          box-sizing: border-box;
-          padding: 12px 10px 12px 10px;
-          width: 250px;
-          font-weight: bolder;
-        }
-        input[type=text], input[type=number] {
+    .Layer {
+      @include col-flex-box;
+      justify-content: center;
+      padding: 25px 10px 25px 10px;
+      width: 50%;
+      z-index: 1;
+
+      .FeatureWrapper {
+        padding: 20px 50px 20px 50px;
+        box-sizing: border-box;
+
+        .LayerNameInput,
+        .LayerCountInput,
+        .LayerClassTypeSelect,
+        .LayerActivation {
           color: $lightColor;
-          font-size: 12pt;
-          border: solid 2px $lightColor;
-          margin-left: 15px;
-          padding: 12px 10px 12px 10px;
-          width: 100px;
-          background: $darkColor;
-        }
-        select{
-          padding: 12px 10px 12px 10px;
-          margin-left: 15px;
-          background: $darkColor;
-          color: $lightColor;
-          font-weight: 800;
-          border: solid 2px $lightColor;
-          width: 125px;
-
-          option{
-            font-weight: 800;
-            background: transparent;
+          label {
+            display: inline-block;
+            box-sizing: border-box;
+            padding: 12px 10px 12px 10px;
+            width: 250px;
+            font-weight: bolder;
+          }
+          input[type=text], input[type=number] {
             color: $lightColor;
-            padding: 2px 5px 2px 5px;
+            font-size: 12pt;
+            border: solid 2px $lightColor;
+            margin-left: 15px;
+            padding: 12px 10px 12px 10px;
+            width: 100px;
+            background: $darkColor;
+          }
+          select {
+            padding: 12px 10px 12px 10px;
+            margin-left: 15px;
+            background: $darkColor;
+            color: $lightColor;
+            font-weight: 800;
+            border: solid 2px $lightColor;
+            width: 125px;
+
+            option {
+              font-weight: 800;
+              background: transparent;
+              color: $lightColor;
+              padding: 2px 5px 2px 5px;
+            }
           }
         }
       }
-    }
 
-    %Btn{
-      color: $lightColor;
-      max-width: 200px;
-      position: absolute;
-      transition: all 0.3s ease-in-out;
-      &:hover {
-        background: $specialColorFirst;
+      %Btn {
+        color: $lightColor;
+        max-width: 200px;
+        position: absolute;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          background: $specialColorFirst;
+        }
+      }
+
+      .RemoveBtn {
+        @extend %Btn;
+        bottom: 2%;
+        border: solid 2px $specialColorFirst;
+        left: 1.5%;
+        width: 100px;
+      }
+
+      .AddBtn {
+        @extend %Btn;
+        bottom: 2%;
+        border: solid 2px $specialColorFirst;
+        right: 10.5%;
+        width: 100px;
+      }
+      .SubmitBtn {
+        @extend %Btn;
+        border: solid 2px $specialColorFirst;
+        bottom: 2%;
+        right: 1%;
+        width: 100px;
       }
     }
+  }
 
-    .RemoveBtn {
-      @extend %Btn;
-      bottom: 2%;
-      border: solid 2px $specialColorFirst;
-      left: 1.5%;
-      width: 100px;
+  .ParametersScene{
+    @extend %Scene;
+  }
+  .SceneSwitchBtn{
+    @extend %Btn;
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    z-index: 1;
+    border: solid 2px $specialColorFirst;
+
+    &:hover {
+      background: $specialColorFirst;
     }
 
-    .AddBtn{
-      @extend %Btn;
-      bottom: 2%;
-      border: solid 2px $specialColorFirst;
-      right: 10.5%;
-      width: 100px;
-    }
-    .SubmitBtn {
-      @extend %Btn;
-      border: solid 2px $specialColorFirst;
-      bottom: 2%;
-      right: 1%;
-      width: 100px;
+    span{
+      font-size: 8pt;
     }
   }
 }

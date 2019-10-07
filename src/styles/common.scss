@@ -22,9 +22,6 @@
   a{
     color: $lightColor
   }
-  &:hover {
-    color: $specialColorSecond
-  }
 }
 
 .UserInput, .UserSelect {
@@ -108,6 +105,7 @@
   opacity: 1;
   border-bottom-left-radius: 5px;
   position: absolute;
+  z-index: 1;
   span{
     position: relative;
     bottom: 3px;
