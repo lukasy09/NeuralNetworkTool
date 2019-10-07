@@ -1,7 +1,7 @@
 import React from 'react';
 import {TextButton} from "../common/TextButton";
 import {connect} from 'react-redux';
-import {setModel, setModelLayers} from "../../actions/modelActions";
+import {setModel, setModelCompilationParameters, setModelLayers} from "../../actions/modelActions";
 import {setGraph} from "../../actions/graphActions";
 import Editor from "./Editor/Editor";
 import {Layer} from "./Layer/Layer";
@@ -88,14 +88,16 @@ class ModelToolBox extends React.Component {
     /**
      * Submitting layers on the preview and replacing with the existing ones
      * @param newLayers
+     * @param newParams
      */
-    submitLayers = (newLayers) => {
+    submitModel = (newLayers, newParams) => {
+        console.log(newParams);
         this.props.setGraph(newLayers);
         this.props.setModelLayers(newLayers);
+        this.props.setModelCompilationParameters(newParams);
         this.updateAlerts(newLayers);
         this.triggerPopup();
     };
-
 
     /**
      * Calling validation method to check if the network has a properly built structure
@@ -160,7 +162,6 @@ class ModelToolBox extends React.Component {
                             })
                         }
                     </div>
-
                     <TextButton
                         text={"Layers"}
                         className={"AddNewLayerBtn"}
@@ -168,7 +169,7 @@ class ModelToolBox extends React.Component {
                     />
                 </div>
                 <Editor triggerPopup={this.triggerPopup}
-                        submitLayers={this.submitLayers}
+                        submitModel={this.submitModel}
                         switchScene={this.switchScene}
                         style={this.state.styles.popup}
                         scene={this.state.scene}
@@ -190,6 +191,7 @@ const mapActionsToProps = {
     setModel: setModel,
     setGraph: setGraph,
     setModelLayers: setModelLayers,
+    setModelCompilationParameters: setModelCompilationParameters,
     setAlerts: setAlerts
 };
 

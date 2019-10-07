@@ -28,6 +28,21 @@ const layerActivations = [
     SETTINGS.model.layerActivations.SOFTMAX,
 ];
 
+const OPTIMIZERS = [
+    SETTINGS.model.compilation.optimizer.ADAM,
+    SETTINGS.model.compilation.optimizer.RMSPROP,
+    SETTINGS.model.compilation.optimizer.SGD
+];
+const LOSSES = [
+    SETTINGS.model.compilation.loss.BINARY_CROSSENTROPY,
+    SETTINGS.model.compilation.loss.CATEGORICAL_CROSSENTROPY,
+    SETTINGS.model.compilation.loss.MSE
+];
+
+const METRICS = [
+    SETTINGS.model.compilation.metrics.ACCURACY
+];
+
 class Editor extends React.Component {
 
     constructor(props) {
@@ -42,6 +57,14 @@ class Editor extends React.Component {
                 type: SETTINGS.model.layerTypes.INPUT,
                 activation: SETTINGS.model.layerActivations.NONE,
                 nodesNumber: 5
+            },
+
+            model: {
+                compilationParameters: {
+                    optimizer: SETTINGS.model.compilation.optimizer.ADAM,
+                    loss: SETTINGS.model.compilation.loss.BINARY_CROSSENTROPY,
+                    metrics: [SETTINGS.model.compilation.metrics.ACCURACY],
+                }
             }
         };
     }
@@ -60,10 +83,6 @@ class Editor extends React.Component {
                 ...this.state.currentLayer,
                 name: `Layer ${newIndex}`,
                 index: newIndex,
-                // type: newIndex > 0 ? SETTINGS.model.layerTypes.HIDDEN : SETTINGS.model.layerTypes.INPUT,
-                // activation: newIndex === 0 || this.state.currentLayer.type === SETTINGS.model.layerTypes.OUTPUT ? SETTINGS.model.layerActivations.NONE
-                //     : (this.state.currentLayer.activation === SETTINGS.model.layerActivations.NONE ? SETTINGS.model.layerActivations.RELU :
-                //     this.state.currentLayer.activation)
             },
         });
     };
@@ -83,9 +102,6 @@ class Editor extends React.Component {
                     ...this.state.currentLayer,
                     name: `Layer ${newIndex}`,
                     index: newIndex,
-                    // type: newIndex > 0 ? SETTINGS.model.layerTypes.HIDDEN : SETTINGS.model.layerTypes.INPUT,
-                    // activation: newIndex === 0 || this.state.currentLayer.type === SETTINGS.model.layerTypes.OUTPUT ? SETTINGS.model.layerActivations.NONE
-                    //     : this.state.currentLayer.activation
                 }
             })
         }
@@ -101,13 +117,20 @@ class Editor extends React.Component {
         return (
             <div className={"EditorContainer"}
                  style={this.props.style}>
+
                 <PopupBlur/>
+
                 <TextButton text={this.props.altScene.toUpperCase()}
                             className={'SceneSwitchBtn'}
                             action={this.props.switchScene}/>
                 <TextButton text={"Esc"}
                             action={this.props.triggerPopup}
                             className={"ExitBtn"}/>
+                <TextButton text={"Submit"}
+                            action={() => {
+                                this.props.submitModel(this.state.subGraph.layers, this.state.model.compilationParameters)
+                            }}
+                            className={"SubmitBtn"}/>
 
                 {this.props.scene === EDITOR_SCENE.LAYER ?
                     <div className={"LayerScene"}>
@@ -204,19 +227,72 @@ class Editor extends React.Component {
                             <TextButton text={"Add"}
                                         action={this.addLayer}
                                         className={"AddBtn"}/>
-
-                            <TextButton text={"Submit"}
-                                        action={() => {
-                                            this.props.submitLayers(this.state.subGraph.layers)
-                                        }}
-                                        className={"SubmitBtn"}/>
                         </div>
 
                         <PreviewGraph graph={this.state.subGraph}/>
                     </div>
                     :
                     <div className={'ParametersScene'}>
+                        <div className={"Parameters"}>
+                            <div className={"FeatureWrapper"}>
+                                <Select action={(e) => {
+                                    this.setState({
+                                        model: {
+                                            ...this.state.model,
+                                            compilation:{
+                                                ...this.state.compilation,
+                                                optimizer: e.target.value.toLowerCase()
+                                            }
+                                        }
+                                    })
+                                }}
+                                        className={"ParameterSelect enlarged"}
+                                        label={{
+                                            text: 'Loss'
+                                        }}
+                                        defaultValue={this.state.model.compilationParameters.optimizer}
+                                        options={LOSSES}/>
+                            </div>
+                            <div className={"FeatureWrapper"}>
+                                <Select action={(e) => {
+                                    this.setState({
+                                        model: {
+                                            ...this.state.model,
+                                            compilation:{
+                                                ...this.state.compilation,
+                                                optimizer: e.target.value.toLowerCase()
+                                            }
+                                        }
+                                    })
+                                }}
+                                        className={"ParameterSelect enlarged"}
+                                        label={{
+                                            text: 'Optimizer'
+                                        }}
+                                        defaultValue={this.state.model.compilationParameters.loss}
+                                        options={OPTIMIZERS}/>
+                            </div>
 
+                            <div className={"FeatureWrapper"}>
+                                <Select action={(e) => {
+                                    this.setState({
+                                        model: {
+                                            ...this.state.model,
+                                            compilation:{
+                                                ...this.state.compilation,
+                                                metrics: e.target.value.toLowerCase()
+                                            }
+                                        }
+                                    })
+                                }}
+                                        className={"ParameterSelect enlarged"}
+                                        label={{
+                                            text: 'Metrics'
+                                        }}
+                                        defaultValue={this.state.model.compilationParameters.metrics}
+                                        options={METRICS}/>
+                            </div>
+                        </div>
                     </div>
                 }
 
@@ -236,8 +312,8 @@ Editor.propTypes = {
     triggerPopup: PropTypes.func,
     submitLayers: PropTypes.func,
     switchScene: PropTypes.func,
-    scene: PropTypes.object,
-    altScene: PropTypes.object,
+    scene: PropTypes.string,
+    altScene: PropTypes.string,
     style: PropTypes.object
 };
 

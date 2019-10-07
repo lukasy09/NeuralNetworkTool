@@ -75,9 +75,6 @@ export class  Exports extends React.Component{
     }
 }
 
-
-
-
 Exports.propTypes = {
     action: PropTypes.func,
     formats: PropTypes.array,

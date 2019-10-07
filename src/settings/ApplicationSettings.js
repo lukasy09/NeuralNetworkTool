@@ -37,7 +37,24 @@ export const SETTINGS = {
             RELU: 'relu',
             SOFTMAX: 'softmax',
             NONE: 'none'
+        },
+
+        compilation:{
+            loss:{
+              BINARY_CROSSENTROPY: 'binary_crossentropy',
+              CATEGORICAL_CROSSENTROPY: 'categorical_crossentropy',
+              MSE: 'mse'
+            },
+            optimizer:{
+                ADAM: 'adam',
+                RMSPROP: 'rmsprop',
+                SGD: 'sgd'
+            },
+            metrics:{
+               ACCURACY: 'accuracy'
+            }
         }
+
     }
 
 };

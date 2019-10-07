@@ -7,9 +7,11 @@ import {SET_MODEL, SET_MODEL_LAYERS} from "../actions/modelActions";
  */
 const defaultModelState = {
     name: 'my-project',
-    optimizer: 'rmsprop',
-    loss: 'categorical_crossentropy',
-    metrics: ['accuracy'],
+    compilationParameters:{
+        optimizer: 'rmsprop',
+        loss: 'categorical_crossentropy',
+        metrics: ['accuracy'],
+    },
     layers:[]
 };
 

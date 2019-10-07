@@ -1,6 +1,16 @@
 @import "../../../styles/mixins";
 @import "../../../settings/StylesSettings";
 
+%Btn {
+  color: $lightColor;
+  max-width: 200px;
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background: $specialColorFirst;
+  }
+}
+
 .EditorContainer {
   @include absolute-center-element;
   transition: all 0.7s ease-in-out;
@@ -19,10 +29,10 @@
     opacity: 0.98;
   }
 
-  .LayerScene {
+  .LayerScene, .ParametersScene {
     @extend %Scene;
 
-    .Layer {
+    .Layer, .Parameters {
       @include col-flex-box;
       justify-content: center;
       padding: 25px 10px 25px 10px;
@@ -36,7 +46,8 @@
         .LayerNameInput,
         .LayerCountInput,
         .LayerClassTypeSelect,
-        .LayerActivation {
+        .LayerActivation,
+        .ParameterSelect{
           color: $lightColor;
           label {
             display: inline-block;
@@ -70,19 +81,14 @@
               padding: 2px 5px 2px 5px;
             }
           }
+          &.enlarged{
+            select{
+              width: 150px;
+            }
+          }
         }
-      }
 
-      %Btn {
-        color: $lightColor;
-        max-width: 200px;
-        position: absolute;
-        transition: all 0.3s ease-in-out;
-        &:hover {
-          background: $specialColorFirst;
-        }
       }
-
       .RemoveBtn {
         @extend %Btn;
         bottom: 2%;
@@ -98,18 +104,20 @@
         right: 10.5%;
         width: 100px;
       }
-      .SubmitBtn {
-        @extend %Btn;
-        border: solid 2px $specialColorFirst;
-        bottom: 2%;
-        right: 1%;
-        width: 100px;
-      }
     }
   }
 
   .ParametersScene{
     @extend %Scene;
+  }
+
+  .SubmitBtn {
+    @extend %Btn;
+    border: solid 2px $specialColorFirst;
+    bottom: 2%;
+    right: 1%;
+    width: 100px;
+    z-index: 1;
   }
   .SceneSwitchBtn{
     @extend %Btn;
@@ -118,7 +126,6 @@
     top: 5px;
     z-index: 1;
     border: solid 2px $specialColorFirst;
-
     &:hover {
       background: $specialColorFirst;
     }
