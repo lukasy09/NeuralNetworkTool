@@ -27,7 +27,7 @@ const layerActivations = [
     SETTINGS.model.layerActivations.SOFTMAX,
 ];
 
-class AddLayerPopup extends React.Component {
+class Editor extends React.Component {
 
     constructor(props) {
         super(props);
@@ -98,7 +98,7 @@ class AddLayerPopup extends React.Component {
 
     render() {
         return (
-            <div className={"AddLayerPopupContainer"}
+            <div className={"EditorContainer"}
                  style={this.props.style}>
                 <PopupBlur/>
                 <div className={"Layer"}>
@@ -220,9 +220,9 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(AddLayerPopup);
+export default connect(mapStateToProps)(Editor);
 
-AddLayerPopup.propTypes = {
+Editor.propTypes = {
     triggerPopup: PropTypes.func,
     submitLayers: PropTypes.func,
     style: PropTypes.object

@@ -3,7 +3,7 @@ import {TextButton} from "../common/TextButton";
 import {connect} from 'react-redux';
 import {setModel, setModelLayers} from "../../actions/modelActions";
 import {setGraph} from "../../actions/graphActions";
-import AddLayerPopup from "./AddLayerPopup/AddLayerPopup";
+import Editor from "./Editor/Editor";
 import {Layer} from "./Layer/Layer";
 import {ESCAPE} from "../../utils/Keyboard";
 import {ModelValidator} from "../../logic/ModelValidator/ModelValidator";
@@ -145,9 +145,9 @@ class ModelToolBox extends React.Component {
                         action={this.triggerPopup}
                     />
                 </div>
-                <AddLayerPopup triggerPopup={this.triggerPopup}
-                               submitLayers={this.submitLayers}
-                               style={this.state.styles.popup}/>
+                <Editor triggerPopup={this.triggerPopup}
+                        submitLayers={this.submitLayers}
+                        style={this.state.styles.popup}/>
             </>
         )
     }

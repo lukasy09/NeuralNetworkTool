@@ -1,7 +1,7 @@
 @import "../../../styles/mixins";
 @import "../../../settings/StylesSettings";
 
-.AddLayerPopupContainer {
+.EditorContainer {
   @include row-flex-box;
   @include box-shadow($lightColor);
   @include absolute-center-element;
