@@ -12,6 +12,10 @@ class StartInfoInput extends React.Component {
 
     state = {
         styles: {
+            startInfoWrapper:{
+                transform:'none'
+            },
+
             textButtonStyle: {
                 opacity: 1
             },
@@ -67,7 +71,6 @@ class StartInfoInput extends React.Component {
 
     /**
      *Enabling(or disabling) submit link button
-     * @TODO Check why textButton is enabling when the project name is valid
      * @param obj
      */
     handleSubmit = (obj) => {
@@ -96,11 +99,20 @@ class StartInfoInput extends React.Component {
      */
     submitProjectName = () => {
         this.props.activateBackground();
+        this.setState({
+            styles:{
+                ...this.state.styles,
+                startInfoWrapper:{
+                    transform:'translateX(50vw)'
+                }
+            }
+        })
     };
 
     render() {
         return (
-            <div className={"StartWrapper"}>
+            <div className={"StartWrapper"}
+                 style={this.state.styles.startInfoWrapper}>
                 <TextButton
                     text={"Let's start!"}
                     style={this.state.styles.textButtonStyle}

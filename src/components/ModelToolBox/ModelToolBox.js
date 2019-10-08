@@ -91,7 +91,6 @@ class ModelToolBox extends React.Component {
      * @param newParams
      */
     submitModel = (newLayers, newParams) => {
-        console.log(newParams);
         this.props.setGraph(newLayers);
         this.props.setModelLayers(newLayers);
         this.props.setModelCompilationParameters(newParams);

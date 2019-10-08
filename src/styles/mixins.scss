@@ -98,3 +98,9 @@
   bottom: 0;
   margin: auto;
 }
+
+@mixin apply-animation($animation-name, $period){
+  -webkit-animation: $animation-name $period ease infinite;
+  -moz-animation:$animation-name $period ease infinite;
+  animation: $animation-name $period infinite;
+}

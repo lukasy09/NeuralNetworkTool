@@ -1,15 +1,21 @@
 @import "../../settings/StylesSettings";
 @import "../../styles/mixins";
+@import "../../styles/animations";
 
 .DesktopBackground{
+  background-size: 400% 400%;
   position: absolute;
   width: calc(2 * 100vw);
   height: 100vh;
   background: $darkColor;
-  background: linear-gradient(128deg, $darkColor 26%, $specialColorFirst 60%);
+  background: linear-gradient(128deg, $darkColor 6%, $specialColorFirst 80%);
   left:0;
   top:0;
   z-index: -1;
+  background-size: 400% 400%;
+  animation: AnimationName 30s ease infinite;
+
+
   .LeftSkew{
     @include skew(20deg, 0);
     @include box-shadow-right($lightColor);
