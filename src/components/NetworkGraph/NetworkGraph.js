@@ -24,18 +24,7 @@ class NetworkGraph extends React.Component {
                 display: 'none'
             }
 
-        },
-        graph:{
-            styles:{
-                node:{
-                   "background-color":"#f1f1f1",
-                },
-                edge: {
-                    backgroundColor: "#f2f2f2"
-                }
-            }
         }
-
     };
 
     componentDidMount() {
@@ -72,7 +61,6 @@ class NetworkGraph extends React.Component {
      */
     initGraph = () => {
         this.cy = NetworkGraphConfigurator.initializeCytoObject(this.graph);
-
         return this.cy;
     };
 

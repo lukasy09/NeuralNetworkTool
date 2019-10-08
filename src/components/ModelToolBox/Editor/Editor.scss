@@ -16,6 +16,7 @@
   transition: all 0.7s ease-in-out;
   width: 80vw;
   height: 90vh;
+  z-index: 1;
 
   %Scene{
     @include row-flex-box;

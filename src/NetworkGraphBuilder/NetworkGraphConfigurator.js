@@ -17,6 +17,38 @@ const SIGMOID_RESOURCE = "http://i.imgur.com/sbTRr0E.png";
 
 export class NetworkGraphConfigurator {
 
+    static commonConfig = {
+        // initial viewport state:
+        zoom: 1,
+        pan: { x: 0, y: 0 },
+
+        // interaction options:
+        minZoom: 0.2,
+        maxZoom: 5,
+        zoomingEnabled: true,
+        userZoomingEnabled: true,
+        panningEnabled: true,
+        userPanningEnabled: true,
+        boxSelectionEnabled: true,
+        selectionType: 'single',
+        touchTapThreshold: 8,
+        desktopTapThreshold: 4,
+        autolock: false,
+        autoungrabify: false,
+        autounselectify: false,
+
+        // rendering options:
+        headless: false,
+        styleEnabled: true,
+        hideEdgesOnViewport: false,
+        hideLabelsOnViewport: false,
+        textureOnViewport: false,
+        motionBlur: false,
+        motionBlurOpacity: 0.2,
+        //wheelSensitivity: 1,
+        pixelRatio: 'auto'
+    };
+
     static layoutConfig = {
         name: "cose",
         padding: 60,
@@ -80,7 +112,8 @@ export class NetworkGraphConfigurator {
         return cytoscape({
             container: graphContainer, // Graph container. All the stuff is rendereing inside.
             style: NetworkGraphConfigurator.getGraphStyleConfiguration(),
-            layout: NetworkGraphConfigurator.getGraphLayoutConfiguration()
+            layout: NetworkGraphConfigurator.getGraphLayoutConfiguration(),
+            ...NetworkGraphConfigurator.getcommonConfiguration()
         });
     };
 
@@ -101,5 +134,9 @@ export class NetworkGraphConfigurator {
 
     static getGraphLayoutConfiguration() {
         return this.layoutConfig;
+    }
+
+    static getcommonConfiguration(){
+        return this.commonConfig;
     }
 }
