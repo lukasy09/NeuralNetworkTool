@@ -75,7 +75,7 @@ export class NetworkGraphConfigurator {
             {
                 selector: `${ELEMENT_TYPES.NODE}node[inLayerType = '${INPUT}']`,
                 css: {
-                    'background-color': '#99ff99',
+                    'background-color': '#ff471a',
                 }
             },
             {

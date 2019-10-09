@@ -5,10 +5,12 @@ import {setModel, setModelCompilationParameters, setModelLayers} from "../../act
 import {setGraph} from "../../actions/graphActions";
 import Editor from "./Editor/Editor";
 import {Layer} from "./Layer/Layer";
+import {Upload} from "../common/Upload";
 import {ESCAPE} from "../../utils/Keyboard";
 import {ModelValidator} from "../../logic/ModelValidator/ModelValidator";
 import Alerts from "./Alerts/Alerts";
 import {setAlerts} from "../../actions/alertsActions";
+import {handleUpload} from "../../utils/Upload";
 
 export const EDITOR_SCENE = {
     LAYER: 'layers',
@@ -161,6 +163,13 @@ class ModelToolBox extends React.Component {
                             })
                         }
                     </div>
+                    <Upload text={"Upload your model"}
+                            id={"Uploader"}
+                            className={"Uploader"}
+                            accept={".json,application/json"}
+                            action={(e) => {
+                                handleUpload(e, false);
+                            }}/>
                     <TextButton
                         text={"Layers"}
                         className={"AddNewLayerBtn"}
