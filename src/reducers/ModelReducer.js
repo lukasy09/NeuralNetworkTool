@@ -21,7 +21,7 @@ export function modelReducer(state = defaultModelState, action) {
         case SET_MODEL:
             return{
                 ...state,
-                model: action.payload
+                ...action.payload
             };
         case SET_MODEL_LAYERS:
             return {

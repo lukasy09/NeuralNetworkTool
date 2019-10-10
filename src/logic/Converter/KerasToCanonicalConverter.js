@@ -1,5 +1,6 @@
 import {JSONFormatConverter} from "./Converter";
 import {format} from "./format";
+import {SETTINGS} from "../../settings/ApplicationSettings";
 
 export class KerasToCanonicalConverter extends JSONFormatConverter{
 
@@ -11,8 +12,14 @@ export class KerasToCanonicalConverter extends JSONFormatConverter{
         }
     }
 
+    /**
+     * Converting JSON model
+     * @param kerasModel
+     * @returns {{layers: Array}}
+     */
     convert(kerasModel) {
         const kerasModelConfig = kerasModel.modelTopology.model_config;
+        const kerasTrainingConfig = kerasModel.modelTopology.training_config;
 
         let model={
             layers: []
@@ -23,18 +30,34 @@ export class KerasToCanonicalConverter extends JSONFormatConverter{
             return;
         }
 
+        model = {
+            ...model,
+            optimizer: kerasTrainingConfig.optimizer_config.class_name,
+            loss: kerasTrainingConfig.loss,
+            metrics: kerasTrainingConfig.metrics
+
+        };
         const layerConfig = kerasModelConfig.config;
-        const lenght = layerConfig.length;
-        for (let i = 0; i < lenght; i++) {
+        const length = layerConfig.length;
+        for (let i = 0; i < length; i++) {
             const kerasLayer = layerConfig[i];
             let layer = {
                 index: i,
-                //name: kerasLayer.config.name,
-                type: 'hidden',
-                //classType:kerasLayer.class_name,
-                nodesNumber: kerasLayer.config.units
-
+                name: kerasLayer.config.name,
+                type: SETTINGS.model.layerTypes.HIDDEN,
+                classType:kerasLayer.class_name,
+                activation: kerasLayer.config.activation,
+                nodesNumber: kerasLayer.config.units,
             };
+
+            if(i === 0){
+                layer.type = SETTINGS.model.layerTypes.INPUT;
+                //model.layers.push(layer);
+            }else if(i === (length - 1)){
+                layer.type = SETTINGS.model.layerTypes.OUTPUT;
+                break;
+            }
+            layer.type = SETTINGS.model.layerTypes.HIDDEN;
             model.layers.push(layer);
         }
         return model;

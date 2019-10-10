@@ -24,7 +24,7 @@ export class NetworkGraphConfigurator {
 
         // interaction options:
         minZoom: 0.2,
-        maxZoom: 5,
+        maxZoom: 7,
         zoomingEnabled: true,
         userZoomingEnabled: true,
         panningEnabled: true,
@@ -75,7 +75,7 @@ export class NetworkGraphConfigurator {
             {
                 selector: `${ELEMENT_TYPES.NODE}node[inLayerType = '${INPUT}']`,
                 css: {
-                    'background-color': '#ff471a',
+                    'background-color': '#99ff99',
                 }
             },
             {

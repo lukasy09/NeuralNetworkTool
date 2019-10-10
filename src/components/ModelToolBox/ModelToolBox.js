@@ -115,10 +115,9 @@ class ModelToolBox extends React.Component {
     saveModel = (e) => {
         const setModel = (json) => {
            let convertedModel = this.converter.convert(json).getData();
-           this.props.setGraph(convertedModel.layers);
+           this.props.setModel(convertedModel);
         };
         getFileData(e, setModel);
-
     };
 
     /**
@@ -175,13 +174,13 @@ class ModelToolBox extends React.Component {
                             })
                         }
                     </div>
-                    <Upload text={"Upload your model"}
+                    <Upload text={"Upload model"}
                             id={"Uploader"}
                             className={"Uploader"}
                             accept={".json,application/json"}
                             action={(e) => {this.saveModel(e)}}/>
                     <TextButton
-                        text={"Layers"}
+                        text={"Editor"}
                         className={"AddNewLayerBtn"}
                         action={this.triggerPopup}
                     />

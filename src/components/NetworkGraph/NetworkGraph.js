@@ -84,8 +84,6 @@ class NetworkGraph extends React.Component {
 
     componentDidUpdate(){
         this.networkGraphBuilder = new NetworkGraphBuilder(this.initGraph());
-        console.log('running XD1234');
-        console.log(this.props.graph);
         this.networkGraphBuilder.buildNeuralNetworkVisualisation(this.props.graph);
     }
 
