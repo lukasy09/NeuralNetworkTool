@@ -10,7 +10,9 @@ import {ESCAPE} from "../../utils/Keyboard";
 import {ModelValidator} from "../../logic/ModelValidator/ModelValidator";
 import Alerts from "./Alerts/Alerts";
 import {setAlerts} from "../../actions/alertsActions";
-import {handleUpload} from "../../utils/Upload";
+import {getFileData} from "../../utils/Upload";
+import {KerasToCanonicalConverter} from "../../logic/Converter/KerasToCanonicalConverter";
+import {JSONFormatConverter} from "../../logic/Converter/Converter";
 
 export const EDITOR_SCENE = {
     LAYER: 'layers',
@@ -41,6 +43,7 @@ class ModelToolBox extends React.Component {
     constructor(props){
         super(props);
         this.modelValidator = new ModelValidator();
+        this.converter = new JSONFormatConverter(new KerasToCanonicalConverter());
     }
 
     /**
@@ -109,6 +112,15 @@ class ModelToolBox extends React.Component {
         this.props.setAlerts(alerts);
     };
 
+    saveModel = (e) => {
+        const setModel = (json) => {
+           let convertedModel = this.converter.convert(json).getData();
+           this.props.setGraph(convertedModel.layers);
+        };
+        getFileData(e, setModel);
+
+    };
+
     /**
      * Styling the component(e.g moving scene) at the beginning.
      */
@@ -167,9 +179,7 @@ class ModelToolBox extends React.Component {
                             id={"Uploader"}
                             className={"Uploader"}
                             accept={".json,application/json"}
-                            action={(e) => {
-                                handleUpload(e, false);
-                            }}/>
+                            action={(e) => {this.saveModel(e)}}/>
                     <TextButton
                         text={"Layers"}
                         className={"AddNewLayerBtn"}

@@ -1,4 +1,5 @@
 export const TEST_MODEL = {
+
     optimizer: 'rmsprop',
     loss: 'categorical_crossentropy',
     metrics: ['accuracy'],
