@@ -74,9 +74,6 @@ export class ModelValidator {
                 if (layer.type === INPUT && layer.activation !== NONE) {
                     this.outputInfo.push(ALERT_STATUS.feature.input.activation);
                 }
-                if (layer.type === OUTPUT && layer.activation !== NONE) {
-                    this.outputInfo.push(ALERT_STATUS.feature.output.activation);
-                }
             }
 
             //Warnings

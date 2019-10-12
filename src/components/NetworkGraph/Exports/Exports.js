@@ -27,7 +27,6 @@ export class  Exports extends React.Component{
             /* Turning off the export to image format due to some errors in existing Cytoscape API.
                In the future take a look at this. In 3.12.0 cytoscape's version it should work properly.
             */
-
             if(type === EXPORTS_TYPES.PNG || type === EXPORTS_TYPES.JPEG){
                 continue;
             }

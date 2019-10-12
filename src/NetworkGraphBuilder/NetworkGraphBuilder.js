@@ -13,7 +13,7 @@ export default class NetworkGraphBuilder {
     };
 
     nodesGap = {
-        horizontal: 150,
+        horizontal: 250,
         vertical: 100
     };
 

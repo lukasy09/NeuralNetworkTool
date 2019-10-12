@@ -289,7 +289,7 @@ class Editor extends React.Component {
                                         label={{
                                             text: 'Metrics'
                                         }}
-                                        defaultValue={this.state.modelTraining.compilationParameters.metrics}
+                                        defaultValue={this.state.modelTraining.compilationParameters.metrics[0]}
                                         options={METRICS}/>
                             </div>
                         </div>

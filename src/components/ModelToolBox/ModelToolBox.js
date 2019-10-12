@@ -36,11 +36,11 @@ class ModelToolBox extends React.Component {
         },
 
         isModelValid: false,
-        alerts:[]
+        alerts: []
 
     };
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.modelValidator = new ModelValidator();
         this.converter = new JSONFormatConverter(new KerasToCanonicalConverter());
@@ -74,7 +74,7 @@ class ModelToolBox extends React.Component {
     switchScene = () => {
         let newScene;
 
-        switch (this.state.scene){
+        switch (this.state.scene) {
             case EDITOR_SCENE.LAYER:
                 newScene = EDITOR_SCENE.PARAMETER;
                 break;
@@ -114,8 +114,9 @@ class ModelToolBox extends React.Component {
 
     saveModel = (e) => {
         const setModel = (json) => {
-           let convertedModel = this.converter.convert(json).getData();
-           this.props.setModel(convertedModel);
+            let cannonical = this.converter.convert(json).getData();
+            this.props.setModel(cannonical.model);
+            this.props.setGraph(cannonical.graph);
         };
         getFileData(e, setModel);
     };
@@ -137,9 +138,9 @@ class ModelToolBox extends React.Component {
 
     componentDidMount() {
         this.setupInitStyles();
-        window.addEventListener('keydown', (e)=>{
-            if(e.keyCode === ESCAPE.code){
-                if(this.state.activePopup){
+        window.addEventListener('keydown', (e) => {
+            if (e.keyCode === ESCAPE.code) {
+                if (this.state.activePopup) {
                     this.triggerPopup();
                 }
             }
@@ -154,7 +155,9 @@ class ModelToolBox extends React.Component {
                      style={this.state.styles.modelToolBoxContainer}>
                     {this.props.alerts.length > 0 ?
                         <Alerts activeAlerts={this.state.activeAlerts}
-                                triggerAlerts={()=>{this.setState({...this.state, activeAlerts: !this.state.activeAlerts})}}/>
+                                triggerAlerts={() => {
+                                    this.setState({...this.state, activeAlerts: !this.state.activeAlerts})
+                                }}/>
                         : <></>
                     }
 
@@ -178,7 +181,9 @@ class ModelToolBox extends React.Component {
                             id={"Uploader"}
                             className={"Uploader"}
                             accept={".json,application/json"}
-                            action={(e) => {this.saveModel(e)}}/>
+                            action={(e) => {
+                                this.saveModel(e)
+                            }}/>
                     <TextButton
                         text={"Editor"}
                         className={"AddNewLayerBtn"}

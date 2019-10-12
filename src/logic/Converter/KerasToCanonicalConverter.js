@@ -4,13 +4,8 @@ import {SETTINGS} from "../../settings/ApplicationSettings";
 
 export class KerasToCanonicalConverter extends JSONFormatConverter{
 
-
-    constructor(){
-        super();
-    }
-
     /**
-     * Converting JSON model
+     * Converting JSON model into a cannonical format.
      * @param kerasModel
      * @returns {{layers: Array}}
      */
@@ -20,6 +15,10 @@ export class KerasToCanonicalConverter extends JSONFormatConverter{
 
         let model={
             layers: []
+        };
+
+        let graph = {
+          layers: []
         };
 
         if (kerasModelConfig.class_name !== format.modelConfigClassName) {
@@ -49,6 +48,11 @@ export class KerasToCanonicalConverter extends JSONFormatConverter{
                     nodesNumber: kerasLayer.config.batch_input_shape[1]
                 };
                 model.layers.push(inputLayer);
+                graph.layers.push({
+                    index: inputLayer.index,
+                    type: inputLayer.type,
+                    nodesNumber: inputLayer.nodesNumber
+                });
             }
 
             let layer = {
@@ -60,7 +64,15 @@ export class KerasToCanonicalConverter extends JSONFormatConverter{
                 nodesNumber: kerasLayer.config.units
             };
             model.layers.push(layer);
+            graph.layers.push({
+                index: layer.index,
+                type: layer.type,
+                nodesNumber: layer.nodesNumber
+            });
         }
-        return model;
+        return {
+            model: model,
+            graph: graph
+        }
     }
 }

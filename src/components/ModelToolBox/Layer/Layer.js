@@ -15,8 +15,8 @@ const OPTIONS = {
 };
 
 const SIZE = {
-    width: 140,
-    height: 80
+    width: 100,
+    height: 60
 };
 
 export const Layer = (props) => {

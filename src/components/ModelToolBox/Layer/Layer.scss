@@ -10,7 +10,7 @@
   overflow-x: hidden;
 
   &::-webkit-scrollbar {
-    width: 0.7em;
+    width: 0.5em;
   }
 
   &::-webkit-scrollbar-track {
@@ -47,7 +47,7 @@
     }
 
     &.input {
-      @include box-shadow($inputLayerColor);
+      border: solid 1px $inputLayerColor;
       &:after {
         background: $inputLayerColor;
       }
@@ -55,14 +55,14 @@
     }
 
     &.hidden {
-      @include box-shadow($hiddenLayerColor);
+      border: solid 1px $hiddenLayerColor;
       &:after {
         background: $hiddenLayerColor;
       }
 
     }
     &.output {
-      @include box-shadow($outputLayerColor);
+      border: solid 1px $outputLayerColor;
       &:after {
         background: $outputLayerColor;
       }
@@ -107,7 +107,7 @@
     .ActivationGroup{
       position: relative;
       left: 220px;
-      top: 10px;
+      top: 30px;
       width: 250px;
       height: 0;
 

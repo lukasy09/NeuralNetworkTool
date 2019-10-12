@@ -5,6 +5,8 @@ import {connect} from "react-redux";
 const Alerts = (props)=>{
     return(
         <div className={"AlertsContainer"}>
+            <div onClick={props.triggerAlerts}
+                 className={"ShowAlertsBtn"} />
             <div className={"Alerts"}>
             {props.activeAlerts ?
                 props.alertsObject.alerts.map((alert, index)=>{
@@ -16,9 +18,6 @@ const Alerts = (props)=>{
                     )
                 }) : <></>}
             </div>
-                <div onClick={props.triggerAlerts}
-                     className={"ShowAlertsBtn"} />
-
         </div>
 
     )

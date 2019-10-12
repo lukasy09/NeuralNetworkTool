@@ -1,7 +1,7 @@
 @import "../../styles/mixins";
 @import "../../settings/StylesSettings";
 
-.NetworkGraphContainer{
+.NetworkGraphContainer {
   @include col-flex-box;
   justify-content: center;
   align-items: center;
@@ -11,14 +11,16 @@
   padding: 20px 10px 20px 10px;
   transition: all 1.7s ease-in-out;
 
-
-  .NetworkGraph{
-   @include box-shadow($specialColorFirst);
-   width: 90%;
-   height: 90%;
- }
-  .LabelInfoWrapper{
-    &.ProjectName{
+  .NetworkGraph {
+    width: 90%;
+    height: 90%;
+    cursor: grab;
+    &:active {
+      cursor: grabbing;
+    }
+  }
+  .LabelInfoWrapper {
+    &.ProjectName {
       position: absolute;
       left: 52px;
       top: 17px;
