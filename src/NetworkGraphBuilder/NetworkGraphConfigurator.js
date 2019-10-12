@@ -127,7 +127,7 @@ export class NetworkGraphConfigurator {
             color: 'black',
             borderWidth: '1px',
             borderColor: 'black',
-            backgroundFit: "contain",
+            backgroundFit: "contain"
         }
     }
 

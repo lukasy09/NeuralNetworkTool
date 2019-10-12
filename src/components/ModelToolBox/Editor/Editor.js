@@ -59,7 +59,7 @@ class Editor extends React.Component {
                 nodesNumber: 5
             },
 
-            model: {
+            modelTraining: {
                 compilationParameters: {
                     optimizer: SETTINGS.model.compilation.optimizer.ADAM,
                     loss: SETTINGS.model.compilation.loss.BINARY_CROSSENTROPY,
@@ -128,7 +128,7 @@ class Editor extends React.Component {
                             className={"ExitBtn"}/>
                 <TextButton text={"Submit"}
                             action={() => {
-                                this.props.submitModel(this.state.subGraph.layers, this.state.model.compilationParameters)
+                                this.props.submitModel(this.state.subGraph, this.state.modelTraining.compilationParameters)
                             }}
                             className={"SubmitBtn"}/>
 
@@ -238,7 +238,7 @@ class Editor extends React.Component {
                                 <Select action={(e) => {
                                     this.setState({
                                         model: {
-                                            ...this.state.model,
+                                            ...this.state.modelTraining,
                                             compilation:{
                                                 ...this.state.compilation,
                                                 optimizer: e.target.value.toLowerCase()
@@ -250,14 +250,14 @@ class Editor extends React.Component {
                                         label={{
                                             text: 'Loss'
                                         }}
-                                        defaultValue={this.state.model.compilationParameters.optimizer}
+                                        defaultValue={this.state.modelTraining.compilationParameters.optimizer}
                                         options={LOSSES}/>
                             </div>
                             <div className={"FeatureWrapper"}>
                                 <Select action={(e) => {
                                     this.setState({
                                         model: {
-                                            ...this.state.model,
+                                            ...this.state.modelTraining,
                                             compilation:{
                                                 ...this.state.compilation,
                                                 optimizer: e.target.value.toLowerCase()
@@ -269,7 +269,7 @@ class Editor extends React.Component {
                                         label={{
                                             text: 'Optimizer'
                                         }}
-                                        defaultValue={this.state.model.compilationParameters.loss}
+                                        defaultValue={this.state.modelTraining.compilationParameters.loss}
                                         options={OPTIMIZERS}/>
                             </div>
 
@@ -277,7 +277,7 @@ class Editor extends React.Component {
                                 <Select action={(e) => {
                                     this.setState({
                                         model: {
-                                            ...this.state.model,
+                                            ...this.state.modelTraining,
                                             compilation:{
                                                 ...this.state.compilation,
                                                 metrics: e.target.value.toLowerCase()
@@ -289,7 +289,7 @@ class Editor extends React.Component {
                                         label={{
                                             text: 'Metrics'
                                         }}
-                                        defaultValue={this.state.model.compilationParameters.metrics}
+                                        defaultValue={this.state.modelTraining.compilationParameters.metrics}
                                         options={METRICS}/>
                             </div>
                         </div>
@@ -310,7 +310,7 @@ const mapStateToProps = state => {
 
 Editor.propTypes = {
     triggerPopup: PropTypes.func,
-    submitLayers: PropTypes.func,
+    submitModel: PropTypes.func,
     switchScene: PropTypes.func,
     scene: PropTypes.string,
     altScene: PropTypes.string,

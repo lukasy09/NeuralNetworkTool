@@ -92,14 +92,14 @@ class ModelToolBox extends React.Component {
 
     /**
      * Submitting layers on the preview and replacing with the existing ones
-     * @param newLayers
+     * @param graph
      * @param newParams
      */
-    submitModel = (newLayers, newParams) => {
-        this.props.setGraph(newLayers);
-        this.props.setModelLayers(newLayers);
+    submitModel = (graph, newParams) => {
+        this.props.setGraph(graph);
+        this.props.setModelLayers(graph.layers);
         this.props.setModelCompilationParameters(newParams);
-        this.updateAlerts(newLayers);
+        this.updateAlerts(graph.layers);
         this.triggerPopup();
     };
 

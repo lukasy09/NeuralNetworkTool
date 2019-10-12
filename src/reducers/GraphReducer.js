@@ -10,7 +10,7 @@ export function graphReducer(state = defaultGraphState, action) {
         case SET_GRAPH:
             return{
                 ...state,
-                layers: action.payload
+                ...action.payload
             };
         default:
             return state;

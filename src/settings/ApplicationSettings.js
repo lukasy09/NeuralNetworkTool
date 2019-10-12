@@ -30,7 +30,8 @@ export const SETTINGS = {
         },
         layerClassTypes:{
             DENSE: 'dense',
-            CONV2D: 'conv2d'
+            CONV2D: 'conv2d',
+            NONE : 'none'
         },
         layerActivations:{
             SIGMOID: 'sigmoid',
