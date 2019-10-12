@@ -2,6 +2,8 @@ import {JSONFormatConverter} from "./Converter";
 import {format} from "./format";
 import {SETTINGS} from "../../settings/ApplicationSettings";
 
+const DEFAULT_LAYER_NAME = 'dense_0';
+
 export class KerasToCanonicalConverter extends JSONFormatConverter{
 
     /**
@@ -41,7 +43,7 @@ export class KerasToCanonicalConverter extends JSONFormatConverter{
             if(i === 0){
                 let inputLayer = {
                     index: i,
-                    name: kerasLayer.config.name,
+                    name: DEFAULT_LAYER_NAME,
                     type: SETTINGS.model.layerTypes.INPUT,
                     classType: SETTINGS.model.layerClassTypes.NONE,
                     activation: SETTINGS.model.layerActivations.NONE,
@@ -51,13 +53,14 @@ export class KerasToCanonicalConverter extends JSONFormatConverter{
                 graph.layers.push({
                     index: inputLayer.index,
                     type: inputLayer.type,
+                    activation: inputLayer.activation,
                     nodesNumber: inputLayer.nodesNumber
                 });
             }
 
             let layer = {
                 index: i+1,
-                name: 'dense_0',
+                name: kerasLayer.config.name,
                 type: (i === length - 1) ? SETTINGS.model.layerTypes.OUTPUT : SETTINGS.model.layerTypes.HIDDEN,
                 classType: kerasLayer.class_name.toLowerCase(),
                 activation: kerasLayer.config.activation,
@@ -67,6 +70,7 @@ export class KerasToCanonicalConverter extends JSONFormatConverter{
             graph.layers.push({
                 index: layer.index,
                 type: layer.type,
+                activation: layer.activation,
                 nodesNumber: layer.nodesNumber
             });
         }

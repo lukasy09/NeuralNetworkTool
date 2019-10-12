@@ -12,5 +12,7 @@ export const getFileData = (evt, handler) => {
             }
         }
     })(f);
-    reader.readAsText(f);
+    if (f) {
+        reader.readAsText(f);
+    }
 };
