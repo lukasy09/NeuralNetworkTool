@@ -3,7 +3,10 @@ import cytoscape from "cytoscape";
 
 const ELEMENT_TYPES = {
     NODE: "node",
-    EDGE: "edge"
+    EDGE: "edge",
+    NODE_SELECTED: 'node:selected',
+    EDGE_SELECTED: 'edge:selected',
+    RECTANGLE: 'rectangle'
 };
 
 const ACTIVATION_TYPES = {
@@ -65,35 +68,43 @@ export class NetworkGraphConfigurator {
         const HIDDEN = SETTINGS.model.layerTypes.HIDDEN;
         const OUTPUT = SETTINGS.model.layerTypes.OUTPUT;
         return [
+
+            // Nodes' visual configuration
+
             {
                 selector: ELEMENT_TYPES.NODE,
                 css: {
                     //'content': 'data(id)', // Uncomment if you want to see node's label
-                    ...NetworkGraphConfigurator.getCommonStyles()
+                    ...NetworkGraphConfigurator.getCommonNodesStyles()
+                },
+            },
+            {
+                selector: ELEMENT_TYPES.NODE_SELECTED,
+                css: {
+                    'content': 'data(displayInfo)',
                 }
             },
             {
-                selector: `${ELEMENT_TYPES.NODE}node[inLayerType = '${INPUT}']`,
+                selector: `${ELEMENT_TYPES.NODE}[inLayerType = '${INPUT}']`,
                 css: {
                     'background-color': '#99ff99',
                 }
             },
             {
-                selector: `${ELEMENT_TYPES.NODE}node[inLayerType = '${HIDDEN}']`,
+                selector: `${ELEMENT_TYPES.NODE}[inLayerType = '${HIDDEN}']`,
                 css: {
                     'background-color': '#0066ff',
-
                 }
             },
             {
-                selector: `${ELEMENT_TYPES.NODE}node[inLayerType = '${OUTPUT}']`,
+                selector: `${ELEMENT_TYPES.NODE}[inLayerType = '${OUTPUT}']`,
                 css: {
                     'background-color': '#f1f1f1',
                 },
 
             },
             {
-                selector: `${ELEMENT_TYPES.NODE}node[activation = '${ACTIVATION_TYPES.RELU}']`,
+                selector: `${ELEMENT_TYPES.NODE}[activation = '${ACTIVATION_TYPES.RELU}']`,
                 css: {
                     backgroundImage: RELU_RESOURCE,
                 }
@@ -102,6 +113,22 @@ export class NetworkGraphConfigurator {
                 selector: `${ELEMENT_TYPES.NODE}node[activation = '${ACTIVATION_TYPES.SIGMOID}']`,
                 css: {
                     backgroundImage: SIGMOID_RESOURCE,
+                }
+            },
+
+            // Edges visual configuration
+
+            {
+                selector: ELEMENT_TYPES.EDGE,
+                style: {
+                    // 'content': 'data(id)', // Uncomment if you want to see edge's label
+                    ...NetworkGraphConfigurator.getCommonEdgesStyles()
+                },
+            },
+            {
+                selector: ELEMENT_TYPES.EDGE_SELECTED,
+                css: {
+                    'content': 'data(displayInfo)',
                 }
             },
         ]
@@ -120,9 +147,9 @@ export class NetworkGraphConfigurator {
 
     /**
      * Storing common (nodes') styles
-     * @returns {{color: string, borderWidth: string, borderColor: string, backgroundFit: string, backgroundImageOpacity: number}}
+     * @returns {{color: string, borderWidth: string, borderColor: string, backgroundFit: string}}
      */
-    static getCommonStyles() {
+    static getCommonNodesStyles() {
         return {
             color: 'black',
             borderWidth: '1px',
@@ -130,6 +157,17 @@ export class NetworkGraphConfigurator {
             backgroundFit: "contain"
         }
     }
+
+    /**
+     * Storing common (edges') styles
+     * @returns
+     */
+    static getCommonEdgesStyles() {
+        return {
+            'background-color': '#222222'
+        }
+    }
+
 
 
     static getGraphLayoutConfiguration() {

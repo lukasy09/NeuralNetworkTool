@@ -41,8 +41,9 @@
     transition: all 0.7s ease-in-out;
     background-color: $darkColor;
     position: absolute;
-    right: 3.5%;
+    left: 3.5%;
     top: 10px;
+
     &:hover {
       background: $specialColorFirst;
     }

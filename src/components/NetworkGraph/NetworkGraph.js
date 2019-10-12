@@ -29,7 +29,7 @@ class NetworkGraph extends React.Component {
 
     componentDidMount() {
         this.setupInitStyles();
-        this.initGraph();
+        this.cy = this.initGraph();
 
         window.addEventListener('keydown', (e)=>{
             if(e.keyCode === ESCAPE.code){
@@ -83,9 +83,12 @@ class NetworkGraph extends React.Component {
     };
 
     componentDidUpdate(){
-        this.networkGraphBuilder = new NetworkGraphBuilder(this.initGraph());
-        this.networkGraphBuilder.buildNeuralNetworkVisualisation(this.props.graph);
+        if(this.props.graph.layers.length > 0){
+            this.networkGraphBuilder = new NetworkGraphBuilder(this.initGraph());
+            this.networkGraphBuilder.buildNeuralNetworkVisualisation(this.props.graph);
+        }
     }
+
 
     render() {
         const projectName = this.props.general.projectName;

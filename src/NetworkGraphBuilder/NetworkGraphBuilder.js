@@ -13,7 +13,7 @@ export default class NetworkGraphBuilder {
     };
 
     nodesGap = {
-        horizontal: 300,
+        horizontal: 260,
         vertical: 140
     };
 
@@ -47,7 +47,8 @@ export default class NetworkGraphBuilder {
                 data: {
                     id: `l${layerIndex.toString()} n${i.toString()}`,
                     inLayerType: type,
-                    activation: activation
+                    activation: activation,
+                    displayInfo: `Unit index: ${i}\nLayer:${layerIndex}`
                 },
                 position: NetworkGraphBuildUtils.getNodePosition(layer, i, this.maxNodesNumber, this.nodesGap),
             });
@@ -78,6 +79,8 @@ export default class NetworkGraphBuilder {
                         data: {
                             id: //"l" + fromLayerIndex + " " + "from" + " " +fromNodeIndex + " " + "to" + " " + toNodeIndex,
                                 `l${fromLayerIndex.toString()} from ${fromNodeIndex.toString()} to ${toNodeIndex}`,
+                            inLayerType: toNode.inLayerType,
+                            displayInfo: `From:${fromLayerIndex.toString()} to: ${toLayerIndex.toString()}, layer: ${fromLayerIndex+1}`,
                             source: fromNode.data.id, // the source node id (edge comes from this node)
                             target: toNode.data.id  // the target node id (edge goes to this node)
                         },
