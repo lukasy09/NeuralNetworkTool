@@ -1,0 +1,20 @@
+@import "../../../styles/mixins";
+
+.EqualizerContainer{
+  position: absolute;
+  top: 6%;
+  max-width: 25px;
+  left: calc(60% - 25px);
+  flex-direction: row;
+  transition: all 0.7s ease-in-out;
+  .Equalizer{
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.7s ease-in-out;
+
+    &:hover{
+      @include translateWithScale(-4px, 0, 1.1);
+    }
+  }
+
+}

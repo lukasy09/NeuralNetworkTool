@@ -5,8 +5,10 @@ import {LabelInfo} from "../common/LabelInfo";
 import NetworkGraphBuilder from '../../NetworkGraphBuilder/NetworkGraphBuilder';
 import {NetworkGraphConfigurator} from "../../NetworkGraphBuilder/NetworkGraphConfigurator";
 import {GraphSideUtil} from "./GraphSideUtil/GraphSideUtil";
-
+import {GraphEqualizer} from "./GraphEqualizer/GraphEqualizer";
 import {ESCAPE} from "../../utils/Keyboard";
+import {userActions} from "../../NetworkGraphBuilder/utils/Equalizer";
+
 
 
 class NetworkGraph extends React.Component {
@@ -92,6 +94,7 @@ class NetworkGraph extends React.Component {
 
     render() {
         const projectName = this.props.general.projectName;
+        const actionList = [userActions.CENTER, userActions.ZOOM_IN, userActions.ZOOM_OUT];
         return (
                 <div className={"NetworkGraphContainer"}
                      style={this.state.styles.networkGraphContainer}>
@@ -103,6 +106,8 @@ class NetworkGraph extends React.Component {
                         text={projectName}
                         className={"ProjectName"}
                     />
+
+                    <GraphEqualizer actions = {actionList}/>
                     <div ref={(div) => this.graph = div}
                         className={"NetworkGraph"}
                         id={this.networkGraphId}
