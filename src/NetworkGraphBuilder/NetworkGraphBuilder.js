@@ -48,7 +48,9 @@ export default class NetworkGraphBuilder {
                     id: `l${layerIndex.toString()} n${i.toString()}`,
                     inLayerType: type,
                     activation: activation,
-                    displayInfo: `Unit index: ${i}\nLayer:${layerIndex}`
+                    displayInfo: `Unit index: ${i}\nLayer:${layerIndex}`,
+                    layerIndex: layerIndex,
+                    order: i
                 },
                 position: NetworkGraphBuildUtils.getNodePosition(layer, i, this.maxNodesNumber, this.nodesGap),
             });

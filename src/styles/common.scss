@@ -11,6 +11,10 @@
   cursor: pointer;
   transition: all 0.7s ease-in-out;
   color: $lightColor;
+
+  &:hover{
+    background-color: $specialColorSecond;
+  }
   a, span {
     font-size: 14pt;
     font-weight: 800;

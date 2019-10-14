@@ -9,6 +9,8 @@
   .Alerts{
     font-weight: 700;
     font-size: 8pt;
+    overflow-y: auto;
+    margin-top: 10px;
     .Alert{
       box-shadow: 1px 1px 1px $specialColorSecond;
       box-sizing: border-box;
@@ -29,14 +31,11 @@
         &:hover{
           background-color: darken($warningBgColor, 5%);
         }
-
-
       }
     }
 
   }
   .ShowAlertsBtn{
-    position: absolute;
     width: 30px;
     height: 30px;
     background: url("../../../assets/images/svg/exclamation-mark.svg");
