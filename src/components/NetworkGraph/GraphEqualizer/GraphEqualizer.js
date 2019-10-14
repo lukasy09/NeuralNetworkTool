@@ -3,23 +3,28 @@ import PropTypes from 'prop-types';
 import centerIcon from '../../../assets/images/jpg/center-icon.jpg';
 import zoomInIcon from '../../../assets/images/png/zoom-in.png';
 import zoomOutIcon from '../../../assets/images/png/zoom-out.png';
-import {userActions} from "../../../NetworkGraphBuilder/utils/Equalizer";
+import {userActions} from "../../../NetworkGraphBuilder/utils/EqualizerSettings";
 
 const size = {
-  width: '25',
-  height: '25'
+    width: '25',
+    height: '25'
 };
 
-export const GraphEqualizer = (props)=>{
-    return(
+/**
+ * @Todo FIX zooms in/out
+ */
+export const GraphEqualizer = (props) => {
+    return (
         <div className={"EqualizerContainer"}>
-            {props.actions.map((action, index)=>{
-                let imgObj = getActionIcon(action);
-                return(
+            {props.actionList.map((action, index) => {
+                let attributes = getActionAttributes(action, {center: props.center,
+                                                              zoomIn: props.zoomIn,
+                                                              zoomOut: props.zoomOut});
+                return (
                     <div key={index}
-                         onClick={()=>{}}
+                         onClick={attributes.actionMethod}
                          className={"Equalizer"}>
-                        <img src={imgObj}
+                        <img src={attributes.icon}
                              alt={"Action icon"}
                              width={size.width}
                              height={size.height}/>
@@ -30,25 +35,33 @@ export const GraphEqualizer = (props)=>{
     )
 };
 
-const getActionIcon =(action) =>{
+const getActionAttributes = (action, methods) => {
     const {CENTER, ZOOM_IN, ZOOM_OUT} = userActions;
-    switch (action){
+    switch (action) {
         case CENTER:
-            return centerIcon;
+            return {
+                icon: centerIcon,
+                actionMethod: methods.center
+            };
         case ZOOM_IN:
-            return zoomInIcon;
+            return {
+                icon: zoomInIcon,
+                actionMethod: methods.zoomIn
+            };
         case ZOOM_OUT:
-            return zoomOutIcon;
+            return {
+                icon: zoomOutIcon,
+                actionMethod: methods.zoomOut
+            };
         default:
             throw new Error('Wrong graph action icon!');
     }
 };
 
-const getAction = (action) => {
-
-};
 
 GraphEqualizer.propTypes = {
-  cy: PropTypes.object,
-  actions: PropTypes.array
+    actionList: PropTypes.array,
+    center: PropTypes.func,
+    zoomIn: PropTypes.func,
+    zoomOut: PropTypes.func
 };

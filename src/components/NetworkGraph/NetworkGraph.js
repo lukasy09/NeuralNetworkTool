@@ -7,7 +7,7 @@ import {NetworkGraphConfigurator} from "../../NetworkGraphBuilder/NetworkGraphCo
 import {GraphSideUtil} from "./GraphSideUtil/GraphSideUtil";
 import {GraphEqualizer} from "./GraphEqualizer/GraphEqualizer";
 import {ESCAPE} from "../../utils/Keyboard";
-import {userActions} from "../../NetworkGraphBuilder/utils/Equalizer";
+import {userActions} from "../../NetworkGraphBuilder/utils/EqualizerSettings";
 
 
 
@@ -28,11 +28,13 @@ class NetworkGraph extends React.Component {
 
         }
     };
+    constructor(props){
+        super(props);
+    }
 
     componentDidMount() {
         this.setupInitStyles();
         this.cy = this.initGraph();
-
         window.addEventListener('keydown', (e)=>{
             if(e.keyCode === ESCAPE.code){
                 if(this.state.exportsPopupActive){
@@ -107,7 +109,11 @@ class NetworkGraph extends React.Component {
                         className={"ProjectName"}
                     />
 
-                    <GraphEqualizer actions = {actionList}/>
+                    <GraphEqualizer center={()=>this.cy.center()}
+                                    zoomIn={()=>{console.log('zoom');this.cy.zoom(2)}}
+                                    zoomOut={()=>this.cy.zoom(2)}
+                                    actionList = {actionList}/>
+
                     <div ref={(div) => this.graph = div}
                         className={"NetworkGraph"}
                         id={this.networkGraphId}
