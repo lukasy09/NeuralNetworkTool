@@ -185,7 +185,7 @@ class ModelToolBox extends React.Component {
                                 this.saveModel(e)
                             }}/>
                     <TextButton
-                        text={"Editor"}
+                        text={"Builder"}
                         className={"AddNewLayerBtn"}
                         action={this.triggerPopup}
                     />

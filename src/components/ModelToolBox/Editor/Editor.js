@@ -132,8 +132,8 @@ class Editor extends React.Component {
                             }}
                             className={"SubmitBtn"}/>
 
-                {this.props.scene === EDITOR_SCENE.LAYER ?
-                    <div className={"LayerScene"}>
+                    <div className={"LayerScene"}
+                         style= {this.props.scene === EDITOR_SCENE.PARAMETER ? {display:'none'} : {}}>
                         <div className={"Layer"}>
                             <div className={"FeatureWrapper"}>
                                 <Input action={(e) => {
@@ -231,12 +231,14 @@ class Editor extends React.Component {
 
                         <PreviewGraph graph={this.state.subGraph}/>
                     </div>
-                    :
-                    <div className={'ParametersScene'}>
+
+                    <div className={'ParametersScene'}
+                         style= {this.props.scene === EDITOR_SCENE.LAYER ? {display:'none'} : {}}>
                         <div className={"Parameters"}>
                             <div className={"FeatureWrapper"}>
                                 <Select action={(e) => {
                                     this.setState({
+                                        ...this.state,
                                         model: {
                                             ...this.state.modelTraining,
                                             compilation:{
@@ -256,6 +258,7 @@ class Editor extends React.Component {
                             <div className={"FeatureWrapper"}>
                                 <Select action={(e) => {
                                     this.setState({
+                                        ...this.state,
                                         model: {
                                             ...this.state.modelTraining,
                                             compilation:{
@@ -276,6 +279,7 @@ class Editor extends React.Component {
                             <div className={"FeatureWrapper"}>
                                 <Select action={(e) => {
                                     this.setState({
+                                        ...this.state,
                                         model: {
                                             ...this.state.modelTraining,
                                             compilation:{
@@ -294,7 +298,6 @@ class Editor extends React.Component {
                             </div>
                         </div>
                     </div>
-                }
 
             </div>
         )

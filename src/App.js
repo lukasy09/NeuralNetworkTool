@@ -15,8 +15,6 @@ class App extends React.Component {
         styles:{
             activeBackground: true
         }
-
-
     };
 
     /**
