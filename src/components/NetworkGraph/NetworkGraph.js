@@ -7,8 +7,7 @@ import {NetworkGraphConfigurator} from "../../NetworkGraphBuilder/NetworkGraphCo
 import {GraphSideUtil} from "./GraphSideUtil/GraphSideUtil";
 import {GraphEqualizer} from "./GraphEqualizer/GraphEqualizer";
 import {ESCAPE} from "../../utils/Keyboard";
-import {userActions} from "../../NetworkGraphBuilder/utils/EqualizerSettings";
-
+import {userActions, equalizerConfig} from "../../NetworkGraphBuilder/utils/EqualizerSettings";
 
 
 class NetworkGraph extends React.Component {
@@ -22,22 +21,24 @@ class NetworkGraph extends React.Component {
             networkGraphContainer: {
                 transform: "translateX(-60vw)"
             },
-            exportsPopup:{
+            exportsPopup: {
                 display: 'none'
             }
 
         }
     };
-    constructor(props){
+
+    constructor(props) {
         super(props);
+        this.zoomLevel = equalizerConfig.initialZoomLevel;
     }
 
     componentDidMount() {
         this.setupInitStyles();
         this.cy = this.initGraph();
-        window.addEventListener('keydown', (e)=>{
-            if(e.keyCode === ESCAPE.code){
-                if(this.state.exportsPopupActive){
+        window.addEventListener('keydown', (e) => {
+            if (e.keyCode === ESCAPE.code) {
+                if (this.state.exportsPopupActive) {
                     this.triggerExportsPopup();
                 }
             }
@@ -49,14 +50,14 @@ class NetworkGraph extends React.Component {
      */
 
     setupInitStyles = () => {
-      this.setState({
-          styles:{
-              ...this.state.styles,
-              networkGraphContainer: {
-                  transform: 'none'
-              }
-          }
-      })
+        this.setState({
+            styles: {
+                ...this.state.styles,
+                networkGraphContainer: {
+                    transform: 'none'
+                }
+            }
+        })
     };
 
     /**
@@ -68,57 +69,67 @@ class NetworkGraph extends React.Component {
         return this.cy;
     };
 
-    triggerExportsPopup = ()=>{
+    triggerExportsPopup = () => {
         let style;
 
-        if(this.state.styles.exportsPopup){
+        if (this.state.styles.exportsPopup) {
             style = null;
-        }else{
-            style={display:'none'};
+        } else {
+            style = {display: 'none'};
         }
         this.setState({
             ...this.state,
             exportsPopupActive: !this.state.exportsPopupActive,
-            styles:{
+            styles: {
                 ...this.state.styles,
                 exportsPopup: style
             }
         });
     };
 
-    componentDidUpdate(){
-        if(this.props.graph.layers.length > 0){
+    componentDidUpdate() {
+        if (this.props.graph.layers.length > 0) {
             this.networkGraphBuilder = new NetworkGraphBuilder(this.initGraph());
             this.networkGraphBuilder.buildNeuralNetworkVisualisation(this.props.graph);
         }
     }
+
+    zoom = (step) => {
+        this.cy.zoom({
+                level: this.zoomLevel,
+                renderedPosition: {x: this.cy.pan().x, y: this.cy.pan().y}
+            }
+        );
+        this.cy.center();
+        this.zoomLevel += step;
+    };
 
 
     render() {
         const projectName = this.props.general.projectName;
         const actionList = [userActions.CENTER, userActions.ZOOM_IN, userActions.ZOOM_OUT];
         return (
-                <div className={"NetworkGraphContainer"}
-                     style={this.state.styles.networkGraphContainer}>
-                    <GraphSideUtil cy={this.cy}
-                                   action={this.triggerExportsPopup}
-                                   style={this.state.styles.exportsPopup}
-                                   exportText={"Exports"}/>
-                    <LabelInfo
-                        text={projectName}
-                        className={"ProjectName"}
-                    />
+            <div className={"NetworkGraphContainer"}
+                 style={this.state.styles.networkGraphContainer}>
+                <GraphSideUtil cy={this.cy}
+                               action={this.triggerExportsPopup}
+                               style={this.state.styles.exportsPopup}
+                               exportText={"Exports"}/>
+                <LabelInfo
+                    text={projectName}
+                    className={"ProjectName"}
+                />
 
-                    <GraphEqualizer center={()=>this.cy.center()}
-                                    zoomIn={()=>{console.log('zoom');this.cy.zoom(2)}}
-                                    zoomOut={()=>this.cy.zoom(2)}
-                                    actionList = {actionList}/>
+                <GraphEqualizer center={() => this.cy.center()}
+                                zoomIn={() => {this.zoom(equalizerConfig.zoomStep)}}
+                                zoomOut={() => this.zoom(-equalizerConfig.zoomStep)}
+                                actionList={actionList}/>
 
-                    <div ref={(div) => this.graph = div}
-                        className={"NetworkGraph"}
-                        id={this.networkGraphId}
-                        style={{backgroundColor: '#f1ebe0'}}/>
-                </div>
+                <div ref={(div) => this.graph = div}
+                     className={"NetworkGraph"}
+                     id={this.networkGraphId}
+                     style={{backgroundColor: '#f1ebe0'}}/>
+            </div>
         )
     }
 }

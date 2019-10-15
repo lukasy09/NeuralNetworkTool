@@ -23,7 +23,7 @@ export class NetworkGraphConfigurator {
     static commonConfig = {
         // initial viewport state:
         zoom: 1,
-        pan: { x: 0, y: 0 },
+        pan: {x: 0, y: 0},
 
         // interaction options:
         minZoom: 0.2,
@@ -135,6 +135,11 @@ export class NetworkGraphConfigurator {
 
     }
 
+    /**
+     * Initializing cy object
+     * @param graphContainer
+     * @returns {*}
+     */
     static initializeCytoObject = (graphContainer) => {
         return cytoscape({
             container: graphContainer, // Graph container. All the stuff is rendereing inside.
@@ -144,6 +149,18 @@ export class NetworkGraphConfigurator {
         });
     };
 
+    static initializeCytoListeners(cy, handle) {
+        cy.on('pan', () => {
+            let pan = cy.pan();
+            let x = pan.x - 92;
+            let y = pan.y - 48;
+            handle({
+                panX: x,
+                panY: y
+            });
+            cy.style.backgroundPosition = x + 'px ' + y + 'px ';
+        });
+    }
 
     /**
      * Storing common (nodes') styles
@@ -169,12 +186,11 @@ export class NetworkGraphConfigurator {
     }
 
 
-
     static getGraphLayoutConfiguration() {
         return this.layoutConfig;
     }
 
-    static getcommonConfiguration(){
+    static getcommonConfiguration() {
         return this.commonConfig;
     }
 }
