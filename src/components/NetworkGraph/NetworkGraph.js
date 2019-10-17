@@ -8,6 +8,7 @@ import {GraphSideUtil} from "./GraphSideUtil/GraphSideUtil";
 import {GraphEqualizer} from "./GraphEqualizer/GraphEqualizer";
 import {ESCAPE} from "../../utils/Keyboard";
 import {userActions, equalizerConfig} from "../../NetworkGraphBuilder/utils/EqualizerSettings";
+import {NetworkGraphStyle} from "./NetworkGraphStyle";
 
 
 class NetworkGraph extends React.Component {
@@ -17,24 +18,17 @@ class NetworkGraph extends React.Component {
 
     state = {
         exportsPopupActive: false,
-        styles: {
-            networkGraphContainer: {
-                transform: "translateX(-60vw)"
-            },
-            exportsPopup: {
-                display: 'none'
-            }
-
-        }
+        styles: NetworkGraphStyle.defaultStyle
     };
 
     constructor(props) {
         super(props);
+        this.styleManager = new NetworkGraphStyle(this);
         this.zoomLevel = equalizerConfig.initialZoomLevel;
     }
 
     componentDidMount() {
-        this.setupInitStyles();
+        this.styleManager.setupInitStyles();
         this.cy = this.initGraph();
         window.addEventListener('keydown', (e) => {
             if (e.keyCode === ESCAPE.code) {
@@ -46,21 +40,6 @@ class NetworkGraph extends React.Component {
     }
 
     /**
-     * Styling the component(e.g moving scene) at the beginning.
-     */
-
-    setupInitStyles = () => {
-        this.setState({
-            styles: {
-                ...this.state.styles,
-                networkGraphContainer: {
-                    transform: 'none'
-                }
-            }
-        })
-    };
-
-    /**
      * Method initializing network graph.
      * Returning the main cytoscape object responsible for all actions.
      */
@@ -70,21 +49,7 @@ class NetworkGraph extends React.Component {
     };
 
     triggerExportsPopup = () => {
-        let style;
-
-        if (this.state.styles.exportsPopup) {
-            style = null;
-        } else {
-            style = {display: 'none'};
-        }
-        this.setState({
-            ...this.state,
-            exportsPopupActive: !this.state.exportsPopupActive,
-            styles: {
-                ...this.state.styles,
-                exportsPopup: style
-            }
-        });
+        this.styleManager.controlPopup();
     };
 
     componentDidUpdate() {

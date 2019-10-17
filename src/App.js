@@ -7,15 +7,20 @@ import {TransitionGroup, CSSTransition} from 'react-transition-group';
 import DesktopMainView from './components/DesktopMainView/DesktopMainView';
 import CreatorView from "./components/CreatorView/CreatorView";
 import {DesktopBackground} from "./components/DesktopBackground/DesktopBackground";
+import {AppStyle} from "./AppStyle";
 
 class App extends React.Component {
 
     state = {
         runningView: SETTINGS.views.loadingView,
-        styles:{
-            activeBackground: true
-        }
+        styles: AppStyle.defaultStyle
     };
+
+    constructor(props){
+        super(props);
+        this.styleManager = new AppStyle(this);
+    }
+
 
     /**
      * Setting up a correct view each time when resizing(and after the component had mounted)
@@ -32,12 +37,11 @@ class App extends React.Component {
         })
     };
 
+    /**
+     * Moving the skewed background scene to the right after project name's submision
+     */
     activateBackground = () => {
-        this.setState({
-            styles:{
-                activeBackground: true
-            }
-        })
+        this.styleManager.activateBackground();
     };
 
 

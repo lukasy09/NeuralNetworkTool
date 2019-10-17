@@ -3,6 +3,7 @@ import {TextButton} from "../common/TextButton";
 import {connect} from 'react-redux';
 import {setModel, setModelCompilationParameters, setModelLayers} from "../../actions/modelActions";
 import {setGraph} from "../../actions/graphActions";
+import {ModelToolBoxStyle} from "./ModelToolBoxStyle";
 import Editor from "./Editor/Editor";
 import {Layer} from "./Layer/Layer";
 import {Upload} from "../common/Upload";
@@ -13,6 +14,7 @@ import {setAlerts} from "../../actions/alertsActions";
 import {getFileData} from "../../utils/Upload";
 import {KerasToCanonicalConverter} from "../../logic/Converter/KerasToCanonicalConverter";
 import {JSONFormatConverter} from "../../logic/Converter/Converter";
+
 
 export const EDITOR_SCENE = {
     LAYER: 'layers',
@@ -26,14 +28,7 @@ class ModelToolBox extends React.Component {
         activeAlerts: false,
         scene: EDITOR_SCENE.LAYER,
 
-        styles: {
-            popup: {
-                transform: 'translateY(-100vh)'
-            },
-            modelToolBoxContainer: {
-                transform: "translateY(60vw)"
-            }
-        },
+        styles: ModelToolBoxStyle.defaultStyle,
 
         isModelValid: false,
         alerts: []
@@ -44,27 +39,14 @@ class ModelToolBox extends React.Component {
         super(props);
         this.modelValidator = new ModelValidator();
         this.converter = new JSONFormatConverter(new KerasToCanonicalConverter());
+        this.styleManager = new ModelToolBoxStyle(this);
     }
 
     /**
      * Event listener, adding a new layer on user's click.
      */
     triggerPopup = () => {
-        let popupStyle;
-        if (this.state.styles.popup) {
-            popupStyle = null;
-        } else {
-            popupStyle = {
-                transform: "translateY(-100vh)",
-            }
-        }
-        this.setState({
-            ...this.state,
-            activePopup: !this.state.activePopup,
-            styles: {
-                popup: popupStyle,
-            }
-        })
+      this.styleManager.controlPopup();
     };
 
     /**
@@ -72,23 +54,7 @@ class ModelToolBox extends React.Component {
      * (Between layer and parameters boxes)
      */
     switchScene = () => {
-        let newScene;
-
-        switch (this.state.scene) {
-            case EDITOR_SCENE.LAYER:
-                newScene = EDITOR_SCENE.PARAMETER;
-                break;
-            case EDITOR_SCENE.PARAMETER:
-                newScene = EDITOR_SCENE.LAYER;
-                break;
-            default:
-                newScene = EDITOR_SCENE.LAYER;
-                console.log("Wrong scene!");
-        }
-        this.setState({
-            ...this.state,
-            scene: newScene
-        })
+        this.styleManager.switchScene();
     };
 
     /**
@@ -123,23 +89,8 @@ class ModelToolBox extends React.Component {
         getFileData(e, setModel);
     };
 
-    /**
-     * Styling the component(e.g moving scene) at the beginning.
-     */
-
-    setupInitStyles = () => {
-        this.setState({
-            styles: {
-                ...this.state.styles,
-                modelToolBoxContainer: {
-                    transform: 'none'
-                }
-            }
-        })
-    };
-
     componentDidMount() {
-        this.setupInitStyles();
+        this.styleManager.setupInitStyles();
         window.addEventListener('keydown', (e) => {
             if (e.keyCode === ESCAPE.code) {
                 if (this.state.activePopup) {

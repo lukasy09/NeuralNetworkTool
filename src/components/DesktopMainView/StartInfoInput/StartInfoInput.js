@@ -7,25 +7,12 @@ import {setProjectName} from "../../../actions/generalActions";
 import UserInputValidator from "../../../utils/UserInputValidator";
 import {SETTINGS} from "../../../settings/ApplicationSettings";
 import {LabelInfo} from "../../common/LabelInfo";
+import {StartInfoInputStyle} from "./StartInfoInputStyle";
 
 class StartInfoInput extends React.Component {
 
     state = {
-        styles: {
-            startInfoWrapper:{
-                transform:'none'
-            },
-
-            textButtonStyle: {
-                opacity: 1
-            },
-            inputStyle: {
-                opacity: 0
-            },
-            linkButtonStyle: {
-                opacity: 0
-            }
-        },
+        styles: StartInfoInputStyle.defaultStyle,
 
         userInputData: {
             projectName: null
@@ -37,23 +24,16 @@ class StartInfoInput extends React.Component {
 
     };
 
+    constructor(props){
+        super(props);
+        this.styleManager = new StartInfoInputStyle(this);
+    }
+
     /**
-     * Enabling INPUT for
+     * Enabling INPUT(displaying)
      */
     startProject = () => {
-        this.setState({
-            styles: {
-                textButtonStyle: {
-                    opacity: 0
-                },
-                inputStyle: {
-                    opacity: 1
-                },
-                linkButtonStyle: {
-                    opacity: 0
-                }
-            }
-        });
+        this.styleManager.showInput();
     };
 
 
@@ -74,23 +54,7 @@ class StartInfoInput extends React.Component {
      * @param obj
      */
     handleSubmit = (obj) => {
-        let opacity = 0;
-        if (obj.isMatching) {
-            opacity = 1;
-        }
-        this.setState({
-            styles: {
-                textButtonStyle:{
-                    opacity: 0
-                },
-                linkButtonStyle: {
-                    opacity: opacity
-                },
-                info: {
-                    projectName: obj.info
-                }
-            }
-        });
+       this.styleManager.handleDisplaySubmit(obj);
     };
 
 
@@ -99,14 +63,7 @@ class StartInfoInput extends React.Component {
      */
     submitProjectName = () => {
         this.props.activateBackground();
-        this.setState({
-            styles:{
-                ...this.state.styles,
-                startInfoWrapper:{
-                    transform:'translateX(50vw)'
-                }
-            }
-        })
+        this.styleManager.submitProjectName();
     };
 
     render() {
