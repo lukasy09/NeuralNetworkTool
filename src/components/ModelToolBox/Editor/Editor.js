@@ -67,6 +67,7 @@ class Editor extends React.Component {
 
         this.state = {
             subGraph: {layers: []},
+
             currentLayer: {
                 index: this.props.graph.layers.length,
                 name: `Layer ${this.props.graph.layers.length}`,
@@ -85,6 +86,10 @@ class Editor extends React.Component {
                     loss: SETTINGS.model.compilation.loss.BINARY_CROSSENTROPY,
                     metrics: [SETTINGS.model.compilation.metrics.ACCURACY],
                 }
+            },
+
+            modelFit: {
+                epochs: SETTINGS.model.fit.epochs
             }
         };
     }
@@ -230,7 +235,7 @@ class Editor extends React.Component {
                             }}
                                    className={"LayerCountInput"}
                                    type={"number"}
-                                   defaultValue={this.state.currentLayer.nodesNumber}
+                                   defaultValue={this.state.currentLayer.nodesNumber.toString()}
                                    min={1}
                                    label={{
                                        text: "Units"
@@ -366,6 +371,22 @@ class Editor extends React.Component {
                                     defaultValue={this.state.modelTraining.compilationParameters.metrics[0]}
                                     options={METRICS}/>
                         </div>
+
+
+                        <div className={"FeatureWrapper"}>
+                            <Input action={(e) => {
+                                this.setState({...this.state,modelFit: {epochs: parseInt(e.target.value)}})
+                            }}
+                                   className={"LayerNameInput"}
+                                   min={1}
+                                   defaultValue={this.state.modelFit.epochs.toString()}
+                                   type={"number"}
+                                   label={{
+                                       text: 'Epochs'
+                                   }}
+                            />
+                        </div>
+
                     </div>
                 </div>
 

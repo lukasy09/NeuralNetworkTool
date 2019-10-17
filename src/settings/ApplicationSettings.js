@@ -84,7 +84,9 @@ export const SETTINGS = {
             loss: {
                 BINARY_CROSSENTROPY: 'binary_crossentropy',
                 CATEGORICAL_CROSSENTROPY: 'categorical_crossentropy',
-                MSE: 'mse'
+                MSE: 'mse',
+                SPARSE_CATEGORICAL_CROSSENTROPY: 'sparse_categorical_crossentropy',
+                LOGCOSH: 'logcosh'
             },
             optimizer: {
                 ADAM: 'adam',
@@ -94,7 +96,12 @@ export const SETTINGS = {
             metrics: {
                 ACCURACY: 'accuracy'
             }
+        },
+
+        fit:{
+            epochs: 10,
         }
+
 
     }
 };
