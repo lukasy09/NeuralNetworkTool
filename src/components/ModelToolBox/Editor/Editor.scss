@@ -34,36 +34,43 @@
     @extend %Scene;
 
     .Layer, .Parameters {
-      @include col-flex-box;
+      @include row-flex-box;
       justify-content: center;
+      flex-wrap: wrap;
       padding: 25px 10px 25px 10px;
       width: 50%;
       z-index: 1;
+      margin-bottom: 50px;
 
       .FeatureWrapper {
-        padding: 20px 50px 20px 50px;
         box-sizing: border-box;
+        margin-top: 65px;
+        margin-left: 25px;
+        margin-right: 25px;
 
         .LayerNameInput,
         .LayerCountInput,
         .LayerClassTypeSelect,
         .LayerActivation,
+        .LayerInitializer,
         .ParameterSelect{
           color: $lightColor;
           label {
             display: inline-block;
             box-sizing: border-box;
             padding: 12px 10px 12px 10px;
-            width: 250px;
+            width: 120px;
             font-weight: bolder;
+            font-size: 8pt;
           }
           input[type=text], input[type=number] {
             color: $lightColor;
-            font-size: 12pt;
+            font-size: 8pt;
             border: solid 2px $lightColor;
             margin-left: 15px;
+            box-sizing: border-box;
             padding: 12px 10px 12px 10px;
-            width: 100px;
+            width: 95px;
             background: $darkColor;
           }
           select {
@@ -73,13 +80,15 @@
             color: $lightColor;
             font-weight: 800;
             border: solid 2px $lightColor;
-            width: 125px;
+            width: 95px;
+            font-size: 8pt;
 
             option {
               font-weight: 800;
               background: transparent;
               color: $lightColor;
               padding: 2px 5px 2px 5px;
+              width: 75px;
             }
           }
           &.enlarged{
@@ -133,7 +142,7 @@
     }
 
     span{
-      font-size: 14pt;
+      font-size: 11pt;
     }
   }
 }

@@ -4,7 +4,8 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route} from "react-router-dom"
-import {createStore, combineReducers} from 'redux';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
+import logger from 'redux-logger'
 import {Provider} from 'react-redux';
 import {generalReducer} from './reducers/GeneralReducer';
 import {modelReducer} from "./reducers/ModelReducer";
@@ -18,7 +19,8 @@ const allReducers = combineReducers({
     alertsReducer: alertsReducer
 });
 
-export const store = createStore(allReducers);
+export const store = createStore(allReducers,
+                     applyMiddleware(logger));
 
 ReactDOM.render(
     <Provider store = {store}>

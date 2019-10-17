@@ -82,6 +82,7 @@ class ModelToolBox extends React.Component {
                 newScene = EDITOR_SCENE.LAYER;
                 break;
             default:
+                newScene = EDITOR_SCENE.LAYER;
                 console.log("Wrong scene!");
         }
         this.setState({
@@ -117,6 +118,7 @@ class ModelToolBox extends React.Component {
             let cannonical = this.converter.convert(json).getData();
             this.props.setModel(cannonical.model);
             this.props.setGraph(cannonical.graph);
+            this.updateAlerts(cannonical.graph.layers);
         };
         getFileData(e, setModel);
     };

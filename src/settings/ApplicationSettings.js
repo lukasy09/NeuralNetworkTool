@@ -3,7 +3,7 @@
  * @type {{}}
  */
 export const SETTINGS = {
-    views:{
+    views: {
         loadingView: 'LOADING',
         mobileView: 'MOBILE',
         desktopView: 'DESKTOP'
@@ -12,50 +12,82 @@ export const SETTINGS = {
     /*
        @TODO In the future probably section "routes" will be removed from the global settings. And consider changing the name "creator" into "editor"
      */
-    routes:{
+    routes: {
         root: '/',
         creator: '/creator'
     },
 
     // A project's name must match the following regex
-    regex:{
+    regex: {
         projectName: /^[a-zA-Z0-9].*$/
     },
 
-    model:{
-        layerTypes:{
+    model: {
+        layerDefaults: {
+            units: 10,
+            useBias: false,
+            kernelConstraint: {},
+
+            biasConstraint: {}
+        },
+
+        layerTypes: {
             INPUT: 'input',
             HIDDEN: 'hidden',
             OUTPUT: 'output'
         },
-        layerClassTypes:{
+        layerClassTypes: {
             DENSE: 'dense',
             CONV2D: 'conv2d',
-            NONE : 'none'
+            NONE: 'none'
         },
-        layerActivations:{
+        layerActivations: {
             SIGMOID: 'sigmoid',
             RELU: 'relu',
             SOFTMAX: 'softmax',
             NONE: 'none'
         },
 
-        compilation:{
-            loss:{
-              BINARY_CROSSENTROPY: 'binary_crossentropy',
-              CATEGORICAL_CROSSENTROPY: 'categorical_crossentropy',
-              MSE: 'mse'
+        // bias & kernel
+        initializers: {
+            ZEROS: 'zeros',
+            ONES: 'ones',
+            CONSTANT: {
+                name: 'constant',
+                value: 0
             },
-            optimizer:{
+            RANDOM_UNIFORM: 'random_uniform'
+        },
+
+        /*
+            The following parameters won't be serviced in the first release version
+         */
+
+        // kernelRegularizers: {},
+        //
+        // biasRegularizers: {},
+        //
+        // activityRegularizers: {},
+        //
+        // kernelConstraint: {},
+        //
+        // biasConstraint: {},
+
+        compilation: {
+            loss: {
+                BINARY_CROSSENTROPY: 'binary_crossentropy',
+                CATEGORICAL_CROSSENTROPY: 'categorical_crossentropy',
+                MSE: 'mse'
+            },
+            optimizer: {
                 ADAM: 'adam',
                 RMSPROP: 'rmsprop',
                 SGD: 'sgd'
             },
-            metrics:{
-               ACCURACY: 'accuracy'
+            metrics: {
+                ACCURACY: 'accuracy'
             }
         }
 
     }
-
 };

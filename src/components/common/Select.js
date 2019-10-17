@@ -14,7 +14,7 @@ export const Select = (props) => {
                 {props.options.map((value, index)=>{
                     return(
                         <option key={index}>
-                            {value.toUpperCase()}
+                            {value.toString().toUpperCase()}
                         </option>
                     )
                 })}
