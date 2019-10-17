@@ -1,6 +1,8 @@
 export class JSONFormatConverter{
 
-    constructor(){}
+    constructor(converter){
+        this.converter = converter;
+    }
 
     convert(data){
        this.data = this.converter.convert(data);
