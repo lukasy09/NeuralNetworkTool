@@ -11,6 +11,9 @@ import {generalReducer} from './reducers/GeneralReducer';
 import {modelReducer} from "./reducers/ModelReducer";
 import {graphReducer} from "./reducers/GraphReducer";
 import {alertsReducer} from "./reducers/AlertsReducer";
+import {getApplicationEnv} from "./utils/EnvironmentDetector";
+
+export const env = getApplicationEnv();
 
 const allReducers = combineReducers({
     generalReducer: generalReducer,

@@ -3,6 +3,13 @@
  * @type {{}}
  */
 export const SETTINGS = {
+
+    runTimeEnv: {
+      development: 'dev',
+      staging: 'stage',
+      production: 'prod'
+    },
+
     views: {
         loadingView: 'LOADING',
         mobileView: 'MOBILE',
