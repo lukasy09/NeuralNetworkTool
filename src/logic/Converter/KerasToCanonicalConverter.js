@@ -4,7 +4,7 @@ import {SETTINGS} from "../../settings/ApplicationSettings";
 
 const DEFAULT_LAYER_NAME = 'dense_0';
 
-export class KerasToCanonicalConverter extends JSONFormatConverter{
+export class KerasToCanonicalConverter extends JSONFormatConverter {
 
     /**
      * Converting JSON model into a cannonical format.
@@ -15,12 +15,12 @@ export class KerasToCanonicalConverter extends JSONFormatConverter{
         const kerasModelConfig = kerasModel.modelTopology.model_config;
         const kerasTrainingConfig = kerasModel.modelTopology.training_config;
 
-        let model={
+        let model = {
             layers: []
         };
 
         let graph = {
-          layers: []
+            layers: []
         };
 
         if (kerasModelConfig.class_name !== format.modelConfigClassName) {
@@ -29,10 +29,11 @@ export class KerasToCanonicalConverter extends JSONFormatConverter{
 
         model = {
             ...model,
-            optimizer: kerasTrainingConfig.optimizer_config.class_name.toLowerCase(),
-            loss: kerasTrainingConfig.loss.toLowerCase(),
-            metrics: kerasTrainingConfig.metrics
-
+            compilationParameters: {
+                optimizer: kerasTrainingConfig.optimizer_config.class_name.toLowerCase(),
+                loss: kerasTrainingConfig.loss.toLowerCase(),
+                metrics: kerasTrainingConfig.metrics
+            }
         };
         const layerConfig = kerasModelConfig.config;
         const length = layerConfig.length;
@@ -40,7 +41,7 @@ export class KerasToCanonicalConverter extends JSONFormatConverter{
             const kerasLayer = layerConfig[i];
 
             // If we encounter first model's layer we add an additinal input layer(In the keras model the first hidden layer has information about input layer's dimension
-            if(i === 0){
+            if (i === 0) {
                 let inputLayer = {
                     index: i,
                     name: DEFAULT_LAYER_NAME,
@@ -59,7 +60,7 @@ export class KerasToCanonicalConverter extends JSONFormatConverter{
             }
 
             let layer = {
-                index: i+1,
+                index: i + 1,
                 name: kerasLayer.config.name,
                 type: (i === length - 1) ? SETTINGS.model.layerTypes.OUTPUT : SETTINGS.model.layerTypes.HIDDEN,
                 classType: kerasLayer.class_name.toLowerCase(),
