@@ -29,6 +29,18 @@ export const SETTINGS = {
         projectName: /^[a-zA-Z0-9].*$/
     },
 
+    api:{
+      routes:{
+          dev:{
+              train:{
+                 host:'127.0.0.1',
+                 port: '8000'
+              }
+          }
+      }
+    },
+
+
     model: {
         layerDefaults: {
             units: 10,
