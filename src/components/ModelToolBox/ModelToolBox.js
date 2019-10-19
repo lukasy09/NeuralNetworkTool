@@ -14,7 +14,9 @@ import {setAlerts} from "../../actions/alertsActions";
 import {getFileData} from "../../utils/Upload";
 import {KerasToCanonicalConverter} from "../../logic/Converter/KerasToCanonicalConverter";
 import {JSONFormatConverter} from "../../logic/Converter/Converter";
-
+import {handleApi} from "../../api/Api";
+import {SETTINGS} from "../../settings/ApplicationSettings";
+import {env} from "../../index";
 
 export const EDITOR_SCENE = {
     LAYER: 'layers',
@@ -27,9 +29,7 @@ class ModelToolBox extends React.Component {
         activePopup: false,
         activeAlerts: false,
         scene: EDITOR_SCENE.LAYER,
-
         styles: ModelToolBoxStyle.defaultStyle,
-
         isModelValid: false,
         alerts: []
 
@@ -46,7 +46,7 @@ class ModelToolBox extends React.Component {
      * Event listener, adding a new layer on user's click.
      */
     triggerPopup = () => {
-      this.styleManager.controlPopup();
+        this.styleManager.controlPopup();
     };
 
     /**
@@ -71,6 +71,17 @@ class ModelToolBox extends React.Component {
     };
 
     /**
+     * Setting model from input json.
+     * @param json
+     */
+    setModel = (json) => {
+        let cannonical = this.converter.convert(json).getData();
+        this.props.setModel(cannonical.model);
+        this.props.setGraph(cannonical.graph);
+        this.updateAlerts(cannonical.graph.layers);
+    };
+
+    /**
      * Calling validation method to check if the network has a properly built structure
      */
     updateAlerts = (layers) => {
@@ -79,19 +90,24 @@ class ModelToolBox extends React.Component {
         this.props.setAlerts(alerts);
     };
 
-    saveModel = (e) => {
-        const setModel = (json) => {
-            let cannonical = this.converter.convert(json).getData();
-            this.props.setModel(cannonical.model);
-            this.props.setGraph(cannonical.graph);
-            this.updateAlerts(cannonical.graph.layers);
-        };
-        getFileData(e, setModel);
+    /**
+     * Handling user's model upload.
+     * @param e
+     */
+    uploadModel = (e) => {
+        getFileData(e, this.setModel);
     };
+
+    sendModel = () => {
+      const config = (env === SETTINGS.runtimeEnv.development) ? SETTINGS.api.paths.dev.train : SETTINGS.api.paths.prod.train;
+      const model = this.props.model;
+      handleApi(config, model);
+    };
+
 
     componentDidMount() {
         this.styleManager.setupInitStyles();
-        window.addEventListener('keydown', (e) => {
+        window.addEventListener('keydown',  (e) => {
             if (e.keyCode === ESCAPE.code) {
                 if (this.state.activePopup) {
                     this.triggerPopup();
@@ -135,12 +151,17 @@ class ModelToolBox extends React.Component {
                             className={"Uploader"}
                             accept={".json,application/json"}
                             action={(e) => {
-                                this.saveModel(e)
+                                this.uploadModel(e)
                             }}/>
                     <TextButton
                         text={"Builder"}
                         className={"AddNewLayerBtn"}
                         action={this.triggerPopup}
+                    />
+                    <TextButton
+                        text={"Send model"}
+                        className={"SendBtn"}
+                        action={this.sendModel}
                     />
                 </div>
                 <Editor triggerPopup={this.triggerPopup}

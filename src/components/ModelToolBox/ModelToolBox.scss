@@ -1,6 +1,14 @@
 @import "../../styles/mixins";
 @import "../../settings/StylesSettings";
 
+%btn{
+  color: $lightColor;
+  border: solid 1px $lightColor;
+  transition: all 0.7s ease-in-out;
+  background-color: $darkColor;
+  position: absolute;
+}
+
 .ModelToolBox {
   @include col-flex-box;
   min-width: 40%;
@@ -11,16 +19,6 @@
   bottom: 0;
   height: 100vh;
   transition: all 1.4s ease-in-out;
-
-  //&:after{
-  //  content: '';
-  //  display: block;
-  //  position: absolute;
-  //  height: 100%;
-  //  width: 2px;
-  //  background-color: $lightColor;
-  //  z-index: -1;
-  //}
 
   .NetworkSettingsBtn {
     color: $lightColor;
@@ -43,7 +41,21 @@
     position: absolute;
     left: 3.5%;
     top: 10px;
+    span{
+      font-size: 10pt;
+    }
+    &:hover {
+      background: $specialColorFirst;
+    }
+  }
 
+  .SendBtn {
+    @extend %btn;
+    right: 3.5%;
+    bottom: 10px;
+    span{
+      font-size: 10pt;
+    }
     &:hover {
       background: $specialColorFirst;
     }

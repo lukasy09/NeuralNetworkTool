@@ -4,10 +4,10 @@
  */
 export const SETTINGS = {
 
-    runTimeEnv: {
-      development: 'dev',
-      staging: 'stage',
-      production: 'prod'
+    runtimeEnv: {
+        development: 'development',
+        staging: 'staging',
+        production: 'production'
     },
 
     views: {
@@ -29,17 +29,28 @@ export const SETTINGS = {
         projectName: /^[a-zA-Z0-9].*$/
     },
 
-    api:{
-      routes:{
-          dev:{
-              train:{
-                 host:'127.0.0.1',
-                 port: '8000'
-              }
-          }
-      }
-    },
+    api: {
+        paths: {
+            dev: {
+                train: {
+                    host: '127.0.0.1',
+                    port: '8000',
+                    uri: 'train',
+                    params: null
+                }
+            },
 
+            // production will be serviced in the future
+            prod: {
+                train: {
+                    host: '127.0.0.1',
+                    port: '8000',
+                    uri: 'train',
+                    params: null
+                }
+            }
+        }
+    },
 
     model: {
         layerDefaults: {
@@ -110,7 +121,7 @@ export const SETTINGS = {
             }
         },
 
-        fit:{
+        fit: {
             epochs: 10,
         }
 

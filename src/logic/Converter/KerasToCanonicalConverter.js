@@ -1,5 +1,5 @@
 import {JSONFormatConverter} from "./Converter";
-import {format} from "./format";
+import {format} from "./Format";
 import {SETTINGS} from "../../settings/ApplicationSettings";
 
 const DEFAULT_LAYER_NAME = 'dense_0';
