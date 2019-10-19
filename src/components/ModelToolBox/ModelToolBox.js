@@ -64,8 +64,10 @@ class ModelToolBox extends React.Component {
      */
     submitModel = (graph, newParams) => {
         this.props.setGraph(graph);
-        this.props.setModelLayers(graph.layers);
-        this.props.setModelCompilationParameters(newParams);
+        this.props.setModel({
+           layers: graph.layers,
+           compilationParameters: newParams
+        });
         this.updateAlerts(graph.layers);
         this.triggerPopup();
     };

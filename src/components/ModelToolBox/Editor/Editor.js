@@ -80,12 +80,10 @@ class Editor extends React.Component {
                 biasInitializer: SETTINGS.model.initializers.ZEROS
             },
 
-            modelTraining: {
-                compilationParameters: {
-                    optimizer: SETTINGS.model.compilation.optimizer.ADAM,
-                    loss: SETTINGS.model.compilation.loss.BINARY_CROSSENTROPY,
-                    metrics: [SETTINGS.model.compilation.metrics.ACCURACY],
-                }
+            compilationParameters: {
+                optimizer: SETTINGS.model.compilation.optimizer.ADAM,
+                loss: SETTINGS.model.compilation.loss.BINARY_CROSSENTROPY,
+                metrics: [SETTINGS.model.compilation.metrics.ACCURACY],
             },
 
             modelFit: {
@@ -153,7 +151,7 @@ class Editor extends React.Component {
                             className={"ExitBtn"}/>
                 <TextButton text={"Submit"}
                             action={() => {
-                                this.props.submitModel(this.state.subGraph, this.state.modelTraining.compilationParameters)
+                                this.props.submitModel(this.state.subGraph, this.state.compilationParameters)
                             }}
                             className={"SubmitBtn"}/>
 
@@ -313,41 +311,35 @@ class Editor extends React.Component {
                         <div className={"FeatureWrapper"}>
                             <Select action={(e) => {
                                 this.setState({
-                                    ...this.state,
-                                    model: {
-                                        ...this.state.modelTraining,
-                                        compilation: {
-                                            ...this.state.compilation,
-                                            optimizer: e.target.value.toLowerCase()
-                                        }
+                                    compilationParameters: {
+                                        ...this.state.compilationParameters,
+                                        loss: e.target.value.toLowerCase()
                                     }
+
                                 })
                             }}
                                     className={"ParameterSelect enlarged"}
                                     label={{
                                         text: 'Loss'
                                     }}
-                                    defaultValue={this.state.modelTraining.compilationParameters.optimizer}
+                                    defaultValue={this.state.compilationParameters.optimizer}
                                     options={LOSSES}/>
                         </div>
                         <div className={"FeatureWrapper"}>
                             <Select action={(e) => {
                                 this.setState({
-                                    ...this.state,
-                                    model: {
-                                        ...this.state.modelTraining,
-                                        compilation: {
-                                            ...this.state.compilation,
-                                            optimizer: e.target.value.toLowerCase()
-                                        }
+                                    compilationParameters: {
+                                        ...this.state.compilationParameters,
+                                        optimizer: e.target.value.toLowerCase()
                                     }
+
                                 })
                             }}
                                     className={"ParameterSelect enlarged"}
                                     label={{
                                         text: 'Optimizer'
                                     }}
-                                    defaultValue={this.state.modelTraining.compilationParameters.loss}
+                                    defaultValue={this.state.compilationParameters.loss}
                                     options={OPTIMIZERS}/>
                         </div>
 
@@ -355,27 +347,25 @@ class Editor extends React.Component {
                             <Select action={(e) => {
                                 this.setState({
                                     ...this.state,
-                                    model: {
-                                        ...this.state.modelTraining,
-                                        compilation: {
-                                            ...this.state.compilation,
-                                            metrics: e.target.value.toLowerCase()
-                                        }
+                                    compilationParameters: {
+                                        ...this.state.compilationParameters,
+                                        metrics: e.target.value.toLowerCase()
                                     }
+
                                 })
                             }}
                                     className={"ParameterSelect enlarged"}
                                     label={{
                                         text: 'Metrics'
                                     }}
-                                    defaultValue={this.state.modelTraining.compilationParameters.metrics[0]}
+                                    defaultValue={this.state.compilationParameters.metrics[0]}
                                     options={METRICS}/>
                         </div>
 
 
                         <div className={"FeatureWrapper"}>
                             <Input action={(e) => {
-                                this.setState({...this.state,modelFit: {epochs: parseInt(e.target.value)}})
+                                this.setState({...this.state, modelFit: {epochs: parseInt(e.target.value)}})
                             }}
                                    className={"LayerNameInput"}
                                    min={1}
@@ -386,6 +376,7 @@ class Editor extends React.Component {
                                    }}
                             />
                         </div>
+
 
                     </div>
                 </div>
