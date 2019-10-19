@@ -1,17 +1,11 @@
-import {buildUrl} from "./utils/UrlBuilder";
 import axios from 'axios';
+import {buildUrl} from "./utils/UrlBuilder";
 
-const headers = {
-    'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-};
-
-export const handleApi= (config, data) => {
+export const handleApi = (config, data) => {
     const url = buildUrl(config);
-    axios.get(url, {
-        'origin': '*',
-        'Access-Control-Allow-Origin': 'http://127.0.0.1:8000/train',
-        'Access-Control-Allow-Methods':'GET'
+
+    axios.post(url, {
+        model: data
     })
         .then(function (response) {
             console.log(response);
