@@ -4,6 +4,7 @@ import {SETTINGS} from "../../settings/ApplicationSettings";
 
 const DEFAULT_LAYER_NAME = 'dense_0';
 
+
 export class KerasToCanonicalConverter extends JSONFormatConverter {
 
     /**
