@@ -1,9 +1,13 @@
 export const TEST_MODEL = {
 
-    optimizer: 'rmsprop',
-    loss: 'categorical_crossentropy',
-    metrics: ['accuracy'],
-
+    compilationParameters: {
+        optimizer: 'rmsprop',
+        loss: 'categorical_crossentropy',
+        metrics: ['accuracy'],
+    },
+    fit:{
+      epochs: 2
+    },
     layers: [
         {
             index: 0,

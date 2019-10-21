@@ -75,7 +75,7 @@ export const SETTINGS = {
             SIGMOID: 'sigmoid',
             RELU: 'relu',
             SOFTMAX: 'softmax',
-            NONE: 'none'
+            NONE: 'linear'
         },
 
         // bias & kernel
