@@ -18,16 +18,20 @@ import {SETTINGS} from "../../settings/ApplicationSettings";
 import {env} from "../../index";
 import {ModelBlockRepresentation} from "./ModelRepresentation/Block/ModelBlockRepresentation";
 import {ModelRepresentation} from "./ModelRepresentation/ModelRepresentation";
+import {RepresentationGroup} from "./RepresentationGroup/RepresentationGroup";
+import {ModelCodeRepresentation} from "./ModelRepresentation/Code/ModelCodeRepresentation";
 
 export const editorScene = {
     LAYER: 'layers',
     PARAMETER: 'parameters'
 };
 
-export const modelRepresentation = {
-  BLOCK: 'block',
-  CODE: 'code'
+export const modelRepresentationTypes = {
+    BLOCK: 'block',
+    CODE: 'code'
 };
+
+const avaiableRepresentations = [modelRepresentationTypes.BLOCK, modelRepresentationTypes.CODE];
 
 class ModelToolBox extends React.Component {
 
@@ -39,7 +43,7 @@ class ModelToolBox extends React.Component {
         scene: editorScene.LAYER,
         isModelValid: false,
         alerts: [],
-        modelRepresentation: modelRepresentation.BLOCK
+        modelRepresentation: modelRepresentationTypes.BLOCK
     };
 
     constructor(props) {
@@ -64,6 +68,10 @@ class ModelToolBox extends React.Component {
         this.styleManager.switchScene();
     };
 
+    switchModelRepresentation = (option) => {
+        this.styleManager.switchModelRepresentation(option);
+    };
+
     /**
      * Submitting layers on the preview and replacing with the existing ones
      * @param graph
@@ -72,8 +80,8 @@ class ModelToolBox extends React.Component {
     submitModel = (graph, newParams) => {
         this.props.setGraph(graph);
         this.props.setModel({
-           layers: graph.layers,
-           compilationParameters: newParams
+            layers: graph.layers,
+            compilationParameters: newParams
         });
         this.updateAlerts(graph.layers);
         this.triggerPopup();
@@ -107,16 +115,17 @@ class ModelToolBox extends React.Component {
         getFileData(e, this.setModel);
     };
 
+
     sendModel = () => {
-      const config = (env === SETTINGS.runtimeEnv.development) ? SETTINGS.api.paths.dev.train : SETTINGS.api.paths.prod.train;
-      const model = this.props.model;
-      handleApi(config, model);
+        const config = (env === SETTINGS.runtimeEnv.development) ? SETTINGS.api.paths.dev.train : SETTINGS.api.paths.prod.train;
+        const model = this.props.model;
+        handleApi(config, model);
     };
 
 
     componentDidMount() {
         this.styleManager.setupInitStyles();
-        window.addEventListener('keydown',  (e) => {
+        window.addEventListener('keydown', (e) => {
             if (e.keyCode === ESCAPE.code) {
                 if (this.state.activePopup) {
                     this.triggerPopup();
@@ -128,20 +137,26 @@ class ModelToolBox extends React.Component {
     render() {
         const modelLayers = this.props.model.layers;
         let Representation;
-        switch (this.state.modelRepresentation){
-            case modelRepresentation.BLOCK:
+        switch (this.state.modelRepresentation) {
+            case modelRepresentationTypes.BLOCK:
                 Representation = ModelRepresentation(ModelBlockRepresentation, modelLayers);
                 break;
-            case modelRepresentation.CODE:
+            case modelRepresentationTypes.CODE:
+                Representation = ModelRepresentation(ModelCodeRepresentation);
                 break;
 
             default:
                 console.log("Unhandled model representation!");
         }
+
         return (
             <>
                 <div className={"ModelToolBox"}
                      style={this.state.styles.modelToolBoxContainer}>
+
+                    <RepresentationGroup options={avaiableRepresentations}
+                                         action={this.switchModelRepresentation}/>
+
                     {this.props.alerts.length > 0 ?
                         <Alerts activeAlerts={this.state.activeAlerts}
                                 triggerAlerts={() => {

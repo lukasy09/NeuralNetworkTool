@@ -19,12 +19,13 @@
 @import "components/NetworkGraph/NetworkGraph";
 @import "components/NetworkGraph/GraphEqualizer/GraphEqualizer";
 @import "components/NetworkGraph/GraphSideUtil/GraphSideUtil";
+@import "components/NetworkGraph/Exports/Exports";
 @import "components/ModelToolBox/ModelToolBox";
 @import "components/ModelToolBox/Editor/Editor";
 @import "components/ModelToolBox/Editor/PreviewGraph/PreviewGraph";
 @import "components/ModelToolBox/ModelRepresentation/Block/Layer/Layer";
 @import "components/ModelToolBox/Alerts/Alerts";
-@import "components/NetworkGraph/Exports/Exports";
+@import "components/ModelToolBox/RepresentationGroup/RepresentationGroup";
 
 body {
   margin: 0;

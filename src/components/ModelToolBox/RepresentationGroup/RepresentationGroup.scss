@@ -1,0 +1,16 @@
+@import "../../../styles/mixins";
+.RepGroup{
+  position: absolute;
+  left: 0;
+  top: 25%;
+
+  .RepOption{
+    margin-top: 10px;
+    transition: all 0.7s ease-in-out;
+    cursor: pointer;
+    &.active{}
+    &:hover{
+      @include translateWithScale(4px, 0, 1.1);
+    }
+  }
+}

@@ -4,8 +4,9 @@ import PropTypes from "prop-types";
 export const Input = (props) => {
     const additionalClassName = props.className ? props.className : "";
     const defaultClassName = "UserInput";
+    const className = `${defaultClassName} ${additionalClassName}`;
     return (
-        <div className={additionalClassName ? defaultClassName+ " " + additionalClassName : defaultClassName}
+        <div className={className}
              style={props.style}>
             {props.label ?
                 <label>{props.label.text}</label> : <></>}

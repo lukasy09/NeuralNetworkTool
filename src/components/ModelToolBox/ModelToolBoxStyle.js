@@ -31,6 +31,9 @@ export class ModelToolBoxStyle {
         })
     };
 
+    /**
+     * Controlling editor popup
+     */
     controlPopup = () => {
         let popupStyle;
         if (this.component.state.styles.popup) {
@@ -49,6 +52,9 @@ export class ModelToolBoxStyle {
         })
     };
 
+    /**
+     * Switching editor's scenes
+     */
     switchScene = () => {
         let newScene;
 
@@ -67,8 +73,15 @@ export class ModelToolBoxStyle {
             ...this.component.state,
             scene: newScene
         })
-    }
+    };
 
+
+    switchModelRepresentation = (opt) => {
+        this.component.setState({
+            ...this.component.state,
+            modelRepresentation: opt
+        })
+    }
 
 
 }
