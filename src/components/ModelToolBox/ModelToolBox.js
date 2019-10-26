@@ -5,7 +5,6 @@ import {setModel, setModelCompilationParameters, setModelLayers} from "../../act
 import {setGraph} from "../../actions/graphActions";
 import {ModelToolBoxStyle} from "./ModelToolBoxStyle";
 import Editor from "./Editor/Editor";
-import {Layer} from "./Layer/Layer";
 import {Upload} from "../common/Upload";
 import {ESCAPE} from "../../utils/Keyboard";
 import {ModelValidator} from "../../logic/ModelValidator/ModelValidator";
@@ -17,22 +16,30 @@ import {JSONFormatConverter} from "../../logic/Converter/Converter";
 import {handleApi} from "../../api/Api";
 import {SETTINGS} from "../../settings/ApplicationSettings";
 import {env} from "../../index";
+import {ModelBlockRepresentation} from "./ModelRepresentation/Block/ModelBlockRepresentation";
+import {ModelRepresentation} from "./ModelRepresentation/ModelRepresentation";
 
-export const EDITOR_SCENE = {
+export const editorScene = {
     LAYER: 'layers',
     PARAMETER: 'parameters'
 };
 
+export const modelRepresentation = {
+  BLOCK: 'block',
+  CODE: 'code'
+};
+
 class ModelToolBox extends React.Component {
 
+
     state = {
+        styles: ModelToolBoxStyle.defaultStyle,
         activePopup: false,
         activeAlerts: false,
-        scene: EDITOR_SCENE.LAYER,
-        styles: ModelToolBoxStyle.defaultStyle,
+        scene: editorScene.LAYER,
         isModelValid: false,
-        alerts: []
-
+        alerts: [],
+        modelRepresentation: modelRepresentation.BLOCK
     };
 
     constructor(props) {
@@ -120,6 +127,17 @@ class ModelToolBox extends React.Component {
 
     render() {
         const modelLayers = this.props.model.layers;
+        let Representation;
+        switch (this.state.modelRepresentation){
+            case modelRepresentation.BLOCK:
+                Representation = ModelRepresentation(ModelBlockRepresentation, modelLayers);
+                break;
+            case modelRepresentation.CODE:
+                break;
+
+            default:
+                console.log("Unhandled model representation!");
+        }
         return (
             <>
                 <div className={"ModelToolBox"}
@@ -131,23 +149,7 @@ class ModelToolBox extends React.Component {
                                 }}/>
                         : <></>
                     }
-
-                    <div className={"LayersContainer"}>
-                        {
-                            modelLayers.map((layer, index) => {
-                                return (
-                                    <Layer key={index}
-                                           index={layer.index}
-                                           name={layer.name}
-                                           type={layer.type}
-                                           classType={layer.classType}
-                                           activation={layer.activation}
-                                           nodesNumber={layer.nodesNumber}
-                                    />
-                                )
-                            })
-                        }
-                    </div>
+                    {Representation}
                     <Upload text={"Upload model"}
                             id={"Uploader"}
                             className={"Uploader"}
@@ -171,7 +173,7 @@ class ModelToolBox extends React.Component {
                         switchScene={this.switchScene}
                         style={this.state.styles.popup}
                         scene={this.state.scene}
-                        altScene={this.state.scene === EDITOR_SCENE.LAYER ? EDITOR_SCENE.PARAMETER : EDITOR_SCENE.LAYER}/>
+                        altScene={this.state.scene === editorScene.LAYER ? editorScene.PARAMETER : editorScene.LAYER}/>
             </>
         )
     }

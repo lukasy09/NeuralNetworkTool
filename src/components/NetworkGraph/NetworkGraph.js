@@ -60,13 +60,13 @@ class NetworkGraph extends React.Component {
     }
 
     zoom = (step) => {
+        this.zoomLevel += step;
         this.cy.zoom({
                 level: this.zoomLevel,
                 renderedPosition: {x: this.cy.pan().x, y: this.cy.pan().y}
             }
         );
         this.cy.center();
-        this.zoomLevel += step;
     };
 
 

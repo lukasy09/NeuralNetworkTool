@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {SETTINGS} from "../../../settings/ApplicationSettings";
-import {EDITOR_SCENE} from "../ModelToolBox";
+import {editorScene} from "../ModelToolBox";
 import {TextButton} from "../../common/TextButton";
 import {Input} from "../../common/Input";
 import {Select} from "../../common/Select";
@@ -156,7 +156,7 @@ class Editor extends React.Component {
                             className={"SubmitBtn"}/>
 
                 <div className={"LayerScene"}
-                     style={this.props.scene === EDITOR_SCENE.PARAMETER ? {display: 'none'} : {}}>
+                     style={this.props.scene === editorScene.PARAMETER ? {display: 'none'} : {}}>
                     <div className={"Layer"}>
                         <div className={"FeatureWrapper"}>
                             <Input action={(e) => {
@@ -306,7 +306,7 @@ class Editor extends React.Component {
                 </div>
 
                 <div className={'ParametersScene'}
-                     style={this.props.scene === EDITOR_SCENE.LAYER ? {display: 'none'} : {}}>
+                     style={this.props.scene === editorScene.LAYER ? {display: 'none'} : {}}>
                     <div className={"Parameters"}>
                         <div className={"FeatureWrapper"}>
                             <Select action={(e) => {

@@ -1,4 +1,4 @@
-import {EDITOR_SCENE} from "./ModelToolBox";
+import {editorScene} from "./ModelToolBox";
 
 export class ModelToolBoxStyle {
 
@@ -53,14 +53,14 @@ export class ModelToolBoxStyle {
         let newScene;
 
         switch (this.component.state.scene) {
-            case EDITOR_SCENE.LAYER:
-                newScene = EDITOR_SCENE.PARAMETER;
+            case editorScene.LAYER:
+                newScene = editorScene.PARAMETER;
                 break;
-            case EDITOR_SCENE.PARAMETER:
-                newScene = EDITOR_SCENE.LAYER;
+            case editorScene.PARAMETER:
+                newScene = editorScene.LAYER;
                 break;
             default:
-                newScene = EDITOR_SCENE.LAYER;
+                newScene = editorScene.LAYER;
                 console.log("Wrong scene!");
         }
         this.component.setState({

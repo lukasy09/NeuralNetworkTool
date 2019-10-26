@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Chart} from "../../Chart/Chart";
-import {DataGeneratorUtil} from "../../../logic/utils/DataGeneratorUtil";
+import {Chart} from "../../../../Chart/Chart";
+import {DataGeneratorUtil} from "../../../../../logic/utils/DataGeneratorUtil";
 
 
 /**
