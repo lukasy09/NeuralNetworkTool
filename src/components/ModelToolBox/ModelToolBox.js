@@ -10,7 +10,7 @@ import {ESCAPE} from "../../utils/Keyboard";
 import {ModelValidator} from "../../logic/ModelValidator/ModelValidator";
 import Alerts from "./Alerts/Alerts";
 import {setAlerts} from "../../actions/alertsActions";
-import {getFileData} from "../../utils/Upload";
+import {getFileData, uploadFormatType} from "../../utils/Upload";
 import {KerasToCanonicalConverter} from "../../logic/Converter/KerasToCanonicalConverter";
 import {JSONFormatConverter} from "../../logic/Converter/Converter";
 import {handleApi} from "../../api/Api";
@@ -99,6 +99,14 @@ class ModelToolBox extends React.Component {
     };
 
     /**
+     * Setting data from csv.
+     * @param csvData
+     */
+    setData = (csvData) => {
+
+    };
+
+    /**
      * Calling validation method to check if the network has a properly built structure
      */
     updateAlerts = (layers) => {
@@ -112,7 +120,11 @@ class ModelToolBox extends React.Component {
      * @param e
      */
     uploadModel = (e) => {
-        getFileData(e, this.setModel);
+        getFileData(e, uploadFormatType.JSON,this.setModel);
+    };
+
+    uploadData = (e) => {
+        getFileData(e, uploadFormatType.CSV, this.setData);
     };
 
 
@@ -168,7 +180,7 @@ class ModelToolBox extends React.Component {
                     <Upload text={"Upload model"}
                             id={"Uploader"}
                             className={"Uploader"}
-                            accept={".json,application/json"}
+                            accept={"*.json"}
                             action={(e) => {
                                 this.uploadModel(e)
                             }}/>
@@ -182,6 +194,11 @@ class ModelToolBox extends React.Component {
                         className={"SendBtn"}
                         action={this.sendModel}
                     />
+                    <Upload text={"Upload data"}
+                            id={"DataUploader"}
+                            className={"Data"}
+                            accept={"*.csv"}
+                            action={(e) => {this.uploadData(e)}}/>
                 </div>
                 <Editor triggerPopup={this.triggerPopup}
                         submitModel={this.submitModel}
