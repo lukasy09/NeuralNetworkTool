@@ -1,8 +1,9 @@
-import {SET_DATA} from "../actions/dataActions";
+import {SET_COLUMNS, SET_DATA} from "../actions/dataActions";
 
 const defaultDataState = {
   header: [],
-  data: []
+  data: [],
+  trainableColumns: []
 };
 
 export function dataReducer(state = defaultDataState, action) {
@@ -11,9 +12,14 @@ export function dataReducer(state = defaultDataState, action) {
         case SET_DATA:
             return{
                 ...state,
-                header: action.payload.header,
-                data: action.payload.data
+                ...action.payload
             };
+        case SET_COLUMNS:
+            return{
+                ...state,
+                ...action.payload
+            };
+
         default:
             return state;
     }

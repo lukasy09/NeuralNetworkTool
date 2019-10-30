@@ -1,0 +1,33 @@
+@import "../../../styles/mixins";
+@import "../../../settings/StylesSettings";
+
+.DataConfiguratorContainer {
+  @include absolute-center-element;
+  @include col-flex-box;
+  @include scroll-bar;
+  background: transparent;
+  align-items: center;
+  transition: all 0.7s ease-in-out;
+  width: 85vw;
+  height: 90vh;
+  z-index: 1;
+  color: $lightColor;
+  font-size: 8pt;
+  overflow: auto;
+
+
+  .DataRowHeader {
+    @include row-flex-box;
+    justify-content: center;
+    width: 100%;
+  }
+  .DataRowContent {
+    @include col-flex-box;
+    justify-content: center;
+    width: 100%;
+    .ContentRow {
+      @include row-flex-box;
+
+    }
+  }
+}

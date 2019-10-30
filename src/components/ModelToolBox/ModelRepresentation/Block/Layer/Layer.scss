@@ -3,24 +3,12 @@
 @import "../../../../../settings/StylesSettings";
 
 .LayersContainer {
+  @include scroll-bar;
   width: 100%;
   box-sizing: border-box;
   padding: 60px 120px 0 120px;
   overflow-y: auto;
   overflow-x: hidden;
-
-  &::-webkit-scrollbar {
-    width: 0.5em;
-  }
-
-  &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: $specialColorFirst;
-    outline: 1px solid $lightColor;
-  }
 
   .LayerRepresentation {
     width: auto;
