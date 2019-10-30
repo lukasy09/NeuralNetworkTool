@@ -1,6 +1,9 @@
 import {SET_DATA} from "../actions/dataActions";
 
-const defaultDataState = [];
+const defaultDataState = {
+  header: [],
+  data: []
+};
 
 export function dataReducer(state = defaultDataState, action) {
 
@@ -8,7 +11,8 @@ export function dataReducer(state = defaultDataState, action) {
         case SET_DATA:
             return{
                 ...state,
-                ...action.payload
+                header: action.payload.header,
+                data: action.payload.data
             };
         default:
             return state;

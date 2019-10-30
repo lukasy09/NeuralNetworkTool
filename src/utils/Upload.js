@@ -1,3 +1,5 @@
+import {readCSV} from "./CSVReader";
+
 export const uploadFormatType = {
   JSON : '.json',
   CSV: '.csv'
@@ -20,12 +22,7 @@ export const getFileData = (evt, formatType, handler) => {
                         data = JSON.parse(e.target.result);
                         break;
                     case uploadFormatType.CSV:
-                        data =[];
-                        let lines = e.target.result.split('\n');
-                        for(let line of lines){
-                            let el = line.split(separators.COMMA);
-                            data.push(el);
-                        }
+                        data = readCSV(e.target.result, separators.COMMA);
                         break;
 
                     default:

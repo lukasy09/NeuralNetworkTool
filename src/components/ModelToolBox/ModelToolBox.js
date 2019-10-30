@@ -20,6 +20,8 @@ import {ModelBlockRepresentation} from "./ModelRepresentation/Block/ModelBlockRe
 import {ModelRepresentation} from "./ModelRepresentation/ModelRepresentation";
 import {RepresentationGroup} from "./RepresentationGroup/RepresentationGroup";
 import {ModelCodeRepresentation} from "./ModelRepresentation/Code/ModelCodeRepresentation";
+import {setData} from "../../actions/dataActions";
+import DataConfigurator from "./DataConfigurator/DataConfigurator";
 
 export const editorScene = {
     LAYER: 'layers',
@@ -103,7 +105,13 @@ class ModelToolBox extends React.Component {
      * @param csvData
      */
     setData = (csvData) => {
+        let header = csvData.slice(0, 1);
+        let trainData = csvData.slice(1);
 
+        this.props.setData({
+            header: header,
+            data: trainData
+        })
     };
 
     /**
@@ -200,6 +208,7 @@ class ModelToolBox extends React.Component {
                             accept={"*.csv"}
                             action={(e) => {this.uploadData(e)}}/>
                 </div>
+                <DataConfigurator />
                 <Editor triggerPopup={this.triggerPopup}
                         submitModel={this.submitModel}
                         switchScene={this.switchScene}
@@ -224,6 +233,7 @@ const mapActionsToProps = {
     setGraph: setGraph,
     setModelLayers: setModelLayers,
     setModelCompilationParameters: setModelCompilationParameters,
+    setData: setData,
     setAlerts: setAlerts
 };
 

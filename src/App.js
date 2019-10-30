@@ -38,7 +38,7 @@ class App extends React.Component {
     };
 
     /**
-     * Moving the skewed background scene to the right after project name's submision
+     * Moving the skewed background scene to the right after project name's submission
      */
     activateBackground = () => {
         this.styleManager.activateBackground();
