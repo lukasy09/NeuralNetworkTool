@@ -61,5 +61,16 @@
     }
   }
 
+  .DataDisplay{
+    position: absolute;
+    right: 0;
+    top: 35%;
+    transition: all 0.7s ease-in-out;
+    cursor: pointer;
+    &:hover{
+      @include translateWithScale(-4px, 0, 1.1);
+    }
+  }
+
 
 }

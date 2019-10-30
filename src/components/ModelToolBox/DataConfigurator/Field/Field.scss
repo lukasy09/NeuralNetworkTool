@@ -9,10 +9,25 @@
   padding: 18px 12px 18px 12px;
   width: 150px;
   text-align: center;
+  cursor: pointer;
   //word-break: break-word;
   //margin-right: 10px;
 
+  &.Header{
+    background: darken($specialColorFirst, 12%);
 
+    &:hover{
+      background: darken($specialColorFirst, 5%);
+    }
+  }
+
+  &.Content{
+    background: darken($darkColor, 12%);
+
+    &:hover{
+      background: lighten($darkColor, 12%);
+    }
+  }
   div{
     input[type=checkbox]{
       width: 25px;

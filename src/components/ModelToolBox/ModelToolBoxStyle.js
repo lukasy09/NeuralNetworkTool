@@ -8,6 +8,9 @@ export class ModelToolBoxStyle {
         },
         modelToolBoxContainer: {
             transform: "translateY(60vw)"
+        },
+        dataPopup: {
+            transform: 'translateY(100vh)'
         }
 
     };
@@ -81,6 +84,22 @@ export class ModelToolBoxStyle {
             ...this.component.state,
             modelRepresentation: opt
         })
+    };
+
+
+    controlDataPopup = () => {
+        let transform;
+        if(this.component.state.dataPopup){
+            transform = null;
+        }else{
+            transform = 'translateY(100vh)';
+        }
+        this.component.setState({
+            dataPopup: {
+                transform: transform
+            }
+        });
+
     }
 
 

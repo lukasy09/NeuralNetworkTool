@@ -5,7 +5,7 @@ import {Checkbox} from "../../../common/Checkbox";
 
 export const DataField = (props)=>{
     return(
-        <div className={"Field"}>
+        <div className={`Field ${props.className}`}>
             {props.isHeader ? <Checkbox action={props.action}/> : <></>}
             <span>{props.fieldName}</span>
         </div>

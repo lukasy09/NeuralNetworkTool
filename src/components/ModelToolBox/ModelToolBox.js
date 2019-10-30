@@ -22,6 +22,7 @@ import {RepresentationGroup} from "./RepresentationGroup/RepresentationGroup";
 import {ModelCodeRepresentation} from "./ModelRepresentation/Code/ModelCodeRepresentation";
 import {setData} from "../../actions/dataActions";
 import DataConfigurator from "./DataConfigurator/DataConfigurator";
+import dataIcon from "../../assets/images/png/data-icon-negative.png";
 
 export const editorScene = {
     LAYER: 'layers',
@@ -33,7 +34,7 @@ export const modelRepresentationTypes = {
     CODE: 'code'
 };
 
-const avaiableRepresentations = [modelRepresentationTypes.BLOCK, modelRepresentationTypes.CODE];
+const availableRepresentations = [modelRepresentationTypes.BLOCK, modelRepresentationTypes.CODE];
 
 class ModelToolBox extends React.Component {
 
@@ -94,10 +95,10 @@ class ModelToolBox extends React.Component {
      * @param json
      */
     setModel = (json) => {
-        let cannonical = this.converter.convert(json).getData();
-        this.props.setModel(cannonical.model);
-        this.props.setGraph(cannonical.graph);
-        this.updateAlerts(cannonical.graph.layers);
+        let canonical = this.converter.convert(json).getData();
+        this.props.setModel(canonical.model);
+        this.props.setGraph(canonical.graph);
+        this.updateAlerts(canonical.graph.layers);
     };
 
     /**
@@ -174,7 +175,7 @@ class ModelToolBox extends React.Component {
                 <div className={"ModelToolBox"}
                      style={this.state.styles.modelToolBoxContainer}>
 
-                    <RepresentationGroup options={avaiableRepresentations}
+                    <RepresentationGroup options={availableRepresentations}
                                          action={this.switchModelRepresentation}/>
 
                     {this.props.alerts.length > 0 ?
@@ -207,8 +208,15 @@ class ModelToolBox extends React.Component {
                             className={"Data"}
                             accept={"*.csv"}
                             action={(e) => {this.uploadData(e)}}/>
+                    <div onClick={this.styleManager.controlDataPopup}
+                         className={"DataDisplay"}>
+                        <img src={dataIcon}
+                             alt={"Action icon"}
+                             width={50}
+                             height={50}/>
+                    </div>
                 </div>
-                <DataConfigurator />
+                <DataConfigurator style={this.state.styles.dataPopup} />
                 <Editor triggerPopup={this.triggerPopup}
                         submitModel={this.submitModel}
                         switchScene={this.switchScene}
