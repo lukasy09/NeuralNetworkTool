@@ -10,7 +10,7 @@ export class ModelToolBoxStyle {
             transform: "translateY(60vw)"
         },
         dataPopup: {
-            transform: 'translateY(100vh)'
+            transform: "translateY(100vh)"
         }
 
     };
@@ -50,6 +50,7 @@ export class ModelToolBoxStyle {
             ...this.component.state,
             activePopup: !this.component.state.activePopup,
             styles: {
+                ...this.component.state.styles,
                 popup: popupStyle,
             }
         })
@@ -89,14 +90,17 @@ export class ModelToolBoxStyle {
 
     controlDataPopup = () => {
         let transform;
-        if(this.component.state.dataPopup){
-            transform = null;
+        if(this.component.state.styles.dataPopup.transform !== "none"){
+            transform = "none";
         }else{
             transform = 'translateY(100vh)';
         }
         this.component.setState({
-            dataPopup: {
-                transform: transform
+            styles:{
+                ...this.component.state.styles,
+                dataPopup: {
+                    transform: transform
+                }
             }
         });
 

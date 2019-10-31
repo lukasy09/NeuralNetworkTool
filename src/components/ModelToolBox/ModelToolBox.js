@@ -208,13 +208,16 @@ class ModelToolBox extends React.Component {
                             className={"Data"}
                             accept={"*.csv"}
                             action={(e) => {this.uploadData(e)}}/>
-                    <div onClick={this.styleManager.controlDataPopup}
-                         className={"DataDisplay"}>
-                        <img src={dataIcon}
-                             alt={"Action icon"}
-                             width={50}
-                             height={50}/>
-                    </div>
+
+                    {this.props.dataInfo.data.length > 0 ?
+                        <div onClick={this.styleManager.controlDataPopup}
+                             className={"DataDisplay"}>
+                            <img src={dataIcon}
+                                 alt={"Data icon"}
+                                 width={50}
+                                 height={50}/>
+                        </div>: <></>
+                    }
                 </div>
                 <DataConfigurator style={this.state.styles.dataPopup} />
                 <Editor triggerPopup={this.triggerPopup}
@@ -232,7 +235,8 @@ const mapStateToProps = state => {
     return {
         model: state.modelReducer,
         graph: state.graphReducer,
-        alerts: state.alertsReducer.alerts
+        alerts: state.alertsReducer.alerts,
+        dataInfo: state.dataReducer
     }
 };
 

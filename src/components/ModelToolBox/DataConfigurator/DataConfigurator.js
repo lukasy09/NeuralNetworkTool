@@ -2,8 +2,6 @@ import React from 'react';
 import connect from "react-redux/es/connect/connect";
 import {DataField} from "./Field/Field";
 import {setColumns} from "../../../actions/dataActions";
-import {TextButton} from "../../common/TextButton";
-import dataIcon from "../../../assets/images/png/data-icon-negative.png";
 
 class DataConfigurator extends React.Component {
 
@@ -30,9 +28,9 @@ class DataConfigurator extends React.Component {
             <>
                 <div style={this.props.style}
                      className="DataConfiguratorContainer">
-                    <TextButton text={"Esc"}
+                  {/*  <TextButton text={"Esc"}
                                 action={() => {}}
-                                className={"ExitBtn DataEsc"}/>
+                                className={"ExitBtn DataEsc"}/>*/}
                     <div className={"DataRowHeader"}>
                         {header.map((field, index) => {
                             return (

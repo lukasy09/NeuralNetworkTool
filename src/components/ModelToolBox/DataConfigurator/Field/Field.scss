@@ -22,7 +22,7 @@
   }
 
   &.Content{
-    background: darken($darkColor, 12%);
+    background: $darkColor;
 
     &:hover{
       background: lighten($darkColor, 12%);
