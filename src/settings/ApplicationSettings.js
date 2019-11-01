@@ -126,5 +126,13 @@ export const SETTINGS = {
         }
 
 
+    },
+
+    data: {
+      types:{
+          NUMERICAL: 'numerical',
+          CATEGORICAL: 'categorical'
+      }
+
     }
 };

@@ -6,7 +6,6 @@
   @include col-flex-box;
   @include scroll-bar;
   background: transparent;
-  align-items: center;
   transition: all 0.7s ease-in-out;
   width: 85vw;
   height: 90vh;
@@ -27,16 +26,11 @@
 
   .DataRowHeader {
     @include row-flex-box;
-    justify-content: center;
-    width: 100%;
   }
   .DataRowContent {
     @include col-flex-box;
-    justify-content: center;
-    width: 100%;
     .ContentRow {
       @include row-flex-box;
-
     }
   }
 }

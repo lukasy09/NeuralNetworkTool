@@ -1,35 +1,41 @@
 @import "../../../../styles/mixins";
 @import "../../../../settings/StylesSettings";
 
-
-.Field{
+.Field {
+  @include col-flex-box;
   background: $darkColor;
   border: solid 1px $lightColor;
   box-sizing: border-box;
-  padding: 18px 12px 18px 12px;
-  width: 150px;
+  width: 120px;
+  min-height: 70px;
   text-align: center;
   cursor: pointer;
-  //word-break: break-word;
-  //margin-right: 10px;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.7s ease-in-out;
 
-  &.Header{
+  //&:hover{
+  //  @include scale(1.2);
+  //}
+
+  &.Header {
     background: darken($specialColorFirst, 12%);
 
-    &:hover{
+    &:hover {
       background: darken($specialColorFirst, 5%);
+
     }
   }
 
-  &.Content{
+  &.Content {
     background: $darkColor;
 
-    &:hover{
+    &:hover {
       background: lighten($darkColor, 12%);
     }
   }
-  div{
-    input[type=checkbox]{
+  div {
+    input[type=checkbox] {
       width: 25px;
       height: 25px;
     }
