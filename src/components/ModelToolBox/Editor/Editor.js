@@ -151,7 +151,7 @@ class Editor extends React.Component {
                             className={"ExitBtn"}/>
                 <TextButton text={"Submit"}
                             action={() => {
-                                this.props.submitModel(this.state.subGraph, this.state.compilationParameters)
+                                this.props.submitModel(this.state.subGraph, this.state.compilationParameters, this.state.modelFit)
                             }}
                             className={"SubmitBtn"}/>
 

@@ -12,7 +12,10 @@ const defaultModelState = {
         loss: 'categorical_crossentropy',
         metrics: ['accuracy'],
     },
-    layers:[]
+    layers:[],
+    fit: {
+        epochs: 10
+    }
 };
 
 export function modelReducer(state = defaultModelState, action) {

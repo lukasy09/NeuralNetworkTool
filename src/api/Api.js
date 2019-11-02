@@ -14,7 +14,7 @@ const attachedFile = {
 export const handleApi = (config, data) => {
     const url = buildUrl(config);
     axios.post(url, {
-        model: data,
+        data: data,
         train: false,
         headers: headers
     })

@@ -79,12 +79,14 @@ class ModelToolBox extends React.Component {
      * Submitting layers on the preview and replacing with the existing ones
      * @param graph
      * @param newParams
+     * @param fit
      */
-    submitModel = (graph, newParams) => {
+    submitModel = (graph, newParams, fit) => {
         this.props.setGraph(graph);
         this.props.setModel({
             layers: graph.layers,
-            compilationParameters: newParams
+            compilationParameters: newParams,
+            fit: fit
         });
         this.updateAlerts(graph.layers);
         this.triggerPopup();
@@ -140,7 +142,12 @@ class ModelToolBox extends React.Component {
     sendModel = () => {
         const config = (env === SETTINGS.runtimeEnv.development) ? SETTINGS.api.paths.dev.train : SETTINGS.api.paths.prod.train;
         const model = this.props.model;
-        handleApi(config, model);
+
+        const data = {
+          model: this.props.model,
+          data: this.props.dataInfo.data
+        };
+        handleApi(config, data);
     };
 
 
