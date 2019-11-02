@@ -25,7 +25,8 @@ export function modelReducer(state = defaultModelState, action) {
             return{
                 ...state,
                 layers: action.payload.layers,
-                compilationParameters: action.payload.compilationParameters
+                compilationParameters: action.payload.compilationParameters,
+                fit: action.payload.fit
             };
         case SET_MODEL_LAYERS:
             return {
