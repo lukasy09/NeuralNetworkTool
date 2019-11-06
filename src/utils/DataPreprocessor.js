@@ -1,21 +1,21 @@
-export class DataPreprocessor{
 
-    static filterColumns(data, columns){
-        const length = data.length;
+export class DataPreprocessor {
+
+    /**
+     * Picking the given columns from a data matrix.
+     * @param data
+     * @param columns
+     * @return {Array}
+     */
+    static filterColumns(data, columns) {
         const preprocessed = [];
-        for(let i = 0; i<length; i++){
-            const row = data[i];
-            const rowLength = row.length;
-            for(let j = 0; j < rowLength; j++){
-
-                if(!columns.includes(j)){
-
-                    row.splice(j, 1);
-                }
+        for (let row of data) {
+            let newRow = [];
+            for (let colIndex of columns) {
+                newRow.push(row[colIndex]);
             }
-            preprocessed.push(row);
+            preprocessed.push(newRow);
         }
-        console.log(preprocessed);
         return preprocessed;
     }
 }
