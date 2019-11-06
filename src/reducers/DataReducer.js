@@ -18,13 +18,13 @@ export function dataReducer(state = defaultDataState, action) {
         case SET_COLUMNS:
             return{
                 ...state,
-                ...action.payload
+                trainableColumns: action.payload
             };
 
         case SET_CATEGORICAL:
             return{
                 ...state,
-                ...action.payload
+                categoricalColumns: action.payload
             };
         default:
             return state;

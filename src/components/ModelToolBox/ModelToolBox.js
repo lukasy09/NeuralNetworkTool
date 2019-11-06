@@ -23,6 +23,7 @@ import {ModelCodeRepresentation} from "./ModelRepresentation/Code/ModelCodeRepre
 import {setData} from "../../actions/dataActions";
 import DataConfigurator from "./DataConfigurator/DataConfigurator";
 import dataIcon from "../../assets/images/png/data-icon-negative.png";
+import {DataPreprocessor} from "../../utils/DataPreprocessor";
 
 export const editorScene = {
     LAYER: 'layers',
@@ -142,12 +143,19 @@ class ModelToolBox extends React.Component {
     sendModel = () => {
         const config = (env === SETTINGS.runtimeEnv.development) ? SETTINGS.api.paths.dev.train : SETTINGS.api.paths.prod.train;
         const model = this.props.model;
+        const dataInfo = this.props.dataInfo;
+        const catIndexes = dataInfo.categoricalColumns;
 
-        const data = {
-          model: this.props.model,
-          data: this.props.dataInfo.data
+        const data = DataPreprocessor.filterColumns(dataInfo.data, dataInfo.trainableColumns);
+
+
+        const sendData = {
+          model: model,
+          dataInfo: {
+              data: data
+          }
         };
-        handleApi(config, data);
+        handleApi(config, sendData);
     };
 
 

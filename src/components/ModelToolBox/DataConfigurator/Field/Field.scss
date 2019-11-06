@@ -6,7 +6,7 @@
   background: $darkColor;
   border: solid 1px $lightColor;
   box-sizing: border-box;
-  width: 120px;
+  min-width: 120px;
   min-height: 70px;
   text-align: center;
   cursor: pointer;

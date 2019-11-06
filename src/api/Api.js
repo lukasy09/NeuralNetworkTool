@@ -11,10 +11,10 @@ const attachedFile = {
   json: 'model.json'
 };
 
-export const handleApi = (config, data) => {
+export const handleApi = (config, dataInfo) => {
     const url = buildUrl(config);
     axios.post(url, {
-        data: data,
+        dataInfo: dataInfo,
         train: false,
         headers: headers
     })
