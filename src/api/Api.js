@@ -11,14 +11,11 @@ const attachedFile = {
   json: 'model.json'
 };
 
-export const handleApi = (config, dataInfo) => {
+export const handleApi = (config, sendData) => {
     const url = buildUrl(config);
-    axios.post(url, {
-        dataInfo: dataInfo,
-        train: false,
-        headers: headers
-    })
+    axios.post(url, sendData)
         .then(function (response) {
+            console.log(response);
             FileDownload(response.data, attachedFile.h5);
         })
         .catch(function (error) {

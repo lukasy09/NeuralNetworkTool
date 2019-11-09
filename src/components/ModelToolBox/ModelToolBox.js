@@ -144,14 +144,17 @@ class ModelToolBox extends React.Component {
         const config = (env === SETTINGS.runtimeEnv.development) ? SETTINGS.api.paths.dev.train : SETTINGS.api.paths.prod.train;
         const model = this.props.model;
         const dataInfo = this.props.dataInfo;
-        const catIndexes = dataInfo.categoricalColumns;
-        const data = DataPreprocessor.filterColumns(dataInfo.data, dataInfo.trainableColumns);
+        const data = dataInfo.data;
+        const catColumns = dataInfo.categoricalColumns;
+        const trainableColumns = dataInfo.trainableColumns;
+        //const data = DataPreprocessor.filterColumns(dataInfo.data, dataInfo.trainableColumns);
 
         const sendData = {
           model: model,
           dataInfo: {
               data: data,
-              categoricalIndexes: catIndexes
+              categoricalColumns: catColumns,
+              trainableColumns: trainableColumns
           }
         };
         handleApi(config, sendData);
