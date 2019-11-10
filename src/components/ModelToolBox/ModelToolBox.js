@@ -1,7 +1,7 @@
 import React from 'react';
 import {TextButton} from "../common/TextButton";
 import {connect} from 'react-redux';
-import {setModel, setModelCompilationParameters, setModelLayers} from "../../actions/modelActions";
+import {setModel, setModelCompilationParameters, setModelLayers, setWeights} from "../../actions/modelActions";
 import {setGraph} from "../../actions/graphActions";
 import {ModelToolBoxStyle} from "./ModelToolBoxStyle";
 import Editor from "./Editor/Editor";
@@ -23,7 +23,6 @@ import {ModelCodeRepresentation} from "./ModelRepresentation/Code/ModelCodeRepre
 import {setData} from "../../actions/dataActions";
 import DataConfigurator from "./DataConfigurator/DataConfigurator";
 import dataIcon from "../../assets/images/png/data-icon-negative.png";
-import {DataPreprocessor} from "../../utils/DataPreprocessor";
 
 export const editorScene = {
     LAYER: 'layers',
@@ -128,6 +127,14 @@ class ModelToolBox extends React.Component {
     };
 
     /**
+     * Setting model weigths(parameters) in the store
+     * @param weights
+     */
+    updateModelWeights(weights){
+        this.props.setWeights(weights)
+    }
+
+    /**
      * Handling user's model upload.
      * @param e
      */
@@ -147,7 +154,6 @@ class ModelToolBox extends React.Component {
         const data = dataInfo.data;
         const catColumns = dataInfo.categoricalColumns;
         const trainableColumns = dataInfo.trainableColumns;
-        //const data = DataPreprocessor.filterColumns(dataInfo.data, dataInfo.trainableColumns);
 
         const sendData = {
           model: model,
@@ -157,7 +163,8 @@ class ModelToolBox extends React.Component {
               trainableColumns: trainableColumns
           }
         };
-        handleApi(config, sendData);
+        handleApi(config, sendData, this.updateModelWeights);
+
     };
 
 
@@ -262,6 +269,7 @@ const mapActionsToProps = {
     setGraph: setGraph,
     setModelLayers: setModelLayers,
     setModelCompilationParameters: setModelCompilationParameters,
+    setWeights: setWeights,
     setData: setData,
     setAlerts: setAlerts
 };

@@ -1,8 +1,17 @@
 @import "../../../styles/mixins";
 .RepGroup{
   position: absolute;
-  left: 0;
+  left: -1px;
   top: 25%;
+  background: $darkColor;
+  box-sizing: border-box;
+  padding: 6px 4px 6px 4px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top: solid 1px $specialColorFirst;
+  border-right: solid 1px $specialColorFirst;
+  border-bottom: solid 1px $specialColorFirst;
+
 
   .RepOption{
     margin-top: 10px;

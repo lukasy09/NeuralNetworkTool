@@ -1,4 +1,4 @@
-import {SET_MODEL, SET_MODEL_LAYERS} from "../actions/modelActions";
+import {SET_MODEL, SET_MODEL_LAYERS, SET_MODEL_WEIGHTS} from "../actions/modelActions";
 
 
 /**
@@ -15,7 +15,8 @@ const defaultModelState = {
     layers:[],
     fit: {
         epochs: 10
-    }
+    },
+    weights: []
 };
 
 export function modelReducer(state = defaultModelState, action) {
@@ -32,6 +33,12 @@ export function modelReducer(state = defaultModelState, action) {
             return {
                 ...state,
                 layers: action.payload
+            };
+
+        case SET_MODEL_WEIGHTS:
+            return{
+                ...state,
+                weights: action.payload
             };
         default:
             return state;

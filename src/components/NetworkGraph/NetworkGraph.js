@@ -59,6 +59,10 @@ class NetworkGraph extends React.Component {
         }
     }
 
+    /**
+     * Zooming in/out
+     * @param step
+     */
     zoom = (step) => {
         this.zoomLevel += step;
         this.cy.zoom({
@@ -68,7 +72,6 @@ class NetworkGraph extends React.Component {
         );
         this.cy.center();
     };
-
 
     render() {
         const projectName = this.props.general.projectName;
@@ -93,7 +96,7 @@ class NetworkGraph extends React.Component {
                 <div ref={(div) => this.graph = div}
                      className={"NetworkGraph"}
                      id={this.networkGraphId}
-                     style={{backgroundColor: '#f1ebe0'}}/>
+                     style={{backgroundColor: '#222222'}}/>
             </div>
         )
     }
@@ -102,7 +105,8 @@ class NetworkGraph extends React.Component {
 const mapStateToProps = state => {
     return {
         general: state.generalReducer,
-        graph: state.graphReducer
+        graph: state.graphReducer,
+        weights: state.modelReducer.weight
     };
 };
 

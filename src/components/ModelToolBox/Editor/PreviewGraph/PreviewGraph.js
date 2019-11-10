@@ -21,7 +21,7 @@ export class PreviewGraph extends React.Component{
                 <div ref={(div) => this.previewGraph = div}
                      className={"PreviewGraph"}
                      id={this.previewGraphId}
-                     style={{backgroundColor: '#f1ebe0'}}/>
+                     style={{backgroundColor: '#222222'}}/>
             </div>
         )
     }

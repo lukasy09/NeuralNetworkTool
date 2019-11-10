@@ -80,6 +80,13 @@
   -moz-box-shadow: 5px 0 5px -5px $color;
 }
 
+@mixin box-shadow-left($color){
+  box-shadow: -5px 0px 5px 1px $color;
+  -webkit-box-shadow: -5px 0px 5px 1px $color;
+  -moz-box-shadow: -5px 0px 5px 1px $color;
+}
+
+
 @mixin touched-plane($color, $opacity){
   background: $color;
   opacity: $opacity;

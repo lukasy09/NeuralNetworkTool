@@ -1,18 +1,26 @@
 @import "../../../styles/mixins";
 
-.EqualizerContainer{
+.EqualizerContainer {
   position: absolute;
   top: 6%;
-  max-width: 25px;
-  left: calc(60% - 25px);
+  background: $darkColor;
+  max-width: 35px;
+  left: calc(60% - 34px);
   flex-direction: row;
   transition: all 0.7s ease-in-out;
-  .Equalizer{
+  padding: 6px 4px 6px 4px;
+  box-sizing: border-box;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  border-left: solid 1px $specialColorFirst;
+  border-top: solid 1px $specialColorFirst;
+  border-bottom: solid 1px $specialColorFirst;
+  .Equalizer {
     margin-top: 10px;
     cursor: pointer;
     transition: all 0.7s ease-in-out;
 
-    &:hover{
+    &:hover {
       @include translateWithScale(-4px, 0, 1.1);
     }
   }
