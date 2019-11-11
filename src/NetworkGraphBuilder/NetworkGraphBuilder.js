@@ -1,4 +1,5 @@
 import {NetworkGraphBuildUtils} from "./utils/NetworkGraphBuildUtils";
+import {NetworkGraphConfigurator} from "./NetworkGraphConfigurator";
 
 export default class NetworkGraphBuilder {
 
@@ -63,7 +64,6 @@ export default class NetworkGraphBuilder {
 
     /**
      * Adding a connections between nodes
-     * @param layer_weights
      * @return {*}
      */
     addLayerEdges = () => {
@@ -91,6 +91,9 @@ export default class NetworkGraphBuilder {
                             source: fromNode.data.id, // the source node id (edge comes from this node)
                             target: toNode.data.id  // the target node id (edge goes to this node),
                         },
+                        css:{
+                          width: NetworkGraphConfigurator.getEdgeConfig().min
+                        },
                         pannable: true
                     });
                 }
@@ -104,13 +107,16 @@ export default class NetworkGraphBuilder {
      * @param weights
      */
     propagateParameters = (weights) => {
+        const ranges = NetworkGraphBuildUtils.computeWeightsExtrema(weights);
         for (let i = 0; i < this.edges.length; i++) {
             let edgeData = this.edges[i].data;
+            let edgeCSS = this.edges[i].css;
             const layerIndex = edgeData.fromLayerIndex;
             const fromNodeIndex = edgeData.fromNodeIndex;
             const toNodeIndex = edgeData.toNodeIndex;
             edgeData.value = weights[layerIndex][0][fromNodeIndex][toNodeIndex];   // params, not biases
             edgeData.displayInfo = edgeData.value.toFixed(5);
+            edgeCSS.width = NetworkGraphBuildUtils.getEdgeWidth(edgeData.value, ranges, NetworkGraphConfigurator.getEdgeConfig());
         }
     };
 
@@ -119,8 +125,9 @@ export default class NetworkGraphBuilder {
      * Building an artificial neural network visualisation from a JSON object passed as an INPUT parameter.
      * @param network - topology
      * @param weights - parameters
+     * @param isPreviewGraph
      */
-    buildNeuralNetworkVisualisation = (network, weights) => {
+    buildNeuralNetworkVisualisation = (network, isPreviewGraph, weights) => {
         let layers = network.layers;
         this.layersNumber = layers.length;
         this.maxNodesNumber = NetworkGraphBuildUtils.getMaximalNodesInLayers(layers);
@@ -134,7 +141,7 @@ export default class NetworkGraphBuilder {
             }
         }
 
-        if (weights && weights.length > 0) {
+        if (weights && weights.length > 0 && !isPreviewGraph) {
             this.propagateParameters(weights);
         }
 

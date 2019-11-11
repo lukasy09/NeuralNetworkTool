@@ -58,6 +58,10 @@ export class NetworkGraphConfigurator {
         gravity: 12,
     };
 
+    static edgeWidthConfig = {
+      min: 0.5,
+      max: 5
+    };
 
     /**
      * Returns default styles configuration for graph's nodes/edges depending on the layer type
@@ -149,18 +153,18 @@ export class NetworkGraphConfigurator {
         });
     };
 
-    static initializeCytoListeners(cy, handle) {
-        cy.on('pan', () => {
-            let pan = cy.pan();
-            let x = pan.x - 92;
-            let y = pan.y - 48;
-            handle({
-                panX: x,
-                panY: y
-            });
-            cy.style.backgroundPosition = x + 'px ' + y + 'px ';
-        });
-    }
+    // static initializeCytoListeners(cy, handle) {
+    //     cy.on('pan', () => {
+    //         let pan = cy.pan();
+    //         let x = pan.x - 92;
+    //         let y = pan.y - 48;
+    //         handle({
+    //             panX: x,
+    //             panY: y
+    //         });
+    //         cy.style.backgroundPosition = x + 'px ' + y + 'px ';
+    //     });
+    // }
 
     /**
      * Storing common (nodes') styles
@@ -186,12 +190,15 @@ export class NetworkGraphConfigurator {
         }
     }
 
-
     static getGraphLayoutConfiguration() {
         return this.layoutConfig;
     }
 
     static getcommonConfiguration() {
         return this.commonConfig;
+    }
+
+    static getEdgeConfig(){
+        return this.edgeWidthConfig;
     }
 }

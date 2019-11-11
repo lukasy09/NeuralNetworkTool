@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
 import {LabelInfo} from "../common/LabelInfo";
 import NetworkGraphBuilder from '../../NetworkGraphBuilder/NetworkGraphBuilder';
 import {NetworkGraphConfigurator} from "../../NetworkGraphBuilder/NetworkGraphConfigurator";
@@ -9,6 +8,7 @@ import {GraphEqualizer} from "./GraphEqualizer/GraphEqualizer";
 import {ESCAPE} from "../../utils/Keyboard";
 import {userActions, equalizerConfig} from "../../NetworkGraphBuilder/utils/EqualizerSettings";
 import {NetworkGraphStyle} from "./NetworkGraphStyle";
+import {weights} from "../../examples/weights";
 
 
 class NetworkGraph extends React.Component {
@@ -55,7 +55,7 @@ class NetworkGraph extends React.Component {
     componentDidUpdate() {
         if (this.props.graph.layers.length > 0) {
             this.networkGraphBuilder = new NetworkGraphBuilder(this.initGraph());
-            this.networkGraphBuilder.buildNeuralNetworkVisualisation(this.props.graph, this.props.weights);
+            this.networkGraphBuilder.buildNeuralNetworkVisualisation(this.props.graph, false, weights);
         }
     }
 

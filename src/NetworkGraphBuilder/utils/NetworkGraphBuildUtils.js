@@ -64,4 +64,52 @@ export class NetworkGraphBuildUtils{
     static getNodeIndexInLayerById(nodeId){
         return nodeId.split(" ")[1].substring(1);
     }
+
+
+    /**
+     * Computing minimal and maximal value from the weights. Used to compute the edge width.
+     * @param weights
+     * @return {{min: number, max: number}}
+     */
+    static computeWeightsExtrema(weights){
+        const length = weights.length;
+        let max = 0;
+        let min = 0;
+        for(let i=0; i<length; i++){
+            const matrix = weights[i][0];
+            for(let fromNodeIndex = 0; fromNodeIndex<matrix.length; fromNodeIndex++){
+                const row = matrix[fromNodeIndex];
+                for(let toNodeIndex = 0; toNodeIndex<row.length; toNodeIndex++){
+                        const val = row[toNodeIndex];
+                        if(val < min){
+                            min = val
+                        }
+                        if(val >= max){
+                            max = val
+                        }
+                }
+            }
+        }
+
+        return {
+            min: min,
+            max: max
+        }
+    }
+
+    /**
+     * Computing the edge width as a linear function
+     * @param value
+     * @param xExtrema
+     * @param widthExtrema
+     * @return {number}
+     */
+    static getEdgeWidth(value, xExtrema, widthExtrema){
+        const a = ((widthExtrema.max - widthExtrema.min) / (xExtrema.max - xExtrema.min));
+        const b = widthExtrema.min - a * xExtrema.min;
+
+        return (a * value + b)
+    }
+
+
 }
