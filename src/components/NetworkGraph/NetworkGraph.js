@@ -53,9 +53,51 @@ class NetworkGraph extends React.Component {
     };
 
     componentDidUpdate() {
+       let  weights = [
+            [
+                [
+                    [0.2, 0.5, 0.3, -0.5, 0.8, 0.9,],
+                    [0.2, 0.5, 0.3, -0.5, 0.8, 0.9],
+                    [0.2, 0.5, 0.3, -0.5, 0.8, 0.9],
+                    [0.2, 0.5, 0.3, -0.5, 0.8, 0.9],
+                    [0.2, 0.5, 0.3, -0.5, 0.8, 0.9],
+                    [0.2, 0.5, 0.3, -0.5, 0.8, 0.9],
+                    [0.2, 0.5, 0.3, -0.5, 0.8, 0.9],
+                    [0.2, 0.5, 0.3, -0.5, 0.8, 0.9],
+                    [0.2, 0.5, 0.3, -0.5, 0.8, 0.9],
+                    [0.2, 0.5, 0.3, -0.5, 0.8, 0.9],
+                    [0.2, 0.5, 0.3, -0.5, 0.8, 0.9],
+                    [0.2, 0.5, 0.3, -0.5, 0.8, 0.9],
+                    [0.2, 0.5, 0.3, -0.5, 0.8, 0.9],
+                ]
+            ],
+            [
+                [
+                    [0.7, 1, 2, 3, 4, 5],
+                    [0.5, 1, 2, 3, 4, 5],
+                    [0.5, 1, 2, 3, 4, 5],
+                    [0.5, 1, 2, 3, 4, 5],
+                    [0.5, 1, 2, 3, 4, 5],
+                    [0.5, 1, 2, 3, 4, 5],
+                ]
+            ],
+
+
+            [
+                [
+                    [456],
+                    [4536],
+                    [44556],
+                    [44556],
+                    [435456],
+                    [455456],
+                ]
+            ]
+        ];
+
         if (this.props.graph.layers.length > 0) {
             this.networkGraphBuilder = new NetworkGraphBuilder(this.initGraph());
-            this.networkGraphBuilder.buildNeuralNetworkVisualisation(this.props.graph);
+            this.networkGraphBuilder.buildNeuralNetworkVisualisation(this.props.graph, weights);
         }
     }
 
@@ -89,7 +131,9 @@ class NetworkGraph extends React.Component {
                 />
 
                 <GraphEqualizer center={() => this.cy.center()}
-                                zoomIn={() => {this.zoom(equalizerConfig.zoomStep)}}
+                                zoomIn={() => {
+                                    this.zoom(equalizerConfig.zoomStep)
+                                }}
                                 zoomOut={() => this.zoom(-equalizerConfig.zoomStep)}
                                 actionList={actionList}/>
 
@@ -106,7 +150,7 @@ const mapStateToProps = state => {
     return {
         general: state.generalReducer,
         graph: state.graphReducer,
-        weights: state.modelReducer.weight
+        weights: state.modelReducer.weights
     };
 };
 

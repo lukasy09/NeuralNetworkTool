@@ -22,7 +22,7 @@ import {RepresentationGroup} from "./RepresentationGroup/RepresentationGroup";
 import {ModelCodeRepresentation} from "./ModelRepresentation/Code/ModelCodeRepresentation";
 import {setData} from "../../actions/dataActions";
 import DataConfigurator from "./DataConfigurator/DataConfigurator";
-import dataIcon from "../../assets/images/png/data-icon-negative.png";
+import dataIcon from "../../assets/images/png/data-icon.png";
 
 export const editorScene = {
     LAYER: 'layers',
@@ -130,9 +130,9 @@ class ModelToolBox extends React.Component {
      * Setting model weigths(parameters) in the store
      * @param weights
      */
-    updateModelWeights(weights){
+    updateModelWeights = (weights) => {
         this.props.setWeights(weights)
-    }
+    };
 
     /**
      * Handling user's model upload.
@@ -164,7 +164,6 @@ class ModelToolBox extends React.Component {
           }
         };
         handleApi(config, sendData, this.updateModelWeights);
-
     };
 
 

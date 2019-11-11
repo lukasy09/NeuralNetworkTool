@@ -58,12 +58,13 @@ export default class NetworkGraphBuilder {
         }
         this.currentPosition.x += this.nodesGap.horizontal;
         this.currentPosition.y = this.origin.y;
-        return this.CY.add(this.nodes);
     };
 
 
     /**
      * Adding a connections between nodes
+     * @param layer_weights
+     * @return {*}
      */
     addLayerEdges = () => {
         for (let i = 0; i < this.nodes.length; i++) {
@@ -75,43 +76,70 @@ export default class NetworkGraphBuilder {
                 let toNode = this.nodes[j];
                 const toLayerIndex = parseInt(NetworkGraphBuildUtils.getNodeLayerIndexByNodeId(toNode.data.id));
                 const toNodeIndex = NetworkGraphBuildUtils.getNodeIndexInLayerById(toNode.data.id);
-                if (fromLayerIndex === (toLayerIndex - 1)){
+                if (fromLayerIndex === (toLayerIndex - 1)) {
+                    //const valueInfoPart = params ? `,value: ${params[fromLayerIndex][toLayerIndex].toFixed(3)}` : null;
                     this.edges.push({
                         group: this.groupTypes.EDGE,
                         data: {
                             id: //"l" + fromLayerIndex + " " + "from" + " " +fromNodeIndex + " " + "to" + " " + toNodeIndex,
                                 `l${fromLayerIndex.toString()} from ${fromNodeIndex.toString()} to ${toNodeIndex}`,
+                            fromLayerIndex: fromLayerIndex,
+                            fromNodeIndex: fromNodeIndex,
+                            toNodeIndex: toNodeIndex,
                             inLayerType: toNode.inLayerType,
-                            displayInfo: `From:${fromLayerIndex.toString()} to: ${toLayerIndex.toString()}, layer: ${fromLayerIndex+1}`,
+                            displayInfo: `From:${fromLayerIndex.toString()} to: ${toLayerIndex.toString()}, layer: ${fromLayerIndex + 1}`,
                             source: fromNode.data.id, // the source node id (edge comes from this node)
-                            target: toNode.data.id  // the target node id (edge goes to this node)
+                            target: toNode.data.id  // the target node id (edge goes to this node),
                         },
                         pannable: true
                     });
                 }
             }
         }
-        return this.CY.add(this.edges);
+    };
+
+
+    /**
+     * Propagating the weights to the graph
+     * @param weights
+     */
+    propagateParameters = (weights) => {
+        for (let i = 0; i < this.edges.length; i++) {
+            let edgeData = this.edges[i].data;
+            const layerIndex = edgeData.fromLayerIndex;
+            const fromNodeIndex = edgeData.fromNodeIndex;
+            const toNodeIndex = edgeData.toNodeIndex;
+            edgeData.value = weights[layerIndex][0][fromNodeIndex][toNodeIndex];   // params, not biases
+            edgeData.displayInfo = edgeData.value;
+        }
     };
 
 
     /**
      * Building an artificial neural network visualisation from a JSON object passed as an INPUT parameter.
-     * @param network
+     * @param network - topology
+     * @param weights - parameters
      */
-    buildNeuralNetworkVisualisation = (network) => {
+    buildNeuralNetworkVisualisation = (network, weights) => {
         let layers = network.layers;
-        const LAYERS_NUMBER = layers.length;
+        this.layersNumber = layers.length;
         this.maxNodesNumber = NetworkGraphBuildUtils.getMaximalNodesInLayers(layers);
 
-        for (let l = 0; l < LAYERS_NUMBER; l++) {
+        for (let l = 0; l < this.layersNumber; l++) {
             this.addLayerNodes(layers[l]);
         }
-        for (let l = 0; l < LAYERS_NUMBER; l++) {
-            if (l !== (LAYERS_NUMBER - 1)) {
-                this.addLayerEdges(layers[l], layers[l + 1], layers[l].index);
+        for (let l = 0; l < this.layersNumber; l++) {
+            if (l !== (this.layersNumber - 1)) {
+                this.addLayerEdges();
             }
         }
+
+        if (weights) {
+            this.propagateParameters(weights);
+        }
+
+        this.CY.add(this.nodes);
+        this.CY.add(this.edges);
         return this.CY.center();
     }
 }

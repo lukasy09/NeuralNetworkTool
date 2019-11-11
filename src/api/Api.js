@@ -11,12 +11,12 @@ const attachedFile = {
   json: 'model.json'
 };
 
-export const handleApi = (config, sendData, updateWeights) => {
+export const handleApi = (config, sendData, handler) => {
     const url = buildUrl(config);
     axios.post(url, sendData)
         .then(function (response) {
             //FileDownload(response.data, attachedFile.h5);
-            updateWeights(response.data)
+            handler(response.data)
         })
         .catch(function (error) {
             console.log(error);

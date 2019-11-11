@@ -168,7 +168,7 @@ export class NetworkGraphConfigurator {
      */
     static getCommonNodesStyles() {
         return {
-            color: 'black',
+            color: '#f1f1f1',
             borderWidth: '1px',
             borderColor: 'black',
             backgroundFit: "contain"
@@ -181,6 +181,7 @@ export class NetworkGraphConfigurator {
      */
     static getCommonEdgesStyles() {
         return {
+            'color': '#f1f1f1',
             'background-color': '#222222'
         }
     }
