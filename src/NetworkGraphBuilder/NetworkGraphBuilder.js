@@ -110,7 +110,7 @@ export default class NetworkGraphBuilder {
             const fromNodeIndex = edgeData.fromNodeIndex;
             const toNodeIndex = edgeData.toNodeIndex;
             edgeData.value = weights[layerIndex][0][fromNodeIndex][toNodeIndex];   // params, not biases
-            edgeData.displayInfo = edgeData.value;
+            edgeData.displayInfo = edgeData.value.toFixed(5);
         }
     };
 
@@ -134,7 +134,7 @@ export default class NetworkGraphBuilder {
             }
         }
 
-        if (weights) {
+        if (weights && weights.length > 0) {
             this.propagateParameters(weights);
         }
 
