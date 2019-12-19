@@ -3,7 +3,7 @@ import {TextButton} from "../../common/TextButton";
 import {LinkButton} from "../../common/LinkButton";
 import {Input} from "../../common/Input";
 import {connect} from 'react-redux';
-import {setProjectName} from "../../../actions/generalActions";
+import {setProject} from "../../../actions/generalActions";
 import UserInputValidator from "../../../utils/UserInputValidator";
 import {SETTINGS} from "../../../settings/ApplicationSettings";
 import {LabelInfo} from "../../common/LabelInfo";
@@ -41,11 +41,14 @@ class StartInfoInput extends React.Component {
      * Event handler for submitting a project name
      * @param e
      */
-    changeProjectName = (e) => {
+    setupProject = (e) => {
         const resultObj = UserInputValidator.validateProjectName(e.target.value);
         this.handleSubmit(resultObj);
         if (resultObj.isMatching) {
-            this.props.setProjectName(e.target.value);
+            this.props.setProject({
+                status: true,
+                name:e.target.value
+            });
         }
     };
 
@@ -79,7 +82,7 @@ class StartInfoInput extends React.Component {
                 <Input
                     type={"text"}
                     placeholder={"Enter a project name"}
-                    action={this.changeProjectName}
+                    action={this.setupProject}
                     style={this.state.styles.inputStyle}
                 />
 
@@ -108,7 +111,7 @@ const mapStateToProps = state => {
 };
 
 const mapActionsToProps = {
-    setProjectName: setProjectName
+    setProject: setProject
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(StartInfoInput);

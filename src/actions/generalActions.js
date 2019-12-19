@@ -1,8 +1,8 @@
-export const SET_PROJECT_NAME= "toolbox:set";
+export const SET_PROJECT= "toolbox:set";
 
-export function setProjectName(projectName){
+export function setProject(projectMetaInfo){
     return {
-        type:SET_PROJECT_NAME,
-        payload: projectName
+        type:SET_PROJECT,
+        payload: projectMetaInfo
     }
 }

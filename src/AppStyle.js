@@ -1,7 +1,7 @@
 export class AppStyle {
 
     static defaultStyle = {
-        activeBackground: true
+        activeBackground: false
     };
 
     constructor(component) {

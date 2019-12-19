@@ -55,7 +55,7 @@ class NetworkGraph extends React.Component {
     componentDidUpdate() {
         if (this.props.graph.layers.length > 0) {
             this.networkGraphBuilder = new NetworkGraphBuilder(this.initGraph());
-            this.networkGraphBuilder.buildNeuralNetworkVisualisation(this.props.graph, false, weights);
+            this.networkGraphBuilder.buildNeuralNetworkVisualisation(this.props.graph, false, this.props.weights);
         }
     }
 

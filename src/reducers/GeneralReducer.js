@@ -1,16 +1,18 @@
-import {SET_PROJECT_NAME} from "../actions/generalActions";
+import {SET_PROJECT} from "../actions/generalActions";
 
 const defaultGeneralState = {
-    projectName: 'my-project'
+    projectName: 'my-project',
+    isProjectSet: false
 };
 
 export function generalReducer(state = defaultGeneralState, action) {
 
     switch (action.type) {
-        case SET_PROJECT_NAME:
+        case SET_PROJECT:
             return {
                 ...state,
-                projectName: action.payload
+                isProjectSet: action.payload.status,
+                projectName: action.payload.name
             };
         default:
             return state;

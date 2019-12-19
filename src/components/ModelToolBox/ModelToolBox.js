@@ -217,7 +217,7 @@ class ModelToolBox extends React.Component {
                                 this.uploadModel(e)
                             }}/>
                     <TextButton
-                        text={"Builder"}
+                        text={"Editor"}
                         className={"AddNewLayerBtn"}
                         action={this.triggerPopup}
                     />
