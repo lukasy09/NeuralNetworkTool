@@ -21,7 +21,7 @@
 
   %Scene{
     @include row-flex-box;
-    @include box-shadow($lightColor);
+    @include box-shadow($darkColor);
     @include absolute-center-element;
     justify-content: center;
     align-items: center;

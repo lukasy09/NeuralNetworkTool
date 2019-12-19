@@ -63,12 +63,27 @@
 
     .Name{
       height: 0;
-      font-size: 17pt;
-      font-weight: 800;
+      font-size: 12pt;
+      font-weight: 600;
       position: relative;
-      top: 40px;
-      left: 40px
+      top: 12px;
+      left: 10px
     }
+    .ClassType{
+      font-weight: 600;
+      height: 0;
+      position: relative;
+      bottom: -35px;
+      left: 10px;
+    }
+    .UseBias{
+      font-weight: 600;
+      height: 0;
+      position: relative;
+      bottom: -58px;
+      left: 10px
+    }
+
     .Type {
       left: 20px;
       top: 0;
@@ -99,8 +114,8 @@
 
     .ActivationGroup{
       position: relative;
-      left: 220px;
-      top: 30px;
+      left: 243px;
+      top: 0;
       width: 250px;
       height: 0;
 

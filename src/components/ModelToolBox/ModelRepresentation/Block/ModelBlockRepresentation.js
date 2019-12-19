@@ -16,6 +16,7 @@ export const ModelBlockRepresentation = (props) => {
                                classType={layer.classType}
                                activation={layer.activation}
                                nodesNumber={layer.nodesNumber}
+                               useBias = {layer.useBias}
                         />
                     )
                 })

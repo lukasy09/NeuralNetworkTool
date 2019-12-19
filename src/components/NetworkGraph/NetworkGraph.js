@@ -8,7 +8,6 @@ import {GraphEqualizer} from "./GraphEqualizer/GraphEqualizer";
 import {ESCAPE} from "../../utils/Keyboard";
 import {userActions, equalizerConfig} from "../../NetworkGraphBuilder/utils/EqualizerSettings";
 import {NetworkGraphStyle} from "./NetworkGraphStyle";
-import {weights} from "../../examples/weights";
 
 
 class NetworkGraph extends React.Component {

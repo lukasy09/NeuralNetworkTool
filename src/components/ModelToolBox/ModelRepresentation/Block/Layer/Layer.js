@@ -15,8 +15,8 @@ const OPTIONS = {
 };
 
 const SIZE = {
-    width: 100,
-    height: 60
+    width: 120,
+    height: 80
 };
 
 export const Layer = (props) => {
@@ -31,9 +31,19 @@ export const Layer = (props) => {
             <div className={`Type ${props.type}`}>
                 {props.type}
             </div>
-            <div className={"Name"}>
-                {props.name}
+            <div className={"Parameters"}>
+
             </div>
+            <div className={"Name"}>
+                Name: {props.name}
+            </div>
+            <div className={"ClassType"}>
+                Class type: {props.classType}
+            </div>
+            <div className={"UseBias"}>
+                Use Bias: {props.useBias.toString()}
+            </div>
+
             <div className={"ActivationGroup"}>
                 <span>{props.activation}</span>
                 {props.activation ?
