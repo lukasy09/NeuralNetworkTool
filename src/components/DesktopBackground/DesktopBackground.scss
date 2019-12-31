@@ -21,8 +21,8 @@
     @include box-shadow-right($lightColor);
     width: map_get($backgroundSize, leftSkewWidth);
     height: 100vh;
-    background: $lightColor;
-    background: linear-gradient(128deg, $lightColor, 100%, $darkColor 100%);
+    background: $darkColor;
+    background: linear-gradient(128deg, $darkColor, 100%, $darkColor 100%);
     position: relative;
     left: -75vw;
     transition: all 1.5s ease-in-out;

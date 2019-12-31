@@ -14,7 +14,7 @@ const defaultModelState = {
     },
     layers:[],
     fit: {
-        epochs: 10
+        epochs: 100
     },
     weights: []
 };

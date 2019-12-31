@@ -1,3 +1,5 @@
+import github from '../assets/images/png/github-logo.png';
+import linkedin from '../assets/images/png/in-logo.png';
 /**
  * Settings
  * @type {{}}
@@ -16,24 +18,34 @@ export const SETTINGS = {
         desktopView: 'DESKTOP'
     },
 
-    /*
-       @TODO In the future probably section "routes" will be removed from the global settings. And consider changing the name "creator" into "editor"
-     */
     routes: {
         root: '/',
         creator: '/creator'
     },
 
+    socials: [
+        {
+            icon: github,
+            name: 'github',
+            href: 'https://www.linkedin.com/in/%C5%82ukasz-bednarski-33163a162/'
+        },
+        {
+            icon: linkedin,
+            name: 'linkedin',
+            href: 'https://github.com/lukasy09'
+        }
+    ],
     // A project's name must match the following regex
     regex: {
         projectName: /^[a-zA-Z0-9].*$/
     },
 
+    // api configuration segment
     api: {
         paths: {
             dev: {
                 train: {
-                    host: '192.168.1.103',
+                    host: '127.0.0.1',
                     port: '8000',
                     uri: 'train',
                     params: null
@@ -52,12 +64,12 @@ export const SETTINGS = {
         }
     },
 
+    // mapping features
     model: {
         layerDefaults: {
             units: 10,
             useBias: false,
             kernelConstraint: {},
-
             biasConstraint: {}
         },
 
@@ -123,16 +135,15 @@ export const SETTINGS = {
 
         fit: {
             epochs: 10,
+            batch_size: 10
         }
-
 
     },
 
     data: {
-      types:{
-          NUMERICAL: 'numerical',
-          CATEGORICAL: 'categorical'
-      }
-
+        types: {
+            NUMERICAL: 'numerical',
+            CATEGORICAL: 'categorical'
+        }
     }
 };

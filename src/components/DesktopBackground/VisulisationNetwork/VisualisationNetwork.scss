@@ -1,0 +1,11 @@
+@import "../../../styles/mixins";
+
+.VisualisationNetworkContainer{
+  @include skew(20deg, 0);
+  position: absolute;
+  top:0;
+
+  canvas{
+    @include skew(-20deg, 0);
+  }
+}

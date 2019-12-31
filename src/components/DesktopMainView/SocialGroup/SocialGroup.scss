@@ -1,0 +1,15 @@
+.SocialGroup{
+  width: auto;
+  height: auto;
+  position: absolute;
+  margin-left: 61%;
+  margin-top: 20%;
+  transform: rotate(-20deg);
+
+  .SocialElement{
+    transition: all 0.2s ease-in-out;
+    &:hover{
+      transform: rotate(20deg);
+    }
+  }
+}

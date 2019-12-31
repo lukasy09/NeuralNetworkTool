@@ -16,9 +16,6 @@ class CreatorView extends React.Component {
         )
     }
     componentDidMount(){
-        if(!this.props.isProjectSet){
-            this.props.history.push("/");
-        }
     }
 
 
