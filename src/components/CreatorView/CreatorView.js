@@ -2,6 +2,7 @@ import React from 'react';
 import NetworkGraph from "../NetworkGraph/NetworkGraph";
 import ModelToolBox from "../ModelToolBox/ModelToolBox";
 import connect from "react-redux/es/connect/connect";
+// import VisualisationNetwork from "../VisulisationNetwork/VisualisationNetwork";
 
 
 class CreatorView extends React.Component {
@@ -10,6 +11,7 @@ class CreatorView extends React.Component {
 
         return(
             <div className = "CreatorContainer">
+                {/*<VisualisationNetwork/>*/}
                 <NetworkGraph/>
                 <ModelToolBox/>
             </div>

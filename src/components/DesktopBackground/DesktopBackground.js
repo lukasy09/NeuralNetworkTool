@@ -1,5 +1,5 @@
 import React from 'react';
-import VisualisationNetwork from "./VisulisationNetwork/VisualisationNetwork";
+import VisualisationNetwork from "../VisulisationNetwork/VisualisationNetwork";
 const SKEW_DEFAULT = "LeftSkew";
 const SKEW_EDITOR = `${SKEW_DEFAULT} shifted`;
 
