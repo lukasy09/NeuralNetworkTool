@@ -60,16 +60,18 @@
   width: 100vw;
   height: 100vh;
   position: fixed;
-  z-index: 0;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
+  opacity: 0.97;
+  z-index: 0;
+  background: black;
 
-  &.Blur {
-    @include blur(8px);
-  }
+  //&.Blur {
+  //  @include blur(8px);
+  //}
 }
 
 .UserCheckbox{
@@ -157,4 +159,49 @@
   }
 
 }
+
+.LoadingScreen{
+  font-size: 32pt;
+  color: white;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: #111111;
+  z-index: 1;
+
+
+  .Spinner {
+    position: absolute;
+    pointer-events: none;
+    width: 2.5em;
+    height: 2.5em;
+    border: 0.4em solid;
+    border-color: $lightColor;
+    border-top-color: $specialColorFirst;
+    border-radius: 50%;
+    animation: loadingspin 1s linear infinite;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1
+  }
+
+  @keyframes loadingspin {
+    100% {
+      transform: rotate(360deg)
+    }
+  }
+
+  .LabelText{
+    z-index: 1;
+    position: relative;
+    top: 200px;
+  }
+}
+
 

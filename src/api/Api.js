@@ -8,7 +8,8 @@ import {buildUrl} from "./utils/UrlBuilder";
 //   json: 'model.json'
 // };
 
-export const handleApi = (config, sendData, handler) => {
+export const handleApi = (config, sendData, handler, styleHandler) => {
+    styleHandler();
     const url = buildUrl(config);
     axios.post(url, sendData)
         .then(function (response) {
@@ -17,5 +18,8 @@ export const handleApi = (config, sendData, handler) => {
         })
         .catch(function (error) {
             console.log(error);
-        });
+        })
+        .finally(function () {
+            styleHandler()
+        })
 };

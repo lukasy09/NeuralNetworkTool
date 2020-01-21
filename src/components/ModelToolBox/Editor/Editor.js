@@ -141,7 +141,7 @@ class Editor extends React.Component {
             <div className={"EditorContainer"}
                  style={this.props.style}>
 
-                <PopupBlur/>
+                {/*<PopupBlur/>*/}
 
                 <TextButton text={this.props.altScene.toUpperCase()}
                             className={'SceneSwitchBtn'}

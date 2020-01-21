@@ -23,6 +23,7 @@ import {ModelCodeRepresentation} from "./ModelRepresentation/Code/ModelCodeRepre
 import {setData} from "../../actions/dataActions";
 import DataConfigurator from "./DataConfigurator/DataConfigurator";
 import dataIcon from "../../assets/images/png/data-icon.png";
+import {LoadingScreen} from "../common/LoadingScreen";
 
 export const editorScene = {
     LAYER: 'layers',
@@ -46,7 +47,8 @@ class ModelToolBox extends React.Component {
         scene: editorScene.LAYER,
         isModelValid: false,
         alerts: [],
-        modelRepresentation: modelRepresentationTypes.BLOCK
+        modelRepresentation: modelRepresentationTypes.BLOCK,
+        isLoading: false
     };
 
     constructor(props) {
@@ -163,8 +165,9 @@ class ModelToolBox extends React.Component {
               trainableColumns: trainableColumns
           }
         };
-        handleApi(config, sendData, this.updateModelWeights);
+        handleApi(config, sendData, this.updateModelWeights, this.styleManager.handleLoadingScreen);
     };
+
 
 
     componentDidMount() {
@@ -197,6 +200,9 @@ class ModelToolBox extends React.Component {
             <>
                 <div className={"ModelToolBox"}
                      style={this.state.styles.modelToolBoxContainer}>
+
+                    <LoadingScreen text={"Training"}
+                                   style={this.state.isLoading ? {} : {display:'none'}}/>
 
                     <RepresentationGroup options={availableRepresentations}
                                          action={this.switchModelRepresentation}/>
