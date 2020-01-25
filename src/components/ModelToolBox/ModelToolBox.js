@@ -1,11 +1,11 @@
 import React from 'react';
-import {TextButton} from "../common/TextButton";
+import {TextButton} from "../Common/TextButton";
 import {connect} from 'react-redux';
 import {setModel, setModelCompilationParameters, setModelLayers, setWeights} from "../../actions/modelActions";
 import {setGraph} from "../../actions/graphActions";
 import {ModelToolBoxStyle} from "./ModelToolBoxStyle";
 import Editor from "./Editor/Editor";
-import {Upload} from "../common/Upload";
+import {Upload} from "../Common/Upload";
 import {ESCAPE} from "../../utils/Keyboard";
 import {ModelValidator} from "../../logic/ModelValidator/ModelValidator";
 import Alerts from "./Alerts/Alerts";
@@ -23,7 +23,7 @@ import {ModelCodeRepresentation} from "./ModelRepresentation/Code/ModelCodeRepre
 import {setData} from "../../actions/dataActions";
 import DataConfigurator from "./DataConfigurator/DataConfigurator";
 import dataIcon from "../../assets/images/png/data-icon.png";
-import {LoadingScreen} from "../common/LoadingScreen";
+import {LoadingScreen} from "../Common/LoadingScreen";
 
 export const editorScene = {
     LAYER: 'layers',

@@ -1,6 +1,6 @@
 import React from 'react';
 import {SocialGroupElement} from "./GroupElement";
-import {SETTINGS} from "../../../settings/ApplicationSettings";
+import {SETTINGS} from "../../../../settings/ApplicationSettings";
 
 let socials = SETTINGS.socials;
 

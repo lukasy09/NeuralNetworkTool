@@ -91,7 +91,7 @@ export class NetworkGraphConfigurator {
             {
                 selector: `${ELEMENT_TYPES.NODE}[inLayerType = '${INPUT}']`,
                 css: {
-                    'background-color': '#99ff99',
+                    'background-color': '#99ff99'
                 }
             },
             {
@@ -153,19 +153,6 @@ export class NetworkGraphConfigurator {
         });
     };
 
-    // static initializeCytoListeners(cy, handle) {
-    //     cy.on('pan', () => {
-    //         let pan = cy.pan();
-    //         let x = pan.x - 92;
-    //         let y = pan.y - 48;
-    //         handle({
-    //             panX: x,
-    //             panY: y
-    //         });
-    //         cy.style.backgroundPosition = x + 'px ' + y + 'px ';
-    //     });
-    // }
-
     /**
      * Storing common (nodes') styles
      * @returns {{color: string, borderWidth: string, borderColor: string, backgroundFit: string}}
@@ -186,7 +173,7 @@ export class NetworkGraphConfigurator {
     static getCommonEdgesStyles() {
         return {
             'color': '#f1f1f1',
-            'background-color': '#222222'
+            'background-color': '#111111'
         }
     }
 

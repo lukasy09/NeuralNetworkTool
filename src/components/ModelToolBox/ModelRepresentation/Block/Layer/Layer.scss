@@ -36,7 +36,7 @@
     }
 
     &.input {
-      @include box-shadow($inputLayerColor);
+      //@include box-shadow($inputLayerColor);
       border: solid 1px $inputLayerColor;
       &:after {
         background: $inputLayerColor;
@@ -45,7 +45,7 @@
     }
 
     &.hidden {
-      @include box-shadow($hiddenLayerColor);
+      //@include box-shadow($hiddenLayerColor);
 
       border: solid 1px $hiddenLayerColor;
       &:after {
@@ -54,7 +54,7 @@
 
     }
     &.output {
-      @include box-shadow($outputLayerColor);
+      //@include box-shadow($outputLayerColor);
       border: solid 1px $outputLayerColor;
       &:after {
         background: $outputLayerColor;

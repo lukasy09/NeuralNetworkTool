@@ -1,5 +1,5 @@
 import React from 'react';
-import {LabelInfo} from "../../common/LabelInfo";
+import {LabelInfo} from "../../Common/LabelInfo";
 import {Exports} from "../Exports/Exports";
 import PropTypes from "prop-types";
 import {EXPORTS_TYPES} from "../../../NetworkGraphBuilder/utils/Exports";

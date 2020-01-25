@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Checkbox} from "../../../common/Checkbox";
-import {Select} from "../../../common/Select";
+import {Checkbox} from "../../../Common/Checkbox";
+import {Select} from "../../../Common/Select";
 
 
 export const DataField = (props)=>{

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {LabelInfo} from "../common/LabelInfo";
+import {LabelInfo} from "../Common/LabelInfo";
 import NetworkGraphBuilder from '../../NetworkGraphBuilder/NetworkGraphBuilder';
 import {NetworkGraphConfigurator} from "../../NetworkGraphBuilder/NetworkGraphConfigurator";
 import {GraphSideUtil} from "./GraphSideUtil/GraphSideUtil";

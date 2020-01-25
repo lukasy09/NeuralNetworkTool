@@ -1,5 +1,5 @@
 var c = document.getElementById("c");
-var w = c.width = window.innerWidth/2,
+var w = c.width = window.innerWidth,
     h = c.height = window.innerHeight,
     ctx = c.getContext( '2d' ),
 
@@ -35,7 +35,7 @@ var w = c.width = window.innerWidth/2,
         wireframeWidth: .1,
         wireframeColor: '#88f',
 
-        depth: 250,
+        depth: 180,
         focalLength: 250,
         vanishPoint: {
             x: w / 2,
@@ -171,7 +171,7 @@ Connection.prototype.link = function(){
         for( var i = 0; i < this.links.length; ++i )
             toDevelop.push( this.links[ i ] );
     }
-}
+};
 Connection.prototype.step = function(){
 
     this.setScreen();
@@ -181,7 +181,7 @@ Connection.prototype.step = function(){
         ctx.moveTo( this.screen.x, this.screen.y );
         ctx.lineTo( this.links[ i ].screen.x, this.links[ i ].screen.y );
     }
-}
+};
 Connection.rootStep = function(){
     this.setScreen();
     this.screen.color = opts.rootColor.replace( 'light', 30 + ( ( tick * this.glowSpeed ) % 30 ) ).replace( 'alp', ( 1 - this.screen.z / mostDistant ) * .8 );
@@ -190,13 +190,13 @@ Connection.rootStep = function(){
         ctx.moveTo( this.screen.x, this.screen.y );
         ctx.lineTo( this.links[ i ].screen.x, this.links[ i ].screen.y );
     }
-}
+};
 Connection.prototype.draw = function(){
     ctx.fillStyle = this.screen.color;
     ctx.beginPath();
     ctx.arc( this.screen.x, this.screen.y, this.screen.scale * this.size, 0, Tau );
     ctx.fill();
-}
+};
 function Data( connection ){
 
     this.glowSpeed = opts.baseGlowSpeed + opts.addedGlowSpeed * Math.random();
@@ -210,7 +210,7 @@ Data.prototype.reset = function(){
 
     this.setConnection( connections[ 0 ] );
     this.ended = 2;
-}
+};
 Data.prototype.step = function(){
 
     this.proportion += this.speed;
@@ -228,7 +228,7 @@ Data.prototype.step = function(){
     this.setScreen();
     this.screen.color = opts.dataColor.replace( 'light', 40 + ( ( tick * this.glowSpeed ) % 50 ) ).replace( 'alp', .2 + ( 1 - this.screen.z / mostDistant ) * .6 );
 
-}
+};
 Data.prototype.draw = function(){
 
     if( this.ended )
@@ -240,7 +240,7 @@ Data.prototype.draw = function(){
     ctx.moveTo( this.screen.lastX, this.screen.lastY );
     ctx.lineTo( this.screen.x, this.screen.y );
     ctx.stroke();
-}
+};
 Data.prototype.setConnection = function( connection ){
 
     if( connection.isEnd )
@@ -268,7 +268,7 @@ Data.prototype.setConnection = function( connection ){
 
         this.proportion = 0;
     }
-}
+};
 Connection.prototype.setScreen = Data.prototype.setScreen = function(){
 
     var x = this.x,
@@ -294,7 +294,7 @@ Connection.prototype.setScreen = Data.prototype.setScreen = function(){
     this.screen.x = opts.vanishPoint.x + x * this.screen.scale;
     this.screen.y = opts.vanishPoint.y + y * this.screen.scale;
 
-}
+};
 function squareDist( a, b ){
 
     var x = b.x - a.x,
@@ -350,4 +350,4 @@ window.addEventListener( 'resize', function(){
     opts.vanishPoint.y = ( h = c.height = window.innerHeight ) / 2;
     ctx.fillRect( 0, 0, w, h );
 });
-window.addEventListener( 'click', init );
+// window.addEventListener( 'click', init );

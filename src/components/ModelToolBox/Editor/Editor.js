@@ -3,11 +3,10 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {SETTINGS} from "../../../settings/ApplicationSettings";
 import {editorScene} from "../ModelToolBox";
-import {TextButton} from "../../common/TextButton";
-import {Input} from "../../common/Input";
-import {Select} from "../../common/Select";
+import {TextButton} from "../../Common/TextButton";
+import {Input} from "../../Common/Input";
+import {Select} from "../../Common/Select";
 import {PreviewGraph} from "./PreviewGraph/PreviewGraph";
-import {PopupBlur} from "../../common/PopupBlur";
 
 
 // topology
@@ -140,8 +139,6 @@ class Editor extends React.Component {
         return (
             <div className={"EditorContainer"}
                  style={this.props.style}>
-
-                {/*<PopupBlur/>*/}
 
                 <TextButton text={this.props.altScene.toUpperCase()}
                             className={'SceneSwitchBtn'}

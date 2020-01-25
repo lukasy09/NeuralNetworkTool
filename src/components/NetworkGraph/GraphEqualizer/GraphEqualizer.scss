@@ -2,7 +2,7 @@
 
 .EqualizerContainer {
   position: absolute;
-  top: 7%;
+  top: 8%;
   background: $darkColor;
   max-width: 35px;
   left: calc(60% - 34px);
@@ -15,6 +15,7 @@
   border-left: solid 1px $specialColorFirst;
   border-top: solid 1px $specialColorFirst;
   border-bottom: solid 1px $specialColorFirst;
+
   .Equalizer {
     margin-top: 10px;
     cursor: pointer;

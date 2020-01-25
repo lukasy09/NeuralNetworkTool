@@ -14,6 +14,7 @@ export const SocialGroupElement = (props) => {
                target={"_blank"}>
             <img src={data.icon}
                  width={size.width}
+                 alt={props.name}
                  height={size.height}/>
             </a>
         </div>

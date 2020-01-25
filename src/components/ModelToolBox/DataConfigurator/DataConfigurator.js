@@ -14,9 +14,6 @@ class DataConfigurator extends React.Component {
     trainingIndexes = [];
     categoricalIndexes = [];
 
-    constructor(props) {
-        super(props);
-    }
 
     /**
      * Adding and colIndex to an array if not exists(if it does it removes the colIndex). Setting the index array to the store.

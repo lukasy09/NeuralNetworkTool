@@ -1,13 +1,14 @@
 import React from 'react';
-import {TextButton} from "../../common/TextButton";
-import {LinkButton} from "../../common/LinkButton";
-import {Input} from "../../common/Input";
+import {TextButton} from "../../Common/TextButton";
+import {LinkButton} from "../../Common/LinkButton";
+import {Input} from "../../Common/Input";
 import {connect} from 'react-redux';
 import {setProject} from "../../../actions/generalActions";
 import UserInputValidator from "../../../utils/UserInputValidator";
 import {SETTINGS} from "../../../settings/ApplicationSettings";
-import {LabelInfo} from "../../common/LabelInfo";
+import {LabelInfo} from "../../Common/LabelInfo";
 import {StartInfoInputStyle} from "./StartInfoInputStyle";
+import {SocialGroup} from "./SocialGroup/SocialGroup";
 
 class StartInfoInput extends React.Component {
 
@@ -73,6 +74,7 @@ class StartInfoInput extends React.Component {
         return (
             <div className={"StartWrapper"}
                  style={this.state.styles.startInfoWrapper}>
+                <SocialGroup/>
                 <TextButton
                     text={"Let's start!"}
                     style={this.state.styles.textButtonStyle}

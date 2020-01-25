@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import {LabelInfo} from "../../common/LabelInfo";
-import {PopupBlur} from "../../common/PopupBlur";
-import {Checkbox} from "../../common/Checkbox";
-import {TextButton} from "../../common/TextButton";
+import {LabelInfo} from "../../Common/LabelInfo";
+import {PopupBlur} from "../../Common/PopupBlur";
+import {Checkbox} from "../../Common/Checkbox";
+import {TextButton} from "../../Common/TextButton";
 import {EXPORTS_TYPES, GraphExporter} from "../../../NetworkGraphBuilder/utils/Exports";
 
 const DEFAULT_CHECKBOX = "FormatCheckbox";
@@ -23,7 +23,8 @@ export class  Exports extends React.Component{
 
     exportFormat = () =>{
         let graphExporter = new GraphExporter();
-        for(let type of this.exportTypes){
+        for (let i = 0; i < this.exportTypes.length; i++) {
+            let type = this.exportTypes[i];
             /* Turning off the export to image format due to some errors in existing Cytoscape API.
                In the future take a look at this. In 3.12.0 cytoscape's version it should work properly.
             */

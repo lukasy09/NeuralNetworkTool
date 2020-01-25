@@ -9,6 +9,7 @@ export const LoadingScreen = (props) => {
              style={props.style}>
             <PopupBlur/>
             <div className={"Spinner"}> </div>
+            <label>{props.text}</label>
             {/*<div className={"LabelText"}>*/}
                 {/*<div>{props.text}</div>*/}
             {/*</div>*/}
@@ -16,7 +17,6 @@ export const LoadingScreen = (props) => {
     )
 };
 LoadingScreen.propTypes = {
-
     style: PropTypes.object,
     text: PropTypes.string
 };

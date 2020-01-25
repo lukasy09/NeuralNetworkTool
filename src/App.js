@@ -3,11 +3,10 @@ import './App.scss';
 import DeviceDetector from './utils/DeviceDetector';
 import {SETTINGS} from './settings/ApplicationSettings';
 import {Switch, Route} from 'react-router-dom'
-import {TransitionGroup, CSSTransition} from 'react-transition-group';
 import DesktopMainView from './components/DesktopMainView/DesktopMainView';
 import CreatorView from "./components/CreatorView/CreatorView";
-import {DesktopBackground} from "./components/DesktopBackground/DesktopBackground";
 import {AppStyle} from "./AppStyle";
+import VisualisationNetwrok from './components/VisulisationNetwork/VisualisationNetwork'
 
 class App extends React.Component {
 
@@ -16,7 +15,7 @@ class App extends React.Component {
         styles: AppStyle.defaultStyle
     };
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.styleManager = new AppStyle(this);
     }
@@ -49,25 +48,16 @@ class App extends React.Component {
         if (this.state.runningView === SETTINGS.views.desktopView) {
             return (
                 <div className="DesktopApp">
-                    <DesktopBackground activeBackground = {this.state.styles.activeBackground}
-                                        />
-                    <Route render={({location})=>(
-                        <TransitionGroup>
-                            <CSSTransition
-                                key={location.key}
-                                timeout = {1000}
-                                classNames = "fade">
-                                <Switch location={location}>
-                                    <Route exact path={"/"}
-                                           component={() => <DesktopMainView activateBackground={this.activateBackground} />}
-                                            />
-                                    <Route path={"/creator"}
-                                           component={CreatorView}/>
-                                </Switch>
-                            </CSSTransition>
-                        </TransitionGroup>
+                    <VisualisationNetwrok/>
+                    <Route render={({location}) => (
+                        <Switch location={location}>
+                            <Route exact path={"/"}
+                                   component={() => <DesktopMainView activateBackground={this.activateBackground}/>}
+                            />
+                            <Route path={"/creator"}
+                                   component={() => <CreatorView activateBackground={this.activateBackground}/>}/>
+                        </Switch>
                     )}
-
                     />
 
                 </div>
@@ -88,7 +78,7 @@ class App extends React.Component {
         this.setRunningView();
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         window.removeEventListener("resize", this.setRunningView);
     }
 

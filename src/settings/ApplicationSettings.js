@@ -45,7 +45,7 @@ export const SETTINGS = {
         paths: {
             dev: {
                 train: {
-                    host: '192.168.1.106',
+                    host: '127.0.0.1',
                     port: '8080',
                     uri: 'train',
                     params: null

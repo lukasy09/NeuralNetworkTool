@@ -34,7 +34,7 @@
     border: 0;
     border-bottom: 3px solid $lightColor;
     padding: 1rem .75rem .3rem;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     background: transparent;
     font-weight: 800;
     outline: none;
@@ -196,11 +196,11 @@
       transform: rotate(360deg)
     }
   }
-
-  .LabelText{
-    z-index: 1;
+  label {
+    color: $lightColor;
+    font-weight: 600;
     position: relative;
-    top: 200px;
+    top: 25%;
   }
 }
 
