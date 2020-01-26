@@ -1,5 +1,9 @@
 # NeuralNetworkTool 
 
+## 0. Warning
+This is a pre-alpha version of the system. Many of the following may be changed in the near or far future.
+The logical component of the system has not been published yet, then many of the functionalities are not available in public.
+
 ## 1. Introduction
 NeuralNetworkTool is an application allowing the user to create, visualise an artificial neural network(in a nutshell - ANN) using a graphical user interface. Moreover the tool owns a built-in functionality to run the whole process of machine learning including basic preprocessing, selecting types of the input data, creating a logical model(network) that is able to learn from the data.
 
@@ -27,6 +31,20 @@ The system is built of 2 main components:
 * Web application - Front of the software, responsible for handling users' actions, creating/uploading models using UI.
 * API - Building & training neural network with Keras framework.
 
-Integrated API is available under this [link](https://github.com/lukasy09/NeuralNetworkAPI)(It is not published yet!)
+The Integrated API is available under this [link](https://github.com/lukasy09/NeuralNetworkAPI)(It is not published yet!)
+
+List of functional requirements imposed on the whole software. 
+
+- [x] Creating ANNs from scratch using GUI 
+- [x] ANNs' Visualisation
+- [x] Model's parametrization(layers + compilation characteristics)
+- [x] Training's parametrization
+- [x] Uploading keras model in JSON format
+- [x] Uploading the training data
+- [x] Selecting data classtypes(numerical/categorical)
+- [x] Training model on the data and chosen parameters
+- [x] Storing user's model in NoSql database
+- [ ] Proposing best model for given data
+- [ ] Projecting multiple architectural networks(like CNN or RNN)
 
 
