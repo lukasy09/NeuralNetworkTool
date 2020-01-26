@@ -20,4 +20,3 @@ After submitting the project's name, we are moving the real part (the meat) of t
 <label>Figure 3. Selecting the input data, training, viewing the trained model</label>
 
 ## 3. Specification
-This section is going to appear soon...
