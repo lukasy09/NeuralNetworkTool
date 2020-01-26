@@ -6,18 +6,20 @@ NeuralNetworkTool is an application allowing the user to create, visualise an ar
 ##  2. Usage
 
 When starting the application, an user encounters the entry, simple form.
+
+<p align="center">
 <img src="./assets/gif/app-1.gif" alt="app-1 gif" align="center" />
-<label>Figure 1. Project's name entry form submission</label>
+ <p>
+<p align ="center">Figure 1. Project's name entry form submission</p>
 
  He is asked for entitling the project he is going to create in the near future. The title should match the following regular expression <i>/^[a-zA-Z0-9].*$/</i>
  
 After submitting the project's name, we are moving the real part of the application - ANN's creator. The user has an access to layers' editor, where we can create, delete and modify extisting (or not!) ann's parts. An exemplary usage is presented on the Figure 2, there is an opportunity to parametrize the layers, the network, and learning process with the available tools. 
 
 <img src="./assets/gif/app-2.gif" alt="app-2 gif" align="center" />
-<label>Figure 2. Building the model's architecture and input training data</label>
-
+<p align="center">Figure 2. Building the model's architecture and input training data</p>
 <img src="./assets/gif/app-3.gif" alt="app-3 gif" align="center" />
-<label>Figure 3. Selecting the input data, training, viewing the trained model</label>
+<p align="center">Figure 3. Selecting the input data, training, viewing the trained model</p>
 
 ## 3. Specification
 
